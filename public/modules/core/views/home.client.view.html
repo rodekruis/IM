@@ -1,7 +1,7 @@
 <style type="text/css">
 #homeMap {
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
     z-index: 0;
 }
 
@@ -10,13 +10,19 @@
 }
 
 .logo img {
-    width: 500px;
+    width: 40%;
+    /*height: 40%;*/
+    padding: 50px;
 }
 
+.logo {
+    min-height: 100%;
+    height: 100%;
+}
 </style>
 <section data-ng-controller="HomeController">
-    <leaflet id='homeMap' center="center" defaults="defaults" layers="layers" maxBounds="maxBounds"></leaflet>
+    <leaflet id='homeMap' center="center" defaults="defaults" layers="layers"></leaflet>
     <div class='logo'>
-	<centered><img src='modules/core/img/homeLogo.png' /></centered>
+	<centered><img ng-src='modules/core/img/homeLogo.png' /></centered>
     </div>
 </section>

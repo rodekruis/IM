@@ -5,6 +5,9 @@
  */
 
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+
+html, body {margin:0;padding:0;height:100%;}
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
