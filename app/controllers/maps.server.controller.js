@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Map = mongoose.model('Map'),
+	AMap = mongoose.model('AMap'),
 	_ = require('lodash');
 
 /**
@@ -35,7 +35,7 @@ var getErrorMessage = function(err) {
  * Create a Map
  */
 exports.create = function(req, res) {
-	var map = new Map(req.body);
+	var map = new AMap(req.body);
 	map.user = req.user;
 
 	map.save(function(err) {
@@ -93,10 +93,10 @@ exports.delete = function(req, res) {
 };
 
 /**
- * List of Maps
+ * List of AMaps
  */
 exports.list = function(req, res) {
-	Map.find().sort('-created').populate('user', 'displayName').exec(function(err, maps) {
+	AMap.find().sort('-created').populate('user', 'displayName').exec(function(err, maps) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
@@ -108,10 +108,10 @@ exports.list = function(req, res) {
 };
 
 /**
- * Map middleware
+ * AMap middleware
  */
 exports.mapByID = function(req, res, next, id) {
-	Map.findById(id).populate('user', 'displayName').exec(function(err, map) {
+	AMap.findById(id).populate('user', 'displayName').exec(function(err, map) {
 		if (err) return next(err);
 		if (!map) return next(new Error('Failed to load map ' + id));
 		req.map = map;

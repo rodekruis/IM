@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('maps', ['leaflet-directive']).controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps',
+angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps',
 	function($scope, $stateParams, $location, Authentication, Maps) {
 		$scope.authentication = Authentication;
 
@@ -56,21 +56,45 @@ angular.module('maps', ['leaflet-directive']).controller('MapsController', ['$sc
 		};
 
 		angular.extend($scope, {
-                london: {
-                    lat: 51.505,
-                    lng: -0.09,
-                    zoom: 8
-                },
-                markers: {
-                    mainMarker: {
-                        lat: 51,
-                        lng: 0,
-                        focus: true,
-                        message: "Hey, drag me if you want",
-                        draggable: true
-                    }
-                }
-            });
+			defaults: {
+			    tileLayer: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
+			    maxZoom: 14,
+			    path: {
+				weight: 10,
+				color: '#800000',
+				opacity: 1
+			    }
+			}
+		});
+		
+		angular.extend($scope, {
+			layers: {
+				baselayers: {
+				    osm: {
+					name: 'OpenStreetMap',
+					url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+					type: 'xyz'
+				    },
+				    cloudmade2: {
+					name: 'Cloudmade Tourist',
+					type: 'xyz',
+					url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
+					layerParams: {
+					    key: '007b9471b4c74da4a6ec7ff43552b16f',
+					    styleId: 7
+					}
+				    }
+				}
+			}
+		});
+
+		angular.extend($scope, {
+		    center: {
+			lat: 51.505,
+			lng: -0.09,
+			zoom: 8
+		    }
+		});
 
 		
 		

@@ -6,7 +6,7 @@
 var should = require('should'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User'),
-	Map = mongoose.model('Map');
+	AMap = mongoose.model('AMap');
 
 /**
  * Globals
@@ -28,7 +28,7 @@ describe('Map Model Unit Tests:', function() {
 		});
 
 		user.save(function() {
-			map = new Map({
+			map = new AMap({
 				title: 'Map Title',
 				content: 'Map Content',
 				user: user
@@ -57,7 +57,7 @@ describe('Map Model Unit Tests:', function() {
 	});
 
 	afterEach(function(done) {
-		Map.remove().exec();
+		AMap.remove().exec();
 		User.remove().exec();
 		done();
 	});

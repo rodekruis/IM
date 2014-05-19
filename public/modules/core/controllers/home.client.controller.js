@@ -2,4 +2,38 @@
 
 angular.module('core').controller('HomeController', ['$scope', 'Authentication', function ($scope, Authentication) {
     $scope.authentication = Authentication;
+    
+    angular.extend($scope, {
+                    defaults: {
+                        tileLayer: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
+                        maxZoom: 14,
+                        zoomControl: false,
+                        path: {
+                            weight: 10,
+                            color: '#800000',
+                            opacity: 1
+                        }
+                    }
+            });
+            
+    angular.extend($scope, {
+            layers: {
+                    baselayers: {
+                        osm: {
+                            name: 'OpenStreetMap',
+                            url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            type: 'xyz'
+                        }
+                    }
+            }
+    });
+
+    //52.1185523,5.2097174
+    angular.extend($scope, {
+        center: {
+            lat: 52.1185523,
+            lng: 5.2097174,
+            zoom: 10
+        }
+    });
 }]);

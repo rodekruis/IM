@@ -31,4 +31,4 @@ var MapSchema = new Schema({
 	}
 });
 
-mongoose.model('Map', MapSchema);
+mongoose.model('AMap', MapSchema);
