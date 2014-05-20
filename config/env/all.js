@@ -31,6 +31,7 @@ module.exports = {
 				'public/lib/angular-leaflet/dist/angular-leaflet-directive.js',
 				'public/lib/leaflet-dist/leaflet.js',
 				'public/lib/angular-centered/angular-centered.js',
+				'public/lib/angular-deckgrid/angular-deckgrid.js',
 			]
 		},
 		css: [
