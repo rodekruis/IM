@@ -1,0 +1,41 @@
+.content {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin-top:20px;
+}
+
+
+.container-fluid {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.unsafehtml {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.twitter {
+        float:left;
+}
+
+.twitter-timeline {
+        height: 720px;
+        width: 400px;
+}
+
+iframe {
+        padding: 0;
+        margin: 0;
+        border:none;
+        width: 100%;
+        height: 100%;
+}

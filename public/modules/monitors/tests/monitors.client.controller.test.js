@@ -1,10 +1,10 @@
 'use strict';
 
 (function() {
-	// Maps Controller Spec
-	describe('MapsController', function() {
+	// Monitors Controller Spec
+	describe('MonitorsController', function() {
 		// Initialize global variables
-		var MapsController,
+		var MonitorsController,
 			scope,
 			$httpBackend,
 			$stateParams,
@@ -44,74 +44,74 @@
 			$httpBackend = _$httpBackend_;
 			$location = _$location_;
 
-			// Initialize the Maps controller.
-			MapsController = $controller('MapsController', {
+			// Initialize the Monitors controller.
+			MonitorsController = $controller('MonitorsController', {
 				$scope: scope
 			});
 		}));
-		/*
-		it('$scope.find() should create an array with at least one map object fetched from XHR', inject(function(Maps) {
-			// Create sample map using the Maps service
-			var sampleMap = new Maps({
-				title: 'An Map about MEAN',
+
+		it('$scope.find() should create an array with at least one monitor object fetched from XHR', inject(function(Monitors) {
+			// Create sample monitor using the Monitors service
+			var sampleMonitor = new Monitors({
+				title: 'An Monitor about MEAN',
 				content: 'MEAN rocks!'
 			});
 
-			// Create a sample maps array that includes the new map
-			var sampleMaps = [sampleMap];
+			// Create a sample monitors array that includes the new monitor
+			var sampleMonitors = [sampleMonitor];
 
 			// Set GET response
-			$httpBackend.expectGET('maps').respond(sampleMaps);
+			$httpBackend.expectGET('monitors').respond(sampleMonitors);
 
 			// Run controller functionality
 			scope.find();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.maps).toEqualData(sampleMaps);
+			expect(scope.monitors).toEqualData(sampleMonitors);
 		}));
 
-		it('$scope.findOne() should create an array with one map object fetched from XHR using a mapId URL parameter', inject(function(Maps) {
-			// Define a sample map object
-			var sampleMap = new Maps({
-				title: 'An Map about MEAN',
+		it('$scope.findOne() should create an array with one monitor object fetched from XHR using a monitorId URL parameter', inject(function(Monitors) {
+			// Define a sample monitor object
+			var sampleMonitor = new Monitors({
+				title: 'An Monitor about MEAN',
 				content: 'MEAN rocks!'
 			});
 
 			// Set the URL parameter
-			$stateParams.mapId = '525a8422f6d0f87f0e407a33';
+			$stateParams.monitorId = '525a8422f6d0f87f0e407a33';
 
 			// Set GET response
-			$httpBackend.expectGET(/maps\/([0-9a-fA-F]{24})$/).respond(sampleMap);
+			$httpBackend.expectGET(/monitors\/([0-9a-fA-F]{24})$/).respond(sampleMonitor);
 
 			// Run controller functionality
 			scope.findOne();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.map).toEqualData(sampleMap);
+			expect(scope.monitor).toEqualData(sampleMonitor);
 		}));
 
-		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Maps) {
-			// Create a sample map object
-			var sampleMapPostData = new Maps({
-				title: 'An Map about MEAN',
+		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Monitors) {
+			// Create a sample monitor object
+			var sampleMonitorPostData = new Monitors({
+				title: 'An Monitor about MEAN',
 				content: 'MEAN rocks!'
 			});
 
-			// Create a sample map response
-			var sampleMapResponse = new Maps({
+			// Create a sample monitor response
+			var sampleMonitorResponse = new Monitors({
 				_id: '525cf20451979dea2c000001',
-				title: 'An Map about MEAN',
+				title: 'An Monitor about MEAN',
 				content: 'MEAN rocks!'
 			});
 
 			// Fixture mock form input values
-			scope.title = 'An Map about MEAN';
+			scope.title = 'An Monitor about MEAN';
 			scope.content = 'MEAN rocks!';
 
 			// Set POST response
-			$httpBackend.expectPOST('maps', sampleMapPostData).respond(sampleMapResponse);
+			$httpBackend.expectPOST('monitors', sampleMonitorPostData).respond(sampleMonitorResponse);
 
 			// Run controller functionality
 			scope.create();
@@ -121,52 +121,50 @@
 			expect(scope.title).toEqual('');
 			expect(scope.content).toEqual('');
 
-			// Test URL redirection after the map was created
-			expect($location.path()).toBe('/maps/' + sampleMapResponse._id);
+			// Test URL redirection after the monitor was created
+			expect($location.path()).toBe('/monitors/' + sampleMonitorResponse._id);
 		}));
 
-		it('$scope.update() should update a valid map', inject(function(Maps) {
-			// Define a sample map put data
-			var sampleMapPutData = new Maps({
+		it('$scope.update() should update a valid monitor', inject(function(Monitors) {
+			// Define a sample monitor put data
+			var sampleMonitorPutData = new Monitors({
 				_id: '525cf20451979dea2c000001',
-				title: 'An Map about MEAN',
+				title: 'An Monitor about MEAN',
 				content: 'MEAN Rocks!'
 			});
 
-			// Mock map in scope
-			scope.map = sampleMapPutData;
+			// Mock monitor in scope
+			scope.monitor = sampleMonitorPutData;
 
 			// Set PUT response
-			$httpBackend.expectPUT(/maps\/([0-9a-fA-F]{24})$/).respond();
+			$httpBackend.expectPUT(/monitors\/([0-9a-fA-F]{24})$/).respond();
 
 			// Run controller functionality
 			scope.update();
 			$httpBackend.flush();
 
 			// Test URL location to new object
-			expect($location.path()).toBe('/maps/' + sampleMapPutData._id);
+			expect($location.path()).toBe('/monitors/' + sampleMonitorPutData._id);
 		}));
 
-		it('$scope.remove() should send a DELETE request with a valid mapId and remove the map from the scope', inject(function(Maps) {
-			// Create new map object
-			var sampleMap = new Maps({
+		it('$scope.remove() should send a DELETE request with a valid monitorId and remove the monitor from the scope', inject(function(Monitors) {
+			// Create new monitor object
+			var sampleMonitor = new Monitors({
 				_id: '525a8422f6d0f87f0e407a33'
 			});
 
-			// Create new maps array and include the map
-			scope.maps = [sampleMap];
+			// Create new monitors array and include the monitor
+			scope.monitors = [sampleMonitor];
 
 			// Set expected DELETE response
-			$httpBackend.expectDELETE(/maps\/([0-9a-fA-F]{24})$/).respond(204);
+			$httpBackend.expectDELETE(/monitors\/([0-9a-fA-F]{24})$/).respond(204);
 
 			// Run controller functionality
-			scope.remove(sampleMap);
+			scope.remove(sampleMonitor);
 			$httpBackend.flush();
 
 			// Test array after successful delete
-			expect(scope.maps.length).toBe(0);
+			expect(scope.monitors.length).toBe(0);
 		}));
-		
-		*/
 	});
 }());

@@ -7,3 +7,44 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
 }
+
+#homeMap {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.logo {
+    z-index: 100;
+    min-width:50%;
+    height:100%;
+}
+
+.logo img {
+    padding: 50px;
+    position:relative;
+}
+
+.content {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    width: auto;
+    height: auto;
+}
+
+
+.container-fluid {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.angular-leaflet-map {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    
+}
