@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Article = mongoose.model('Article'),
+	DataObject = mongoose.model('DataObject'),
 	_ = require('lodash');
 
 /**
@@ -17,7 +17,7 @@ var getErrorMessage = function(err) {
 		switch (err.code) {
 			case 11000:
 			case 11001:
-				message = 'Article already exists';
+				message = 'DataObject already exists';
 				break;
 			default:
 				message = 'Something went wrong';
@@ -32,98 +32,98 @@ var getErrorMessage = function(err) {
 };
 
 /**
- * Create a article
+ * Create a dataObject
  */
 exports.create = function(req, res) {
-	var article = new Article(req.body);
-	article.user = req.user;
+	var dataObject = new DataObject(req.body);
+	dataObject.user = req.user;
 
-	article.save(function(err) {
+	dataObject.save(function(err) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.jsonp(dataObject);
 		}
 	});
 };
 
 /**
- * Show the current article
+ * Show the current dataObject
  */
 exports.read = function(req, res) {
-	res.jsonp(req.article);
+	res.jsonp(req.dataObject);
 };
 
 /**
- * Update a article
+ * Update a dataObject
  */
 exports.update = function(req, res) {
-	var article = req.article;
+	var dataObject = req.dataObject;
 
-	article = _.extend(article, req.body);
+	dataObject = _.extend(dataObject, req.body);
 
-	article.save(function(err) {
+	dataObject.save(function(err) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.jsonp(dataObject);
 		}
 	});
 };
 
 /**
- * Delete an article
+ * Delete an dataObject
  */
 exports.delete = function(req, res) {
-	var article = req.article;
+	var dataObject = req.dataObject;
 
-	article.remove(function(err) {
+	dataObject.remove(function(err) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.jsonp(dataObject);
 		}
 	});
 };
 
 /**
- * List of Articles
+ * List of DataObjects
  */
 exports.list = function(req, res) {
-	Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
+	DataObject.find().sort('-created').populate('user', 'displayName').exec(function(err, dataObjects) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(articles);
+			res.jsonp(dataObjects);
 		}
 	});
 };
 
 /**
- * Article middleware
+ * DataObject middleware
  */
-exports.articleByID = function(req, res, next, id) {
-	Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
+exports.dataObjectByID = function(req, res, next, id) {
+	DataObject.findById(id).populate('user', 'displayName').exec(function(err, dataObject) {
 		if (err) return next(err);
-		if (!article) return next(new Error('Failed to load article ' + id));
-		req.article = article;
+		if (!dataObject) return next(new Error('Failed to load dataObject ' + id));
+		req.dataObject = dataObject;
 		next();
 	});
 };
 
 /**
- * Article authorization middleware
+ * DataObject authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.article.user.id !== req.user.id) {
+	if (req.dataObject.user.id !== req.user.id) {
 		return res.send(403, {
 			message: 'User is not authorized'
 		});

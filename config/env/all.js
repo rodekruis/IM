@@ -32,6 +32,7 @@ module.exports = {
 				'public/lib/leaflet-dist/leaflet.js',
 				'public/lib/angular-centered/angular-centered.js',
 				'public/lib/angular-deckgrid/angular-deckgrid.js',
+				'public/lib/smart-table/Smart-Table.min.js',
 			]
 		},
 		css: [

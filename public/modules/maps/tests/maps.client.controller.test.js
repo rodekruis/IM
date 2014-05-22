@@ -4,7 +4,7 @@
 	// Articles Controller Spec
 	describe('MapsController', function() {
 		// Initialize global variables
-		var ArticlesController,
+		var MapsController,
 			scope,
 			$httpBackend,
 			$stateParams,

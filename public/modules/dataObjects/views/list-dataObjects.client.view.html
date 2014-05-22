@@ -1,0 +1,14 @@
+<section data-ng-controller="DataObjectsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Data objects</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="dataObject in dataObjects" data-ng-href="#!/dataObjects/{{dataObject._id}}" class="list-group-item">
+            <small class="list-group-item-text">{{dataObject.created | date:'medium'}} / {{dataObject.user.displayName}}</small>
+            <h4 class="list-group-item-heading">{{dataObject.title}}</h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!dataObject.$resolved || dataObject.length">
+    	No data objects yet, why don't you <a href="/#!/dataObjects/create">create one</a>?
+    </div>
+</section>

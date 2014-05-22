@@ -6,16 +6,17 @@
 var should = require('should'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User'),
-	Article = mongoose.model('Article');
+	DataObject = mongoose.model('DataObject');
 
 /**
  * Globals
  */
-var user, article;
+var user, dataObject;
 
 /**
  * Unit tests
  */
+/*
 describe('Article Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		user = new User({
@@ -61,4 +62,6 @@ describe('Article Model Unit Tests:', function() {
 		User.remove().exec();
 		done();
 	});
+
 });
+*/
