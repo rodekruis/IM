@@ -23,13 +23,13 @@
   margin: 0;
 }
 
-.twitter {
+.twitter, .twitter-timeline, .twitter-timeline-rendered {
         float:left;
 }
 
 .twitter-timeline {
-        height: 720px;
-        width: 400px;
+        height: 100%;
+        width:100%;
 }
 
 iframe {
@@ -38,4 +38,98 @@ iframe {
         border:none;
         width: 100%;
         height: 100%;
+}
+
+.tweet {
+	padding-left: 68px !important;
+	padding-right: 15px !important;
+}
+
+.var-narrow.var-chromeless .tweet {
+	padding-left: 15px !important;
+}
+
+.var-narrow .tweet .header {
+	padding-bottom: 10px !important;
+}
+
+.var-narrow .tweet .e-entry-content {
+	margin-bottom: 10px !important;
+}
+
+.var-chromeless .tweet {
+	color: #727272;
+	background: #f9fafc;
+	border-bottom: 1px solid #E9E9EB;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+.var-chromeless .timeline-footer {
+	display: none;
+}
+
+.var-chromeless button.load-more {
+	width: 100% !important;
+	box-sizing: border-box !important;
+	-moz-box-sizing: border-box !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	border: none !important;
+	box-shadow: none !important;
+	display: none;
+}
+
+div.no-tweets-pane {
+	margin-top: 90px;
+}
+
+.no-tweets-pane a.load-tweets,
+.no-tweets-pane a.load-tweets:hover,
+.no-tweets-pane a.load-tweets:active {
+	background: #87D37C;
+	color: white;
+	text-shadow: none;
+	border: none;
+	padding: 10px 20px;
+	-webkit-transition: background 0.1s linear;
+	-moz-transition: background 0.1s linear;
+	-o-transition: background 0.1s linear;
+	transition: background 0.1s linear;
+}
+.no-tweets-pane a.load-tweets:hover,
+.no-tweets-pane a.load-tweets:active {
+	background: #72B269
+}
+
+.header .avatar {
+	border-radius: 25px !important;
+}
+
+.p-author .profile .p-name {
+	color: #444 !important;
+}
+
+.animate-enter, 
+.animate-leave
+{ 
+    -webkit-transition: 2000ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 2000ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 2000ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 2000ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 2000ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+} 
+ 
+.animate-enter {
+    left: 100%;
+}
+.animate-enter.animate-enter-active {
+    left: 0;
+}
+ 
+.animate-leave {
+    left: 0;
+}
+.animate-leave.animate-leave-active{
+    left: -100%;
 }

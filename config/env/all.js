@@ -17,9 +17,15 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/leaflet-dist/leaflet.css',
 				'public/lib/angular-centered/angular-centered.css',
+				'public/lib/angular-ui-dashboard/dist/angular-ui-dashboard.css',
 			],
 			js: [
+				'public/lib/jquery/dist/jquery.min.js',
+				'public/lib/jquery-ui/ui/jquery-ui.js',
+				'public/lib/lodash/dist/lodash.min.js',
 				'public/lib/angular/angular.js',
+				'public/lib/angular-lodash/angular-lodash.js',
+				'public/lib/angular-route/angular-route.min.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js',  
 				'public/lib/angular-animate/angular-animate.js', 
@@ -33,6 +39,9 @@ module.exports = {
 				'public/lib/angular-centered/angular-centered.js',
 				'public/lib/angular-deckgrid/angular-deckgrid.js',
 				'public/lib/smart-table/Smart-Table.min.js',
+				'public/lib/angular-ui-sortable/sortable.min.js',
+				'public/lib/angular-ui-dashboard/dist/angular-ui-dashboard.js',
+				
 			]
 		},
 		css: [

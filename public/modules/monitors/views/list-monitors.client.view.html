@@ -1,24 +1,23 @@
 <section data-ng-controller="MonitorsController" data-ng-init="find()">
     <div class="page-header">
-        <h1>Monitors</h1>
     </div>
-    <div><a href="/#!/monitors/create">Nieuwe monitor</a></div>
-       
+    
   <tabset justified="true">
     <tab data-ng-repeat="monitor in monitors" heading="{{monitor.title}}">
-	<div class="pull-right" data-ng-show="authentication.user._id == monitor.user._id">
-		<a class="btn btn-primary" href="/#!/monitors/{{monitor._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	{{monitor.content}}
+	<div class='unsafehtml' ng-bind-html="monitor.content | unsafehtml"></div>
+	<div><a href="/#!/monitors/{{monitor._id}}">{{monitor.title}} openen in nieuw venster</a></div>
     </tab>
   </tabset>
-  
-    <div class="list-group">
+  <div><a href="/#!/monitors/create">Nieuwe monitor</a></div>
+  <!--
+    <div class="row">
+	<div class="col-md-12">
+	    <div dashboard="dashboardOptions" class="dashboard-container"></div>
+	</div>
+    </div>
+  -->
+  <!--
+  <div class="list-group">
         <a data-ng-repeat="monitor in monitors" data-ng-href="#!/monitors/{{monitor._id}}" class="list-group-item">
             <small class="list-group-item-text">{{monitor.created | date:'medium'}} / {{monitor.user.displayName}}</small>
             <h4 class="list-group-item-heading">{{monitor.title}}</h4>
@@ -28,4 +27,5 @@
     <div class="alert alert-warning text-center" data-ng-hide="!monitors.$resolved || monitors.length">
     	No monitors yet, why don't you <a href="/#!/monitors/create">create one</a>?
     </div>
+  -->
 </section>
