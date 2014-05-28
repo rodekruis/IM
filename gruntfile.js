@@ -102,7 +102,20 @@ module.exports = function(grunt) {
             unit: {
                 configFile: 'karma.conf.js'
             }
-        }
+        },
+	'node-inspector': {
+	    custom: {
+	      options: {
+		'web-port': 8080,
+		'web-host': 'localhost',
+		'debug-port': 5858,
+		'save-live-edit': true,
+		'no-preload': true,
+		'stack-trace-limit': 4,
+		'hidden': ['node_modules']
+	      }
+	    }
+	  }
     });
 
     // Load NPM tasks 
@@ -131,4 +144,7 @@ module.exports = function(grunt) {
 
     // Test task.
     grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+    
+    // Load debugger
+    grunt.loadNpmTasks('grunt-node-inspector');
 };

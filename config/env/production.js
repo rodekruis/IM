@@ -1,5 +1,7 @@
 'use strict';
 
+var secrets = require('../secrets');
+
 module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/im',
 	assets: {
@@ -42,5 +44,12 @@ module.exports = {
 		clientID: process.env.LINKEDIN_ID || 'APP_ID',
 		clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
 		callbackURL: 'http://localhost:3000/auth/linkedin/callback'
+	},
+	azure: {
+		clientID: secrets.azure.clientID,
+		clientSecret: secrets.azure.clientSecret,
+		tenantId: secrets.azure.tenantId,
+		resource: 'http://portal.microsoftonline.com',
+		redirectURL: 'http://localhost:3000/auth/azure/callback'
 	}
 };

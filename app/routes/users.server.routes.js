@@ -40,6 +40,10 @@ module.exports = function(app) {
 	// Setting the linkedin oauth routes
 	app.route('/auth/linkedin').get(passport.authenticate('linkedin'));
 	app.route('/auth/linkedin/callback').get(users.oauthCallback('linkedin'));
+	
+	// Setting the linkedin oauth routes
+	app.route('/auth/azure').get(passport.authenticate('azure'));
+	app.route('/auth/azure/callback').get(users.oauthCallback('azure'));
 
 	// Finish by binding the user middleware
 	app.param('userId', users.userByID);
