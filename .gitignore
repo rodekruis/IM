@@ -5,4 +5,4 @@ npm-debug.log
 app/tests/coverage/
 .bower-*/
 .idea/
-app/config/secrets.json
+config/secrets.json
