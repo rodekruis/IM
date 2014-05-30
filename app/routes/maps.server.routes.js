@@ -5,6 +5,12 @@
  */
 var users = require('../../app/controllers/users'),
 	maps = require('../../app/controllers/maps');
+	
+var mongoose = require('mongoose'),
+	AMap = mongoose.model('AMap'),
+	_ = require('lodash');
+	
+var formsAngular = require('forms-angular');
 
 module.exports = function(app) {
 	// Maps Routes
@@ -19,4 +25,8 @@ module.exports = function(app) {
 
 	// Finish by binding the article middleware
 	app.param('mapId', maps.mapByID);
+	
+	// Add form handler
+	var DataFormHandler = new (formsAngular)(app);
+	DataFormHandler.addResource('amap', AMap);
 };

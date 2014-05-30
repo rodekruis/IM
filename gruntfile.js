@@ -108,7 +108,7 @@ module.exports = function(grunt) {
 	      options: {
 		'web-port': 8080,
 		'web-host': 'localhost',
-		'debug-port': 5858,
+		'debug-port': 5857,
 		'save-live-edit': true,
 		'no-preload': true,
 		'stack-trace-limit': 4,

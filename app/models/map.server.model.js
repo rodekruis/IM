@@ -6,6 +6,8 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
+
+
 /**
  * Map Schema
  */
@@ -28,7 +30,13 @@ var MapSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+	visualisation: [{
+		type: Schema.ObjectId,
+		ref: 'Visualisation'
+	}],
 });
 
-mongoose.model('AMap', MapSchema);
+var AMap = mongoose.model('AMap', MapSchema);
+
+

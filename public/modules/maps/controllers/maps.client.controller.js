@@ -1,9 +1,12 @@
 'use strict';
 
-angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps',
-	function($scope, $stateParams, $location, Authentication, Maps) {
+angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps', '$window', 'leafletData', //'L', 'cartodb',
+	function($scope, $stateParams, $location, Authentication, Maps, $window, leafletData) { //, 
 		$scope.authentication = Authentication;
-
+		$scope.L = $window.L;
+		$scope.cartodb = $window.cartodb;
+		$scope.LMap = leafletData.getMap();
+					
 		$scope.create = function() {
 			var map = new Maps({
 				title: this.title,
@@ -58,12 +61,6 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		angular.extend($scope, {
 			defaults: {
 			    tileLayer: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
-			    maxZoom: 14,
-			    path: {
-				weight: 10,
-				color: '#800000',
-				opacity: 1
-			    }
 			}
 		});
 		
@@ -75,28 +72,82 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 					type: 'xyz'
 				    },
-				    cloudmade2: {
-					name: 'Cloudmade Tourist',
-					type: 'xyz',
-					url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
-					layerParams: {
-					    key: '007b9471b4c74da4a6ec7ff43552b16f',
-					    styleId: 7
-					}
-				    }
 				}
 			}
 		});
 
 		angular.extend($scope, {
 		    center: {
-			lat: 51.505,
-			lng: -0.09,
+			lat: 52.0809819, 
+			lng: 5.1060363,
 			zoom: 8
 		    }
 		});
 
 		
+		
+		$scope.loadLayers = function() {	
+
+			var sql_statement = 'select visualisations.group from visualisations WHERE name = \'Vrijwilligers\' OR name = \'Basisscholen\' GROUP BY visualisations.group';
+			$.getJSON('http://rodekruis.cartodb.com/api/v2/sql/?q='+sql_statement+'',
+				  function(dataGroup) {
+					leafletData.getMap().then(function(cartomap) {
+						
+						$.each(dataGroup.rows, function(keyGroup, valGroup) {
+						       // Create control and add to list
+							
+							var layercontrol = $scope.L.control.activeLayers({}, {}, {collapsed:false}).addTo(cartomap);
+							
+							var sql_statement = 'select name, description, visualisation, table_columns, table_name from visualisations WHERE visualisations.group = \'' + valGroup.group + '\'';
+							$.getJSON('http://rodekruis.cartodb.com/api/v2/sql/?q='+sql_statement+'',
+								function(data) {
+									$.each(data.rows, function(key, val) {
+								  
+									// set columns to be able to display in the table
+									//tableColumns[val['table_name']] = val['table_columns'];
+									var table = val.table_name;
+								
+									$scope.cartodb.createLayer(cartomap, val.visualisation)
+										//.addTo(map)
+									.on('done', function(layer) {
+						      
+										 //tableNames[val['name']] = val['table_name'];
+						      
+										 var subLayerOptions = {
+											      sql: 'SELECT * FROM ' + table
+										 };
+						      
+										 // get sublayer and store in array
+										 var sublayer = layer.getSubLayer(0);
+										 sublayer.set(subLayerOptions);
+						      
+										 //sublayers[table] = sublayer;	
+															      
+										 layer.setInteraction(true);
+						      
+										 // Add layer to control
+										 layercontrol.addOverlay(layer, val.name);
+						      
+										 layer.on('featureOver', function(e, pos, latlng, data) {
+										   $scope.cartodb.log.log(e, pos, latlng, data);
+										 });
+						      
+										 layer.on('error', function(err) {
+										   $scope.cartodb.log.log('error: ' + err);
+										 });
+									}).on('error', function() {
+										 $scope.cartodb.log.log('some error occurred');
+									});
+								});
+							});
+						
+							// add layers and sublayers to arrayp
+							//layerControls.push(layercontrol);
+						    
+						});
+					});
+			  });
+		};
 		
 	}
 ]);

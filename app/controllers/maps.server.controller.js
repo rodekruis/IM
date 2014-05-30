@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+
 var mongoose = require('mongoose'),
 	AMap = mongoose.model('AMap'),
 	_ = require('lodash');
@@ -130,3 +131,4 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
