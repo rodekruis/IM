@@ -22,7 +22,8 @@ module.exports = {
 				'public/lib/angular-ui-dashboard/dist/angular-ui-dashboard.css',
 				'public/lib/ng-grid/ng-grid.css',
 				'public/lib/select2/select2.css',
-				'public/lib/forms-angular/css/forms-angular-bs2.css',
+				//'public/lib/select2-bootstrap-css/select2-bootstrap.css',
+				'public/lib/forms-angular/css/forms-angular-bs3.css',
 			],
 			js: [
 				'public/lib/jquery/jquery.min.js',

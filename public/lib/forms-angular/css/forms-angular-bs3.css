@@ -5646,6 +5646,7 @@ button.close {
 }
 .pull-left {
   float: left !important;
+  width: 100%;
 }
 .hide {
   display: none !important;
@@ -5802,7 +5803,7 @@ body {
 }
 .list-header,
 .edit-header {
-  position: fixed;
+  position: relative;
   width: 100%;
   margin-top: 11px;
   z-index: 1;
@@ -5819,6 +5820,7 @@ body {
 }
 .page-header {
   padding-left: 20px;
+  padding-top: 40px;
 }
 .header-rhs {
   width: 226px;

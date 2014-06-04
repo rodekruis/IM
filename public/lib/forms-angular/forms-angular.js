@@ -3,6 +3,7 @@
 
 var formsAngular = angular.module('formsAngular', [
   'ngRoute',
+  'ui.router',
   'ngSanitize',
   'ui.select2',
   'ui.date',
@@ -261,8 +262,8 @@ formsAngular.controller('AnalysisCtrl', ['$locationParse', '$filter', '$scope', 
 
 'use strict';
 
-formsAngular.controller('BaseCtrl', ['$scope', '$routeParams', '$location', '$http', '$filter', '$data', '$locationParse', '$modal', '$window', 'urlService',
-  function ($scope, $routeParams, $location, $http, $filter, $data, $locationParse, $modal, $window, urlService) {
+formsAngular.controller('BaseCtrl', ['$scope', '$routeParams', '$location', '$http', '$filter', '$data', '$locationParse', '$modal', '$window', 'urlService', '$state', '$stateParse',
+  function ($scope, $routeParams, $location, $http, $filter, $data, $locationParse, $modal, $window, urlService, $state, $stateParse) {
     var master = {};
     var fngInvalidRequired = 'fng-invalid-required';
     var sharedStuff = $data;
@@ -282,8 +283,15 @@ formsAngular.controller('BaseCtrl', ['$scope', '$routeParams', '$location', '$ht
     $scope.select2List = [];
     $scope.pageSize = 20;
     $scope.pagesLoaded = 0;
-    angular.extend($scope, $locationParse($location.$$path));
+    //angular.extend($scope, $locationParse($location.$$path));
 
+    // Parse states
+    if($state && $state.params && $state.params.model) {
+       angular.extend($scope, $stateParse($state));
+    } else {
+       angular.extend($scope, $locationParse($location.$$path));
+    }
+ 
     $scope.formPlusSlash = $scope.formName ? $scope.formName + '/' : '';
     $scope.modelNameDisplay = sharedStuff.modelNameDisplay || $filter('titleCase')($scope.modelName);
     $scope.generateEditUrl = function (obj) {
@@ -648,6 +656,9 @@ formsAngular.controller('BaseCtrl', ['$scope', '$routeParams', '$location', '$ht
         if (record !== undefined) {
           record = record[nests[i]];
         }
+        else {
+          record = '';
+        }
       }
       if (record && $scope.select2List.indexOf(nests[i - 1]) !== -1) {
         record = record.text;
@@ -980,8 +991,12 @@ formsAngular.controller('BaseCtrl', ['$scope', '$routeParams', '$location', '$ht
           if (options.redirect) {
             $window.location = options.redirect;
           } else {
-            $location.path('/' + $scope.modelName + '/' + $scope.formPlusSlash + data._id + '/edit');
-            //                    reset?
+            if($state && $state.params && $state.params.model) {
+              $state.go("model::edit", {id: data._id, model: $scope.modelName });
+            } else {
+              $location.path('/' + $scope.modelName + '/' + $scope.formPlusSlash + data._id + '/edit');
+              //                    reset?
+            }
           }
         } else {
           $scope.showError(data);
@@ -1045,8 +1060,12 @@ formsAngular.controller('BaseCtrl', ['$scope', '$routeParams', '$location', '$ht
     };
 
     $scope.new = function () {
-      $location.search('');
-      $location.path('/' + $scope.modelName + '/' + $scope.formPlusSlash + 'new');
+      if($state && $state.params && $state.params.model) {
+        $state.go("model::new", {model: $scope.modelName});
+      } else {
+          $location.search("");
+          $location.path('/' + $scope.modelName + '/' + $scope.formPlusSlash + 'new');
+      }
     };
 
     $scope.deleteRecord = function (model, id) {
@@ -1054,7 +1073,11 @@ formsAngular.controller('BaseCtrl', ['$scope', '$routeParams', '$location', '$ht
         if (typeof $scope.dataEventFunctions.onAfterDelete === 'function') {
           $scope.dataEventFunctions.onAfterDelete(master);
         }
-        $location.path('/' + $scope.modelName);
+        if($state && $state.params && $state.params.model) {
+          $state.go("model::list", { model: model });
+        } else {
+          $location.path('/' + $scope.modelName);
+        }
       });
     };
 
@@ -1815,7 +1838,7 @@ formsAngular
                     value += '<option>' + optValue + '</option>';
                   });
                 } else {
-                  value += '<option ng-repeat="option in ' + fieldInfo.options + '">{{option}}</option>';
+                  value += '<option ng-repeat="option in ' + fieldInfo.options + ' track by $index">{{option}}</option>';
                 }
                 value += '</select>';
               }
@@ -2049,7 +2072,7 @@ formsAngular
                   '</div>' +
                   '<div ng-form class="' + (cssFrameworkService.framework() === 'bs2' ? 'row-fluid ' : '') +
                   convertFormStyleToClass(info.formStyle) + '" name="form_' + niceName + '{{$index}}" class="sub-doc well" id="' + info.id + 'List_{{$index}}" ' +
-                  ' ng-repeat="subDoc in ' + (options.model || 'record') + '.' + info.name + ' track by $index">' +
+                  ' ng-repeat="subDoc in ' + (options.model || 'record') + '.' + info.name + '">' +
                   '   <div class="' + (cssFrameworkService.framework() === 'bs2' ? 'row-fluid' : 'row') + ' sub-doc">' +
                   '      <div class="pull-left">' + processInstructions(info.schema, false, {subschema: true, formstyle: info.formStyle, model: options.model}) +
                   '      </div>';
@@ -2624,6 +2647,36 @@ formsAngular.factory('$locationParse', [function () {
   };
 }]);
 
+/**
+ * Created by DominicBoettger on 09.04.14.
+ *
+ * Parser for the states provided by ui.router
+ */
+'use strict';
+
+formsAngular.factory('$stateParse', [function() {
+
+  var lastObject = {};
+  var lastRoute = null;
+
+  return function(state) {
+    if(state.current && state.current.name) {
+      lastObject = {newRecord: false};
+      lastObject.modelName = state.params.model;
+      if(state.current.name == 'model::list') {
+        lastObject = {index: true};
+        lastObject.modelName = state.params.model;
+      } else if(state.current.name == 'model::edit') {
+        lastObject.id = state.params.id;
+      } else if(state.current.name == 'model::new') {
+        lastObject.newRecord = true;
+      } else if(state.current.name == 'model::analyse') {
+        lastObject.analyse = true;
+      }
+    }
+    return lastObject;
+  }
+}]);
 
 'use strict';
 

@@ -39,7 +39,8 @@ var UserSchema = new Schema({
 	},
 	displayName: {
 		type: String,
-		trim: true
+		trim: true,
+		list:true
 	},
 	email: {
 		type: String,
@@ -136,4 +137,10 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 	});
 };
 
-mongoose.model('User', UserSchema);
+var User;
+
+try {
+  User = mongoose.model('User');
+} catch (e) {
+  User = mongoose.model('User', UserSchema);
+}

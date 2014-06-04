@@ -17,6 +17,15 @@ var db = mongoose.connect(config.db);
 // Init the express application
 var app = require('./config/express')(db);
 
+// print all routers
+/*for (var key in app._router.stack) {
+   var obj = app._router.stack[key];
+   if(obj.route !== undefined){
+        console.log(obj.route.path);
+   }
+   
+}
+*/
 // Bootstrap passport config
 require('./config/passport')();
 

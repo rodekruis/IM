@@ -86,8 +86,69 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 
 		
 		
-		$scope.loadLayers = function() {	
-
+		$scope.loadLayers = function() {
+			// set function
+			
+			var addVisualisation = function(cartomap, visualisation, layerControl){
+				$scope.cartodb.createLayer(cartomap, visualisation.apiUrl)
+				.addTo(cartomap)
+				.on('done', function(layer) {
+					var table = visualisation.tableName;
+					
+					 //tableNames[val['name']] = val['table_name'];
+	      
+					 var subLayerOptions = {
+						      sql: 'SELECT * FROM ' + table
+					 };
+	      
+					 // get sublayer and store in array
+					 var sublayer = layer.getSubLayer(0);
+					 sublayer.set(subLayerOptions);
+	      
+					 //sublayers[table] = sublayer;	
+										      
+					 layer.setInteraction(true);
+	      
+					 // Add layer to control
+					 layerControl.addOverlay(layer, visualisation.name);
+	      
+					 layer.on('featureOver', function(e, pos, latlng, data) {
+					   $scope.cartodb.log.log(e, pos, latlng, data);
+					 });
+	      
+					 layer.on('error', function(err) {
+					   $scope.cartodb.log.log('error: ' + err);
+					 });
+				}).on('error', function() {
+					 $scope.cartodb.log.log('some error occurred');
+				});
+			};
+			
+			// Get leaflet map object
+			leafletData.getMap().then(function(cartomap) {
+				var layerControl = $scope.L.control.activeLayers({}, {}, {collapsed:false}).addTo(cartomap);
+			
+				// Get map object
+				Maps.get({
+					mapId: $stateParams.mapId
+				}).$promise.then(function(map) {
+					var baseMap = map.baseMap;
+					
+					for (var vId in map.visualisation) {
+						var visualisation = map.visualisation[vId];
+						
+						
+						addVisualisation(cartomap, visualisation, layerControl);
+						
+					}
+				});
+					
+				// add layers and sublayers to arrayp
+				//layerControls.push(layercontrol);
+			});
+			
+			
+			/*
 			var sql_statement = 'select visualisations.group from visualisations WHERE name = \'Vrijwilligers\' OR name = \'Basisscholen\' GROUP BY visualisations.group';
 			$.getJSON('http://rodekruis.cartodb.com/api/v2/sql/?q='+sql_statement+'',
 				  function(dataGroup) {
@@ -96,7 +157,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 						$.each(dataGroup.rows, function(keyGroup, valGroup) {
 						       // Create control and add to list
 							
-							var layercontrol = $scope.L.control.activeLayers({}, {}, {collapsed:false}).addTo(cartomap);
+							
 							
 							var sql_statement = 'select name, description, visualisation, table_columns, table_name from visualisations WHERE visualisations.group = \'' + valGroup.group + '\'';
 							$.getJSON('http://rodekruis.cartodb.com/api/v2/sql/?q='+sql_statement+'',
@@ -141,12 +202,12 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 								});
 							});
 						
-							// add layers and sublayers to arrayp
-							//layerControls.push(layercontrol);
+							
 						    
 						});
 					});
 			  });
+			  */
 		};
 		
 	}
