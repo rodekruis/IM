@@ -32,6 +32,6 @@ module.exports = {
 		clientSecret: secrets.azure.clientSecret,
 		tenantId: secrets.azure.tenantId,
 		resource: 'https://graph.windows.net',
-		redirectURL: 'http://localhost:3000/auth/azure/callback' //http://nexios-shared1.cloudapp.net/auth/azure/callback
+		redirectURL: 'http://nexios-shared1.cloudapp.net/auth/azure/callback' //http://nexios-shared1.cloudapp.net/auth/azure/callback
 	}
 };
