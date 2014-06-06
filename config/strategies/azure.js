@@ -20,32 +20,47 @@ module.exports = function() {
 			passReqToCallback: true
 		},
 		function(req, accessToken, refreshToken, profile, done) {
-			var providerData = profile._json;
+			var providerData = profile.rawObject;
 			
-			if(providerData.hd === 'rodekruis.nl'){
-				// Set the provider data and include tokens
-				providerData.accessToken = accessToken;
-				providerData.refreshToken = refreshToken;
+			var domainRegex = /@(.*$)/i;
+			
+			try {
+				var matches = providerData.upn.match(domainRegex);
+		    
+				var domain = matches[1].toLowerCase();
+				
+				if (domain === 'rodekruis.nl') {
+					//code	
+				
+
+					// Set the provider data and include tokens
+					providerData.accessToken = accessToken;
+					providerData.refreshToken = refreshToken;
+		
+					// Create the user OAuth profile
+					var providerUserProfile = {
+						firstName: providerData.given_name,
+						lastName: providerData.family_name,
+						displayName: profile.displayName,
+						email: providerData.upn,
+						username: profile.username,
+						provider: 'azure',
+						providerIdentifierField: 'id',
+						providerData: providerData
+					};
+		
+					// Save the user OAuth profile
+					users.saveOAuthUserProfile(req, providerUserProfile, done);
+				 }else{
+					// fail        
+					done(new Error('Dit is geen geldig @rodekruis.nl account'));
+				 }
+			}
+					
+			catch (e) {
+				console.log(e);
+			}
 	
-				// Create the user OAuth profile
-				var providerUserProfile = {
-					firstName: profile.name.givenName,
-					lastName: profile.name.familyName,
-					displayName: profile.displayName,
-					email: profile.emails[0].value,
-					username: profile.username,
-					provider: 'azure',
-					providerIdentifierField: 'id',
-					providerData: providerData
-				};
-	
-				// Save the user OAuth profile
-				users.saveOAuthUserProfile(req, providerUserProfile, done);
-			 }else{
-				// fail        
-				done(new Error('Dit is geen geldig @rodekruis.nl account'));
-			 }
-						
 			
 		}
 	));

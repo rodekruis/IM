@@ -31,7 +31,7 @@ module.exports = {
 		clientID: secrets.azure.clientID,
 		clientSecret: secrets.azure.clientSecret,
 		tenantId: secrets.azure.tenantId,
-		resource: 'http://portal.microsoftonline.com',
+		resource: 'https://graph.windows.net',
 		redirectURL: 'http://localhost:3000/auth/azure/callback'
 	}
 };

@@ -16,6 +16,7 @@ var VisualisationSchema = new Schema({
             default: '',
 	    required:true,
 	    form:  {label:'Naam', size:'large'},
+	    list:true
     },
     description: {
             type: String,
@@ -92,19 +93,23 @@ var MapSchema = new Schema({
 		required: true
 	},
 	baseMap: {
-		type: String,
-		required:true,
-		enum:['OSM', 'HOT']
+		type: Schema.Types.ObjectId,
+		ref: 'TileServer',
+		form:  {label:'Achtergrondkaart'}
+	},
+	mapCenter: {
+		type: Schema.Types.ObjectId,
+		ref: 'MapCenter',
+		form:  {label:'Kaart centreren op'}
 	},
 	user: {
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	},
 	visualisation: {
-		//type: Schema.ObjectId,
-		//ref: 'Visualisation',
 		type: [VisualisationSchema]
-	}
+	},
+
 });
 
 var AMap;

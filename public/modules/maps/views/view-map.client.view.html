@@ -2,7 +2,30 @@
 	<div class="page-header">
 		<h3>{{map.title}}</h3>
 	</div>
-
+        <!--<div id='LayerMenu'></div>-->
+	<div class="btn-group btn-wide" dropdown>
+	      <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+		Kaartlagen <span class="caret"></span>
+	      </button>
+	      
+	      <ul class="dropdown-menu" role="menu">
+		<li>
+		     <accordion close-others="true">
+			    <accordion-group heading="Achtergrondkaart">
+			      <div class="btn-group  btn-wide">
+				<label ng-repeat="layer in baseLayers" class="btn btn-layers btn-wide" ng-model="radioModel" btn-checkbox>{{layer.name}}</label>
+			    </div>
+			    </accordion-group>
+			    <accordion-group heading="Lagen">
+			      <div class="btn-group  btn-wide">
+				<label ng-repeat="layer in layers" class="btn btn-layers btn-wide" ng-model="checkModel[layer.id]" btn-checkbox>{{layer.name}}</label>
+			      </div>
+			    </accordion-group>
+			    
+		     </accordion>
+		 </li>
+	      </ul>
+	    </div>
 	<div class="pull-right" data-ng-show="authentication.user._id == map.user._id">
 		<a class="btn btn-primary" href="/#!/maps/{{map._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
@@ -15,6 +38,6 @@
 		<em class="text-muted">Aangemaakt op {{map.created | date:'mediumDate'}} door {{map.user.displayName}}</em>
 	</small>
 	<p class="lead" data-ng-init="loadLayers();">
-		<leaflet center="center" defaults="defaults" layers="layers" maxBounds="maxBounds"></leaflet>
+		<leaflet></leaflet>
 	</p>
 </section>

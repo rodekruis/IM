@@ -26,7 +26,7 @@ module.exports = {
 				'public/lib/forms-angular/css/forms-angular-bs3.css',
 			],
 			js: [
-				'public/lib/jquery/jquery.min.js',
+				'public/lib/jquery/jquery.js',
 				'public/lib/jquery-ui/ui/jquery-ui.js',
 				'public/lib/lodash/dist/lodash.min.js',
 				'public/lib/angular/angular.js',

@@ -9,4 +9,23 @@ angular.module('maps').factory('Maps', ['$resource', function($resource) {
             method: 'PUT'
         }
     });
+}])
+
+.factory('layerService', ['$rootScope', function($rootScope) {
+
+    return { 
+        baseLayers: function() {
+            $rootScope.baseLayers;
+        },    
+        setBaseLayers: function(layers) {
+            $rootScope.baseLayers = layers;
+        },
+        layers: function() {
+            $rootScope.layers;
+        },
+        setLayers: function(layers){
+            $rootScope.layers = layers;
+        }
+    };
+
 }]);

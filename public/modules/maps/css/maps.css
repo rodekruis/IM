@@ -293,3 +293,54 @@ a.leaflet-control-zoom-out {
 .leaflet-control-layers-expanded {
 	width: 200px;	
 }
+
+.leaflet-control {
+    float: none;
+    display: inline-block;
+}
+
+.btn-wide {
+	width: 100%;
+}
+
+.btn-right {
+    float: right;
+}
+
+.btn-layers {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.btn-layers:hover,
+.btn-layers:focus,
+.btn-layers:active,
+.btn-layers.active,
+.open .dropdown-toggle.btn-layers {
+  color: #000;
+  background-color: #fff;
+  border-color: #398439;
+}
+.btn-layers:active,
+.btn-layers.active,
+.open .dropdown-toggle.btn-layers {
+  background-image: none;
+}
+.btn-layers.disabled,
+.btn-layers[disabled],
+fieldset[disabled] .btn-layers,
+.btn-layers.disabled:hover,
+.btn-layers[disabled]:hover,
+fieldset[disabled] .btn-layers:hover,
+.btn-layers.disabled:focus,
+.btn-layers[disabled]:focus,
+fieldset[disabled] .btn-layers:focus,
+.btn-layers.disabled:active,
+.btn-layers[disabled]:active,
+fieldset[disabled] .btn-layers:active,
+.btn-layers.disabled.active,
+.btn-layers[disabled].active,
+fieldset[disabled] .btn-layers.active {
+  background-color: #fff;
+  border-color: #4cae4c;
+}
