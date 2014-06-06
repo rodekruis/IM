@@ -29,7 +29,7 @@ module.exports = function() {
 		    
 				var domain = matches[1].toLowerCase();
 				
-				if (domain === 'rodekruis.nl') {
+				if (domain === 'rodekruis.nl' || domain ==='osbranches.onmicrosoft.com') {
 					//code	
 				
 
@@ -41,7 +41,7 @@ module.exports = function() {
 					var providerUserProfile = {
 						firstName: providerData.given_name,
 						lastName: providerData.family_name,
-						displayName: profile.displayName,
+						displayName: profile.displayname,
 						email: providerData.upn,
 						username: profile.username,
 						provider: 'azure',

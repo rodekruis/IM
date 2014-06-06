@@ -49,7 +49,7 @@ module.exports = {
 		clientID: secrets.azure.clientID,
 		clientSecret: secrets.azure.clientSecret,
 		tenantId: secrets.azure.tenantId,
-		resource: 'http://portal.microsoftonline.com',
-		redirectURL: 'http://localhost:3000/auth/azure/callback'
+		resource: 'https://graph.windows.net',
+		redirectURL: 'http://nexios-shared1.cloudapp.net/auth/azure/callback'
 	}
 };
