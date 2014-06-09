@@ -9,19 +9,14 @@ var mongoose = require('mongoose'),
 
 /**
  * Map authorization middleware
+ * Only allow users with role admin to this module
  */
-exports.hasAuthorization = function(roles) {
-	var _this = this;
-
-	return function(req, res, next) {
-		_this.requiresLogin(req, res, function() {
-			if (_.intersection(req.user.roles, roles).length) {
+exports.hasAuthorization = function(req, res, next) {
+	if (_.intersection(req.user.roles, ['admin']).length) {
 				return next();
 			} else {
 				return res.send(403, {
 					message: 'User is not authorized'
 				});
 			}
-		});
-	};
 };

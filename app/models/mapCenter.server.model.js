@@ -1,4 +1,6 @@
 /**
+ * The map center objects specifies a map location where the map can be centered on
+ *
  * Module dependencies.
  */
 var mongoose = require('mongoose'),

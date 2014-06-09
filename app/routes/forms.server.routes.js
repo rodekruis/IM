@@ -19,7 +19,7 @@ var formsAngular = require('forms-angular');
 
 module.exports = function(app) {	
 	// Add form handler
-	var secureOptions = {authentication: [forms.hasAuthorization(['admin'])]};
+	var secureOptions = {authentication: [users.requiresLogin, forms.hasAuthorization]};
 	var DataFormHandler = new (formsAngular)(app ,secureOptions);
 	DataFormHandler.addResource('amap', AMap);
 	DataFormHandler.addResource('User', User);

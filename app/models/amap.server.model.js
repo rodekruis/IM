@@ -71,6 +71,7 @@ try {
 
 /**
  * Map Schema
+ *
  */
 var MapSchema = new Schema({
 	created: {
@@ -112,6 +113,7 @@ var MapSchema = new Schema({
 
 });
 
+// the model is registered as AMap instead of Map. The Map object is dedicated to the framework itself
 var AMap;
 
 try {

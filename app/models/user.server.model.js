@@ -53,22 +53,24 @@ var UserSchema = new Schema({
 		type: String,
 		unique: true,
 		required: 'Please fill in a username',
-		trim: true
+		trim: true,
+		form:  {hidden:true}
 	},
 	password: {
 		type: String,
 		default: '',
-		validate: [validateLocalStrategyPassword, 'Password should be longer']
+		validate: [validateLocalStrategyPassword, 'Password should be longer'],
+		form:  {hidden:true}
 	},
 	salt: {
-		type: String
+		type: String,
+		form:  {hidden:true}
 	},
 	provider: {
 		type: String,
-		required: 'Provider is required'
+		required: 'Provider is required',
+		form:  {hidden:true}
 	},
-	providerData: {},
-	additionalProvidersData: {},
 	roles: {
 		type: [{
 			type: String,
@@ -77,12 +79,23 @@ var UserSchema = new Schema({
 		default: ['user']
 	},
 	updated: {
-		type: Date
+		type: Date,
+		form:  {hidden:true}
 	},
 	created: {
 		type: Date,
-		default: Date.now
-	}
+		default: Date.now,
+		form:  {hidden:true}
+	},
+	providerData: {
+		type: Schema.Types.Mixed,
+		form:  {hidden:true}
+	},
+	additionalProvidersData: {
+		type: Schema.Types.Mixed,
+		form:  {hidden:true}
+	},
+	
 });
 
 /**
