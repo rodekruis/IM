@@ -15,13 +15,13 @@ angular.module('maps').factory('Maps', ['$resource', function($resource) {
 
     return { 
         baseLayers: function() {
-            $rootScope.baseLayers;
+            return $rootScope.baseLayers;
         },    
         setBaseLayers: function(layers) {
             $rootScope.baseLayers = layers;
         },
         layers: function() {
-            $rootScope.layers;
+            return $rootScope.layers;
         },
         setLayers: function(layers){
             $rootScope.layers = layers;

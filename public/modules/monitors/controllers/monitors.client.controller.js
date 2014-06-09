@@ -75,7 +75,7 @@ angular.module('monitors')
   ])
 
 
-.controller('MonitorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Monitors', '$sce', '$interval', '$window', 'widgetDefinitions', 'defaultWidgets',
+.controller('MonitorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Monitors', '$sce', '$interval', '$window', 'widgetDefinitions', 'defaultWidgets', 
 	function($scope, $stateParams, $location, Authentication, Monitors, $sce, $interval, $window, widgetDefinitions, defaultWidgets) {
 		$scope.authentication = Authentication;
 
@@ -138,6 +138,66 @@ angular.module('monitors')
 			storageId: 'explicitSave',
 			explicitSave: true
 		};
+		
+		$scope.monitorIndex = 0;
+		
+		$scope.prev = function() {
+			if ($scope.monitorIndex === 0) {
+				$scope.monitorIndex = $scope.monitors.length - 1;
+			}
+			else {
+				$scope.monitorIndex--;
+			}
+		};
+		
+		$scope.next = function() {
+			if ($scope.monitorIndex === ($scope.monitors.length -1 )) {
+				$scope.monitorIndex = 0;
+			}
+			else {
+				$scope.monitorIndex++;
+			}
+			
+		};
+		
+		$scope.swipe = true;
+		
+		$scope.toggleSwipe = function() {
+			$scope.swipe = !$scope.swipe;
+		};
+		
+		$scope.rotate = false;
+		$scope.toggleRotate = function() {
+			$scope.rotate = !$scope.rotate;
+			
+			if ($scope.rotate) {
+				$scope.interval = $interval($scope.next, 20000);
+			}
+			else {
+				$interval.cancel($scope.interval);
+			}
+		};
+		
+		$scope.$on('$destroy', function() {
+			// Make sure that the interval is destroyed too
+			if (angular.isDefined($scope.interval)) {
+				$interval.cancel($scope.interval);
+				$scope.interval = undefined;
+			}
+			
+		});
+		/*
+		$scope.$watch('rotate', function($timeout) {
+			// enable rotate 
+			if ($scope.rotate) {
+				$timeout($scope.next, 5000);
+			}
+			else {
+				$timeout.cancel($scope.next);
+			}
+		});
+		*/
+		
 		      
 	}
 ]);

@@ -24,6 +24,7 @@ module.exports = {
 				'public/lib/select2/select2.css',
 				//'public/lib/select2-bootstrap-css/select2-bootstrap.css',
 				'public/lib/forms-angular/css/forms-angular-bs3.css',
+				'public/lib/angular-carousel/dist/angular-carousel.css'
 			],
 			js: [
 				'public/lib/jquery/jquery.js',
@@ -58,7 +59,8 @@ module.exports = {
 				'public/lib/angular-ui-select2/src/select2.js',
 				'public/lib/ckeditor/ckeditor.js',
 				'public/lib/ng-ckeditor/ng-ckeditor.js',
-				'public/lib/forms-angular/forms-angular.js'
+				'public/lib/forms-angular/forms-angular.js',
+				'public/lib/angular-carousel/dist/angular-carousel.js'
 			]
 		},
 		css: [

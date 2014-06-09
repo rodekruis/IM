@@ -3,20 +3,22 @@
 /**
  * Module dependencies.
  */
-var users = require('../../app/controllers/users'),
-	maps = require('../../app/controllers/maps');
+
 	
 var mongoose = require('mongoose'),
 	_ = require('lodash');
+	
+var users = require('../../app/controllers/users'),
+    maps = require('../../app/controllers/maps');
 
 module.exports = function(app) {
 	// Maps Routes
 	app.route('/maps')
-		.get(maps.list)
+		.get(users.requiresLogin, maps.list)
 		.post(users.requiresLogin, maps.create);
 	
 	app.route('/maps/:mapId')
-		.get(maps.read)
+		.get(users.requiresLogin, maps.read)
 		.put(users.requiresLogin, maps.hasAuthorization, maps.update)
 	    .delete(users.requiresLogin, maps.hasAuthorization, maps.delete);
 

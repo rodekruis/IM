@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'im';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'leaflet-directive', 'angular-centered', 'akoenig.deckgrid', 'ui.dashboard', 'ui.sortable', 'ngRoute', 'angular-lodash', 'ngGrid', 'formsAngular'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'leaflet-directive', 'angular-centered', 'akoenig.deckgrid', 'ui.dashboard', 'ui.sortable', 'ngRoute', 'angular-lodash', 'ngGrid', 'formsAngular', 'angular-carousel'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName) {

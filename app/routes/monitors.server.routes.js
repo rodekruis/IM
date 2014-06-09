@@ -9,11 +9,11 @@ var users = require('../../app/controllers/users'),
 module.exports = function(app) {
 	// Article Routes
 	app.route('/monitors')
-		.get(monitors.list)
-		.post(users.requiresLogin, monitors.create);
+		.get(users.requiresLogin, monitors.list)
+		.post(users.requiresLogin, monitors.hasAuthorization, monitors.create);
 	
 	app.route('/monitors/:monitorId')
-		.get(monitors.read)
+		.get(users.requiresLogin, monitors.hasAuthorization, monitors.read)
 		.put(users.requiresLogin, monitors.hasAuthorization, monitors.update)
 	    .delete(users.requiresLogin, monitors.hasAuthorization, monitors.delete);
 

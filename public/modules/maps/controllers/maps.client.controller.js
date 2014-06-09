@@ -5,8 +5,6 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		$scope.authentication = Authentication;
 		$scope.L = $window.L;
 		$scope.cartodb = $window.cartodb;
-		$scope.LMap;
-		$scope.layerControl;
 						
 		$scope.create = function() {
 			var map = new Maps({
@@ -184,11 +182,6 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 						var visualisation = map.visualisation[vId];
 						addVisualisation(cartomap, visualisation);
 						
-						/*var layerString = 'checkModel.' + visualisation._id;
-						var model = $parse(layerString);  // Get the model
-						model.assign($scope, '');  // Assigns a value to it
-						$scope.$apply();  // Apply it to the scope
-						*/
 						layers.push({id: visualisation._id, name: visualisation.name});
 						
 						
@@ -199,15 +192,6 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					layerService.setBaseLayers([
 								    {id: '1234', name:baseMap.name}
 								   ]);
-						
-					
-					
-					/*layerControl._map = cartomap;
-					var controlDiv = layerControl.onAdd(cartomap);
-					document.getElementById('LayerMenu').appendChild(controlDiv);
-					$compile(controlDiv)($scope);
-					*/
-
 				});
 					
 				// add layers and sublayers to arrayp
