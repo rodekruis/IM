@@ -3,7 +3,7 @@
 var secrets = require('../secrets');
 
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/im',
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/im-dev',
 	assets: {
 		lib: {
 			css: [
