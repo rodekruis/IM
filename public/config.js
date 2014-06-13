@@ -3,7 +3,7 @@
 // Init the application configuration module for AngularJS application
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
-	var applicationModuleName = 'im';
+	var applicationModuleName = 'Digital Operations Centre';
 	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'leaflet-directive', 'angular-centered', 'akoenig.deckgrid', 'ui.dashboard', 'ui.sortable', 'ngRoute', 'angular-lodash', 'ngGrid', 'formsAngular', 'angular-carousel'];
 
 	// Add a new vertical module

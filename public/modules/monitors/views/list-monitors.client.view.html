@@ -1,55 +1,27 @@
-<section data-ng-controller="MonitorsController" data-ng-init="find()">
-    <div class="monitors">
-    <div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="btn-group btn-group-sm">
-				 <button ng-click="prev()" class="btn btn-default" type="button"><em class="glyphicon glyphicon-chevron-left"></em> vorige</button>
-				 <button class="btn btn-default" type="button"> {{ monitorIndex + 1 }} / {{ monitors.length }}</button>
-				 <button ng-click="next()" class="btn btn-default" type="button"><em class="glyphicon glyphicon-chevron-right"></em> volgende</button>
-				 <button ng-click="toggleSwipe()" class="btn btn-default" type="button"><em class="glyphicon glyphicon-hand-up"></em> swipe ({{ swipe?'aan':'uit' }})</button>
-				 <button ng-click="toggleRotate()" class="btn btn-default" type="button"><em class="glyphicon glyphicon-repeat"></em> roteren ({{ rotate?'aan':'uit' }})</button>
-				 
-			</div>
-		</div>
-	</div>
+<section class="section-expand" data-ng-controller="MonitorsController" data-ng-init="find()">
+    <div class="monitorHeader">	
 	<div class="row clearfix">
-		<div class="col-md-12 column">
-		    <ul rn-carousel rn-carousel-buffered rn-carousel-index="monitorIndex" rn-carousel-swipe="{{swipe}}" class="my-slider ng-cloak">
-			    <li data-ng-repeat="monitor in monitors">
-				<div class='unsafehtml' ng-bind-html="monitor.content | unsafehtml"></div>
-				<div><a href="/#!/monitors/{{monitor._id}}">{{monitor.title}} openen in nieuw venster</a></div>
+		    <div class="col-md-12 column">
+			    <div class="btn-group btn-group-sm">
+				     <button class="btn btn-default btn-title" type="button"> {{currentMonitor.title}} </button>
+				     <button ng-click="prev()" class="btn btn-default" type="button"><em class="glyphicon glyphicon-chevron-left"></em> vorige</button>
+				     <button class="btn btn-default" type="button"> {{ monitorIndex + 1 }} / {{ monitors.length }}</button>
+				     <button ng-click="next()" class="btn btn-default" type="button"><em class="glyphicon glyphicon-chevron-right"></em> volgende</button>
+				     <!--<button ng-click="toggleSwipe()" class="btn btn-default" type="button"><em class="glyphicon glyphicon-hand-up"></em> swipe ({{ swipe?'aan':'uit' }})</button> -->
+				     <button ng-click="toggleRotate()" class="btn btn-default" type="button"><em class="glyphicon glyphicon-repeat"></em> roteren ({{ rotate?'aan':'uit' }})</button>
+				     
+			    </div>
+		    </div>
+	</div>
+    </div>
+	<div class="row clearfix monitorVerticalStretch">
+		<div class="col-md-12 column monitorVerticalStretch">
+		    <ul rn-carousel rn-carousel-buffered rn-carousel-index="monitorIndex" rn-carousel-swipe="{{swipe}}" class="my-slider ng-cloak monitorVerticalStretch">
+			    <li class="monitorVerticalStretch" data-ng-repeat="monitor in monitors">
+				<div class='unsafehtml monitorVerticalStretch' ng-bind-html="monitor.content | unsafehtml"></div>
+				<!--<div><a href="/#!/monitors/{{monitor._id}}">{{monitor.title}} openen in nieuw venster</a></div>-->
 			    </li>
 		    </ul>
 		</div>
-	</div>
     </div>
-
-  <!--
-  <tabset justified="true">
-    <tab data-ng-repeat="monitor in monitors" heading="{{monitor.title}}">
-	<div class='unsafehtml' ng-bind-html="monitor.content | unsafehtml"></div>
-	<div><a href="/#!/monitors/{{monitor._id}}">{{monitor.title}} openen in nieuw venster</a></div>
-    </tab>
-  </tabset>
-  -->
-  <div><a href="/#!/monitors/create">Nieuwe monitor</a></div>
-  <!--
-    <div class="row">
-	<div class="col-md-12">
-	    <div dashboard="dashboardOptions" class="dashboard-container"></div>
-	</div>
-    </div>
-  -->
-  <!--
-  <div class="list-group">
-        <a data-ng-repeat="monitor in monitors" data-ng-href="#!/monitors/{{monitor._id}}" class="list-group-item">
-            <small class="list-group-item-text">{{monitor.created | date:'medium'}} / {{monitor.user.displayName}}</small>
-            <h4 class="list-group-item-heading">{{monitor.title}}</h4>
-            <p class="list-group-item-text">{{monitor.content}}</p>
-        </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!monitors.$resolved || monitors.length">
-    	No monitors yet, why don't you <a href="/#!/monitors/create">create one</a>?
-    </div>
-  -->
 </section>

@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	wmsLayer = require('../../app/models/wmsLayer'),
 	Schema = mongoose.Schema;
 
 /**
@@ -98,10 +99,22 @@ var MapSchema = new Schema({
 		ref: 'TileServer',
 		form:  {label:'Achtergrondkaart'}
 	},
+	icon: {
+		type: String,
+		default: 'glyphicon glyphicon-map-marker',
+		trim: true,
+		required: true
+	},
+	mapBounds: {
+		type: Schema.Types.ObjectId,
+		ref: 'MapBounds',
+		form:  {label:'Kaart centreren op'}
+	},
 	mapCenter: {
 		type: Schema.Types.ObjectId,
 		ref: 'MapCenter',
-		form:  {label:'Kaart centreren op'}
+		form:  {label:'Kaart centreren op'},
+		required: true
 	},
 	user: {
 		type: Schema.Types.ObjectId,
@@ -110,6 +123,10 @@ var MapSchema = new Schema({
 	visualisation: {
 		type: [VisualisationSchema]
 	},
+	wmsLayer: [{
+		type: Schema.Types.ObjectId,
+		ref: 'WmsLayer'
+	}],
 
 });
 

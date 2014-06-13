@@ -100,7 +100,9 @@ exports.list = function(req, res) {
 	AMap.find().sort('-created')
 		.populate('user', 'displayName')
 		.populate('baseMap')
+		.populate('mapBounds')
 		.populate('mapCenter')
+		.populate('wmsLayer')
 		.exec(function(err, maps) {
 		if (err) {
 			return res.send(400, {
@@ -119,7 +121,9 @@ exports.mapByID = function(req, res, next, id) {
 	AMap.findById(id)
 		.populate('user', 'displayName')
 		.populate('baseMap')
+		.populate('mapBounds')
 		.populate('mapCenter')
+		.populate('wmsLayer')
 		.exec(function(err, map) {
 		if (err) return next(err);
 		if (!map) return next(new Error('Failed to load map ' + id));

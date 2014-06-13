@@ -78,6 +78,9 @@ angular.module('monitors')
 .controller('MonitorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Monitors', '$sce', '$interval', '$window', 'widgetDefinitions', 'defaultWidgets', 
 	function($scope, $stateParams, $location, Authentication, Monitors, $sce, $interval, $window, widgetDefinitions, defaultWidgets) {
 		$scope.authentication = Authentication;
+		$scope.monitorIndex = 0;
+		$scope.currentMonitor = null;
+		var window = angular.element($window);
 
 		$scope.create = function() {
 			var monitor = new Monitors({
@@ -122,6 +125,11 @@ angular.module('monitors')
 
 		$scope.find = function() {
 			$scope.monitors = Monitors.query();
+			
+			$scope.monitors.$promise.then(function (result) {
+				$scope.setCurrentMonitor();
+			});
+			
 		};
 
 		$scope.findOne = function() {
@@ -139,8 +147,28 @@ angular.module('monitors')
 			explicitSave: true
 		};
 		
-		$scope.monitorIndex = 0;
 		
+            
+	        // resize the remainder of the page, excluding the height of the navbar and the monitor header
+		$scope.onResize = function() {
+			var newHeight = window.height() - $('.navbar').height() - $('.monitorHeader').height();
+			$('.monitorVerticalStretch').css('height', newHeight);
+			$('.monitorVerticalStretch').css('minHeight', newHeight);
+		};
+	       
+	        // call function once to initialize
+		$scope.onResize();
+	    
+	        // bind function to window resize event
+		window.bind('resize', function() {
+			$scope.onResize();
+		});
+		
+		
+		$scope.setCurrentMonitor = function(){
+			$scope.currentMonitor = $scope.monitors[$scope.monitorIndex];
+		};
+
 		$scope.prev = function() {
 			if ($scope.monitorIndex === 0) {
 				$scope.monitorIndex = $scope.monitors.length - 1;
@@ -148,6 +176,8 @@ angular.module('monitors')
 			else {
 				$scope.monitorIndex--;
 			}
+			
+			$scope.setCurrentMonitor();
 		};
 		
 		$scope.next = function() {
@@ -158,6 +188,7 @@ angular.module('monitors')
 				$scope.monitorIndex++;
 			}
 			
+			$scope.setCurrentMonitor();
 		};
 		
 		$scope.swipe = true;

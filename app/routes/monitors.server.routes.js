@@ -13,7 +13,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, monitors.hasAuthorization, monitors.create);
 	
 	app.route('/monitors/:monitorId')
-		.get(users.requiresLogin, monitors.hasAuthorization, monitors.read)
+		.get(users.requiresLogin, monitors.read)
 		.put(users.requiresLogin, monitors.hasAuthorization, monitors.update)
 	    .delete(users.requiresLogin, monitors.hasAuthorization, monitors.delete);
 

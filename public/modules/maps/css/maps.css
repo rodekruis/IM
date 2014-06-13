@@ -344,3 +344,19 @@ fieldset[disabled] .btn-layers.active {
   background-color: #fff;
   border-color: #4cae4c;
 }
+
+.mapHeader{
+    /*position:relative;*/
+}
+
+.mapView{
+    /*overflow:auto;*/
+}
+
+.lead {
+    margin-bottom: 0px;
+}
+
+.list-group-item-text {
+    font-size: 14px;
+}

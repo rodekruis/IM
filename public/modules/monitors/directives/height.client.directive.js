@@ -1,18 +1,6 @@
 'use strict';
 
-
-angular.module('maps')
-.directive('layermenu', function ($compile) {
-   return {
-      template: '<div></div>',
-      replace: true,
-      link: function(scope, element) {
-        var container = scope.menuContainer;      
-        $compile(container)(scope);
-        element.append(container);
-      }
-    };
-  })
+angular.module('monitors')
 
 .directive('heightresize', ['$window', function($window) {
     return {
@@ -21,7 +9,7 @@ angular.module('maps')
             var window = angular.element($window);
             
             scope.onResize = function() {
-               $(elem).height( window.height() - $('.navbar').height() - $('.mapHeader').height() );
+               $(elem).height( window.height() - $('.navbar').height() - $('.monitorHeader').height());
            };
    
             scope.onResize();

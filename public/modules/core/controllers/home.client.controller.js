@@ -3,6 +3,8 @@
 angular.module('core').controller('HomeController', ['$scope', 'Authentication', function ($scope, Authentication) {
     $scope.authentication = Authentication;
     
+
+    
     angular.extend($scope, {
                     defaults: {
                         tileLayer: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',

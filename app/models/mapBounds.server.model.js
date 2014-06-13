@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 /**
  * MapCenter Schema
  */
-var MapCenterSchema = new Schema({
+var MapBoundsSchema = new Schema({
     name: {
             type: String,
             trim: true,
@@ -25,26 +25,40 @@ var MapCenterSchema = new Schema({
 	    required:true,
 	    form:  {label:'Beschrijving'},
     },
-    lat: { 
+    latSW: { 
             type: String,
             trim: true,
             default: '50.800974',
 	    required:true,
-	    form:  {label:'Latitude'},
+	    form:  {label:'Latitude  South-West point'},
     },
-    lng: {
+    lngSW: {
             type: String,
             trim: true,
             default: '2.638917',
 	    required:true,
-	    form:  {label:'Longitude'},
+	    form:  {label:'Longitude South-West point'},
+    },
+    latNE: {
+            type: String,
+            trim: true,
+            default: '7.450928',
+	    required:true,
+	    form:  {label:'Latitude North-East point'},
+    },
+    lngNE: {
+            type: String,
+            trim: true,
+            default: '5.1060363',
+	    required:true,
+	    form:  {label:'Longitude North-East point'},
     },
 });
 
-var MapCenter;
+var MapBounds;
 
 try {
-  var MapCenter = mongoose.model('MapCenter');
+  var MapBounds = mongoose.model('MapBounds');
 } catch (e) {
-  MapCenter = mongoose.model('MapCenter', MapCenterSchema);
+  MapBounds = mongoose.model('MapBounds', MapBoundsSchema);
 }

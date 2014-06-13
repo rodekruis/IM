@@ -1,7 +1,7 @@
-<section data-ng-controller="MonitorsController" data-ng-init="findOne()">
+<section class="section-expand" data-ng-controller="MonitorsController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1>{{monitor.title}}</h1>
-		<div class="pull-right" data-ng-show="authentication.user._id == monitor.user._id">
+		<h3>{{monitor.title}}</h3>
+		<div class="pull-right" data-ng-show="(authentication.user._id == monitor.user._id) || _.intersection(authentication.user.roles, ['admin']).length">
 			<a class="btn btn-primary" href="/#!/monitors/{{monitor._id}}/edit">
 				<i class="glyphicon glyphicon-edit"></i>
 			</a>

@@ -5,7 +5,8 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		$scope.authentication = Authentication;
 		$scope.L = $window.L;
 		$scope.cartodb = $window.cartodb;
-						
+		$scope.LMap = null;
+				   
 		$scope.create = function() {
 			var map = new Maps({
 				title: this.title,
@@ -86,16 +87,18 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		*/
 		
 		$scope.$watchCollection('checkModel', function(newValues, oldValues) {
-			var layers = $scope.LMap.layers;
-			console.log($scope.LMap);
-			// Use newValues to determine active layers
-			for (var i in newValues) {
-				// detect change
-				if (newValues[i] !== oldValues[i]) {
-					if (newValues[i] === false) {
-						$scope.LMap.removeLayer(layers[i]);
-					} else {
-						$scope.LMap.addLayer(layers[i]);
+			if ($scope.LMap !== null) {
+				var layers = $scope.LMap.layers;
+				console.log($scope.LMap);
+				// Use newValues to determine active layers
+				for (var i in newValues) {
+					// detect change
+					if (newValues[i] !== oldValues[i]) {
+						if (newValues[i] === false) {
+							$scope.LMap.removeLayer(layers[i]);
+						} else {
+							$scope.LMap.addLayer(layers[i]);
+						}
 					}
 				}
 			}
@@ -139,6 +142,23 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					 $scope.cartodb.log.log('some error occurred');
 				});
 			};
+				
+			var addWmsLayer = function(cartomap, wmsLayer){
+				$scope.L.tileLayer.wms(wmsLayer.url, {
+						layers: wmsLayer.layers,
+						format: wmsLayer.format,
+						transparent: wmsLayer.transparent
+					    })
+				.addTo(cartomap)
+				.on('done', function(layer) {									      
+					 layer.setInteraction(true);
+	      
+					 // Add layer to control
+					 $scope.layerControl.addOverlay(layer, wmsLayer.name);
+				}).on('error', function() {
+					 $scope.cartodb.log.log('some error occurred');
+				});
+			};
 			
 			// Get leaflet map object
 			leafletData.getMap().then(function(cartomap) {
@@ -150,7 +170,6 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					mapId: $stateParams.mapId
 				}).$promise.then(function(map) {
 					var baseMap = map.baseMap;
-					var mapCenter = map.mapCenter;
 					
 					var baselayers = {};	
 					
@@ -172,8 +191,25 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					$scope.layerControl = $scope.L.control.activeLayers(baselayers, {}, {collapsed:false});
 					
 					// Set map center
+					var mapCenter = map.mapCenter;
 					cartomap.setView(new $scope.L.latLng(mapCenter.lat, mapCenter.lng), mapCenter.zoom);
 					
+					/*
+					 * Couldn't get the map bounds to work.
+					 * Idea is to fit the map to preset bounds, so that on each resolution the map displays properly
+					 * Possibly something to do with asynchronous loading of map
+					/*
+					var mapBounds = map.mapBounds;
+					var 	southWest = $scope.L.latLng(mapBounds.latSW, mapBounds.lngSW),
+						northEast = $scope.L.latLng(mapBounds.latNE, mapBounds.lngNE),
+						bounds = $scope.L.latLngBounds(southWest, northEast);
+						
+					var mapCenter = bounds.getCenter();
+					var zoom = cartomap.getBoundsZoom(bounds);
+					
+					cartomap.fitBounds(bounds, {reset: true});
+					*/
+    
 					$scope.radioModel = '';
 					$scope.checkModel = {};
 		      
@@ -182,9 +218,14 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 						var visualisation = map.visualisation[vId];
 						addVisualisation(cartomap, visualisation);
 						
-						layers.push({id: visualisation._id, name: visualisation.name});
+						layers.push({id: visualisation._id, name: visualisation.name});	
+					}
+					
+					for (var wmsId in map.wmsLayer) {
+						var wmsLayer = map.wmsLayer[wmsId];
+						addWmsLayer(cartomap, wmsLayer);
 						
-						
+						layers.push({id: wmsLayer._id, name: wmsLayer.name});	
 					}
 					
 					layerService.setLayers(layers);

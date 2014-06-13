@@ -27,6 +27,7 @@ module.exports = {
 				'public/lib/angular-carousel/dist/angular-carousel.css'
 			],
 			js: [
+
 				'public/lib/jquery/jquery.js',
 				'public/lib/jquery-ui/ui/jquery-ui.js',
 				'public/lib/lodash/dist/lodash.min.js',
