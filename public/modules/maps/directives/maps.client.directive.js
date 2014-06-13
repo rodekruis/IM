@@ -14,7 +14,7 @@ angular.module('maps')
     };
   })
 
-.directive('heightresize', ['$window', function($window) {
+.directive('heightresize', ['$window', function($window, $rootScope) {
     return {
         restrict: 'A',
         link: function(scope, elem, attrs) {
@@ -22,6 +22,7 @@ angular.module('maps')
             
             scope.onResize = function() {
                $(elem).height( window.height() - $('.navbar').height() - $('.mapHeader').height() );
+               $rootScope.LMap.invalidateSize();
            };
    
             scope.onResize();

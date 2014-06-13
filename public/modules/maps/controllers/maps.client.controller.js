@@ -237,6 +237,8 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					
 				// add layers and sublayers to arrayp
 				//layerControls.push(layercontrol);
+				
+				cartomap.invalidateSize();
 			});
 		};
 		
