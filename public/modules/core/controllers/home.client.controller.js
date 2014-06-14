@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', function ($scope, Authentication) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'leafletData', function ($scope, Authentication, leafletData) {
     $scope.authentication = Authentication;
     
 
@@ -38,4 +38,10 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             zoom: 10
         }
     });
+    
+    // Get leaflet map object
+    leafletData.getMap().then(function(cartomap) {	
+            cartomap.invalidateSize();
+    });
+                        
 }]);
