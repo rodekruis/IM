@@ -360,3 +360,15 @@ fieldset[disabled] .btn-layers.active {
 .list-group-item-text {
     font-size: 14px;
 }
+
+.leaflet-control-search .search-button {
+    width: 20px;
+    height: 20px;
+    background: url('/lib/leaflet-search/images/search-icon.png') no-repeat scroll 0px 0px transparent;
+}
+
+.leaflet-control-search .search-input {
+    margin: 0px;
+}
+   
+   

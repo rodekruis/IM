@@ -24,7 +24,8 @@ module.exports = {
 				'public/lib/select2/select2.css',
 				//'public/lib/select2-bootstrap-css/select2-bootstrap.css',
 				'public/lib/forms-angular/css/forms-angular-bs3.css',
-				'public/lib/angular-carousel/dist/angular-carousel.css'
+				'public/lib/angular-carousel/dist/angular-carousel.css',
+				'public/lib/leaflet-search/dist/leaflet-search.src.css',
 			],
 			js: [
 
@@ -61,7 +62,9 @@ module.exports = {
 				'public/lib/ckeditor/ckeditor.js',
 				'public/lib/ng-ckeditor/ng-ckeditor.js',
 				'public/lib/forms-angular/forms-angular.js',
-				'public/lib/angular-carousel/dist/angular-carousel.js'
+				'public/lib/angular-carousel/dist/angular-carousel.js',
+				'https://maps.googleapis.com/maps/api/js?v=3&sensor=true',
+				'public/lib/leaflet-search/dist/leaflet-search.src.js'
 			]
 		},
 		css: [

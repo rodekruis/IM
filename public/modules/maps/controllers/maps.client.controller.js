@@ -105,6 +105,46 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			
 		}, true);
 		
+		$scope.loadSearchControl = function(cartomap) {
+			var geocoder = new google.maps.Geocoder();
+
+			function googleGeocoding(text, callResponse)
+			{
+				geocoder.geocode({address: text}, callResponse);
+			}
+		
+			function filterJSONCall(rawjson)
+			{
+				var json = {},
+					key, loc, disp = [];
+		
+				for(var i in rawjson)
+				{
+					key = rawjson[i].formatted_address;
+					
+					loc = $scope.L.latLng( rawjson[i].geometry.location.lat(), rawjson[i].geometry.location.lng() );
+					
+					json[ key ]= loc;	//key,value format
+				}
+		
+				return json;
+			}
+		
+			cartomap.addControl( new $scope.L.Control.Search({
+					wrapper: 'findbox',
+					text: 'Zoeken...',			//placeholder value	
+					textCancel: 'Cancel',			//title in cancel button
+					textErr: 'Locatie niet gevonden',	//error message
+					callData: googleGeocoding,
+					filterJSON: filterJSONCall,
+					markerLocation: true,
+					autoType: false,
+					autoCollapse: true,
+					minLength: 2,
+					zoom: 13
+				}) );
+		};
+		
 		$scope.loadLayers = function() {
 			// set function
 			
@@ -239,6 +279,8 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				//layerControls.push(layercontrol);
 				
 				cartomap.invalidateSize();
+				
+				$scope.loadSearchControl(cartomap);
 			});
 		};
 		

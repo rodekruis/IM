@@ -21,7 +21,8 @@ module.exports = {
 				'public/lib/select2/select2.css',
 				//'public/lib/select2-bootstrap-css/select2-bootstrap.css',
 				'public/lib/forms-angular/css/forms-angular-bs3.less',
-				'public/lib/angular-carousel/dist/angular-carousel.min.css'
+				'public/lib/angular-carousel/dist/angular-carousel.min.css',
+				'public/lib/leaflet-search/dist/leaflet-search.min.css'
 			],
 			js: [
 				'public/lib/jquery/jquery.min.js',
@@ -56,7 +57,8 @@ module.exports = {
 				'public/lib/ckeditor/ckeditor.js',
 				'public/lib/ng-ckeditor/ng-ckeditor.min.js',
 				'public/lib/forms-angular/forms-angular.min.js',
-				'public/lib/angular-carousel/dist/angular-carousel.min.js'
+				'public/lib/angular-carousel/dist/angular-carousel.min.js',
+				'public/lib/leaflet-search/dist/leaflet-search.min.js'
 			]
 		},
 		css: 'public/dist/application.min.css',
