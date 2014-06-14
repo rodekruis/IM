@@ -58,6 +58,7 @@ module.exports = {
 				'public/lib/ng-ckeditor/ng-ckeditor.min.js',
 				'public/lib/forms-angular/forms-angular.min.js',
 				'public/lib/angular-carousel/dist/angular-carousel.min.js',
+				'https://maps.googleapis.com/maps/api/js?v=3&sensor=true',
 				'public/lib/leaflet-search/dist/leaflet-search.min.js'
 			]
 		},
