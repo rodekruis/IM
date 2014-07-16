@@ -7,10 +7,9 @@ module.exports = {
 	usehttp: true, // should a non encrypted server be launched?
 	usessl: false, // should an encrypted server be launced?
 	sslport: process.env.SSLPORT || 443,
-	key_file: './config/cert/rodekruis-key.pem',
-	cert_file: './config/cert/rodekruis-cert.pem',
+	pfx_file: './config/cert/rodekruis.pfx',
 	app: {
-		title: 'Rode Kruis Digital Operations Centre'
+		title: 'Rode Kruis Digital Operations Center'
 	},
 	assets: {
 		lib: {
