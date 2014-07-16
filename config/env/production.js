@@ -7,7 +7,8 @@ module.exports = {
 	usehttp: true, // should a non encrypted server be launched?
 	usessl: true, // should an encrypted server be launced?
 	sslport: process.env.SSLPORT || 443,
-	pfx_file: './config/cert/rodekruis.pfx',
+	key_file: './config/cert/rodekruis-key3.pem',
+	cert_file: './config/cert/rodekruis-cert3.pem',
 	app: {
 		title: 'Rode Kruis Digital Operations Center'
 	},
