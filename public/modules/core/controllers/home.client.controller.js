@@ -23,7 +23,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     baselayers: {
                         osm: {
                             name: 'OpenStreetMap',
-                            url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                             type: 'xyz'
                         }
                     }

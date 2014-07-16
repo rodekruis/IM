@@ -4,6 +4,6 @@
 angular.module('maps').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Kaarten', 'maps');
+		Menus.addMenuItem('topbar', 'Kaarten', 'maps', '/maps', true);
 	}
 ]);

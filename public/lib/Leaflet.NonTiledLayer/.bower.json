@@ -1,0 +1,14 @@
+{
+  "name": "Leaflet.NonTiledLayer",
+  "homepage": "https://github.com/oliverheilig/Leaflet.NonTiledLayer",
+  "_release": "93fc1629f5",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "93fc1629f59ddff712e68db77a98fdb46e37d534"
+  },
+  "_source": "https://github.com/oliverheilig/Leaflet.NonTiledLayer.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/oliverheilig/Leaflet.NonTiledLayer.git",
+  "_direct": true
+}

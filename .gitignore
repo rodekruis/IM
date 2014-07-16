@@ -6,3 +6,4 @@ app/tests/coverage/
 .bower-*/
 .idea/
 config/secrets.json
+config/cert/*.pem

@@ -1,0 +1,14 @@
+{
+  "name": "Leaflet.WMS.GetLegendGraphic",
+  "homepage": "https://github.com/stuporglue/Leaflet.WMS.GetLegendGraphic",
+  "_release": "4ae87cbb53",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4ae87cbb537f4c00c78443fc505937aca17c7852"
+  },
+  "_source": "https://github.com/stuporglue/Leaflet.WMS.GetLegendGraphic.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/stuporglue/Leaflet.WMS.GetLegendGraphic.git",
+  "_direct": true
+}

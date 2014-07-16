@@ -4,6 +4,8 @@ var secrets = require('../secrets');
 
 module.exports = {
 	db: 'mongodb://localhost/im-dev',
+	usehttp: true, // should a non encrypted server be launced?
+	usessl: true, // should an encrypted server be launced?
 	app: {
 		title: 'IM - Development Environment'
 	},
@@ -32,6 +34,7 @@ module.exports = {
 		clientSecret: secrets.azure.clientSecret,
 		tenantId: secrets.azure.tenantId,
 		resource: 'https://graph.windows.net',
-		redirectURL: 'http://localhost:3000/auth/azure/callback' //http://nexios-shared1.cloudapp.net/auth/azure/callback
+		redirectURL: 'http://localhost:3000/auth/azure/callback',
+		redirectURLSSL: 'http://localhost:3000/auth/azure/callback'
 	}
 };

@@ -1,11 +1,14 @@
 'use strict';
 
-angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps', '$window', 'leafletData', '$compile', 'layerService', '$parse',//'L', 'cartodb',
-	function($scope, $stateParams, $location, Authentication, Maps, $window, leafletData, $compile, layerService, $parse) { //, 
+/*global google */
+
+angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps', '$window', 'leafletData', '$compile', 'layerService', '$parse', 'CartoDB', //'L', 'cartodb',
+	function($scope, $stateParams, $location, Authentication, Maps, $window, leafletData, $compile, layerService, $parse, CartoDB) { //, 
 		$scope.authentication = Authentication;
 		$scope.L = $window.L;
 		$scope.cartodb = $window.cartodb;
 		$scope.LMap = null;
+		$scope.subLayers = [];
 				   
 		$scope.create = function() {
 			var map = new Maps({
@@ -15,7 +18,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			map.$save(function(response) {
 				$location.path('maps/' + response._id);
 			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
+				$scope.addAlert('danger', errorResponse.data.message);
 			});
 
 			this.title = '';
@@ -44,47 +47,37 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			map.$update(function() {
 				$location.path('maps/' + map._id);
 			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
+				$scope.addAlert('danger', errorResponse.data.message);
 			});
 		};
 
 		$scope.find = function() {
-			$scope.maps = Maps.query();
+			Maps.query(function(data) {
+				$scope.maps = data;
+			    }, function(error) {
+				$scope.addAlert('danger', error.data.message);
+			    });
 		};
 
 		$scope.findOne = function() {
-			$scope.map = Maps.get({
-				mapId: $stateParams.mapId
-			});
+			Maps.get({mapId: $stateParams.mapId},
+			    function(data) {
+				$scope.map = data;
+			    },
+			    function(error) {
+				$scope.addAlert('danger', error.data.message);
+			    });
 		};
 		
-		/*
-		angular.extend($scope, {
-			defaults: {
-			    tileLayer: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-			}
-		});
-		
-		angular.extend($scope, {
-			layers: {
-				baselayers: {
-				    osm: {
-					name: 'OSM',
-					url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-					type: 'xyz'
-				    },
-				}
-			}
-		});
-
-		angular.extend($scope, {
-		    center: {
-			lat: 53.0809819, 
-			lng: 5.6060363,
-			zoom: 8
-		    }
-		});
-		*/
+		$scope.alerts = [];
+		    
+		$scope.addAlert = function(messageType, message) {
+			$scope.alerts.push({type: messageType, msg: message});
+		};
+		    
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
 		
 		$scope.$watchCollection('checkModel', function(newValues, oldValues) {
 			if ($scope.LMap !== null) {
@@ -152,20 +145,24 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				$scope.cartodb.createLayer(cartomap, visualisation.apiUrl)
 				.addTo(cartomap)
 				.on('done', function(layer) {
-					var table = visualisation.tableName;
+					/*var table = visualisation.tableName;
 					
 					 //tableNames[val['name']] = val['table_name'];
 	      
+					CartoDB.get({
+						table: table
+					}).$promise.then(function(subL) {
+						var subll = subL;
+					});
+						      
 					 var subLayerOptions = {
 						      sql: 'SELECT * FROM ' + table
 					 };
 	      
-					 // get sublayer and store in array
+					 // get sublayer
 					 var sublayer = layer.getSubLayer(0);
 					 sublayer.set(subLayerOptions);
-	      
-					 //sublayers[table] = sublayer;	
-										      
+					*/					      
 					 layer.setInteraction(true);
 	      
 					 // Add layer to control
@@ -184,20 +181,73 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			};
 				
 			var addWmsLayer = function(cartomap, wmsLayer){
-				$scope.L.tileLayer.wms(wmsLayer.url, {
+				
+				var wms = null;
+				
+				if (wmsLayer.tiled) {
+					if (wmsLayer.featureInfo) {
+						wms = $scope.L.tileLayer.betterWms(wmsLayer.url, {
 						layers: wmsLayer.layers,
 						format: wmsLayer.format,
-						transparent: wmsLayer.transparent
-					    })
-				.addTo(cartomap)
-				.on('done', function(layer) {									      
-					 layer.setInteraction(true);
-	      
-					 // Add layer to control
-					 $scope.layerControl.addOverlay(layer, wmsLayer.name);
-				}).on('error', function() {
-					 $scope.cartodb.log.log('some error occurred');
-				});
+						transparent: wmsLayer.transparent,
+						version: wmsLayer.version
+					    });
+					} else {
+					wms = $scope.L.tileLayer.wms(wmsLayer.url, {
+						layers: wmsLayer.layers,
+						format: wmsLayer.format,
+						transparent: wmsLayer.transparent,
+						version: wmsLayer.version
+					    });
+					}
+				}
+				else {
+					wms = new $scope.L.NonTiledLayer.WMS(wmsLayer.url, {
+							layers: wmsLayer.layers,
+							format: wmsLayer.format,
+							transparent: wmsLayer.transparent,
+							version: wmsLayer.version,
+							pane: cartomap.getPanes().tilePane,
+							zIndex: wmsLayer.zIndex,
+							opacity: wmsLayer.opacity
+						    }, wmsLayer.featureInfo);
+				}
+				
+				if (wms !== null) {
+					// Add layer to map
+					wms.addTo(cartomap);
+					
+					// Add layer to layer control
+					$scope.layerControl.addOverlay(wms, wmsLayer.name);
+				
+					// Get layer legends
+					var legendOptions = wmsLayer.legendOptions;
+					if (wmsLayer.legendOptions !== '') {
+						legendOptions = JSON.parse(wmsLayer.legendOptions);
+					}
+					var legends = wms.getLegendGraphic(legendOptions);
+					
+					// add legends to map
+					for (var l in legends) {
+						var legendControl = $scope.L.control({position: 'bottomright'});
+						addLegend(legendControl, l, legends[l]);
+										
+						legendControl.addTo(cartomap);
+					}
+				}
+				
+			};
+			
+			/*
+			 * Function to load png in legend when added to map
+			 */
+			var addLegend = function(legendControl, legend, url){
+				legendControl.onAdd = function (cartomap) {
+						var div = $scope.L.DomUtil.create('div', 'legend ' + legend);
+						    div.innerHTML +=
+						    '<img src="' + url + '" alt="legend">';
+						return div;
+					};
 			};
 			
 			// Get leaflet map object
@@ -220,7 +270,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 						//}
 							
 						// add base layer
-						var layer = $scope.L.tileLayer(baseMap.url);
+						var layer = $scope.L.tileLayer(baseMap.url, {attribution: '&copy; <a href="http://www.rodekruis.nl" target="_new">Rode Kruis</a>'});
 						cartomap.addLayer(layer);
 					
 						// Set default base layer

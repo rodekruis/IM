@@ -7,6 +7,9 @@ module.exports = {
 		keywords: 'MongoDB, Express, AngularJS, Node.js'
 	},
 	port: process.env.PORT || 3000,
+	sslport: process.env.SSLPORT || 443,
+	key_file: './config/cert/localhost-key.pem',
+	cert_file: './config/cert/localhost-cert.pem',
 	templateEngine: 'swig',
 	sessionSecret: 'MEAN',
 	sessionCollection: 'sessions',
@@ -64,7 +67,11 @@ module.exports = {
 				'public/lib/forms-angular/forms-angular.js',
 				'public/lib/angular-carousel/dist/angular-carousel.js',
 				'https://maps.googleapis.com/maps/api/js?v=3&sensor=true',
-				'public/lib/leaflet-search/dist/leaflet-search.src.js'
+				'public/lib/leaflet-search/dist/leaflet-search.src.js',
+				'public/lib/Leaflet.NonTiledLayer/NonTiledLayer.js',
+				'public/lib/Leaflet.NonTiledLayer/NonTiledLayer.WMS.js',
+				'public/lib/leaflet-betterwms/L.TileLayer.BetterWMS.js',
+				'public/lib/Leaflet.WMS.GetLegendGraphic/leaflet-wms-getlegendgraphic.js',
 			]
 		},
 		css: [

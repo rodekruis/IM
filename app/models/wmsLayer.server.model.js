@@ -52,14 +52,48 @@ var WmsLayerSchema = new Schema({
     format: {
             type: String,
             trim: true,
-            default: 'image/jpeg',
+            default: 'image/png',
 	    form:  {label:'WMS image format', size:'large'},
+    },
+    version: {
+            type: String,
+            trim: true,
+            default: '1.1.1',
+	    form:  {label:'WMS service version number', size:'large'},
     },
     transparent: {
             type: Boolean,
             default: true,
 	    form:  {label:'WMS images transparant', size:'large'},
     },
+    opacity: {
+            type: String,
+	    trim: true,
+            default: '1.0',
+	    form:  {label:'WMS layer opacity', size:'large'},
+    },
+    zIndex: {
+            type: String,
+	    trim: true,
+            default: '50',
+	    form:  {label:'WMS layer zIndex on map', size:'large'},
+    },
+    tiled : {
+	    type: Boolean,
+	    default: true,
+	    form: {label:'Is the layer tiled?'}
+    },
+    featureInfo : {
+	    type: Boolean,
+	    default: false,
+	    form: {label:'Feature info can be retreived'}
+    },
+    legendOptions: {
+            type: String,
+	    trim: true,
+            default: '',
+	    form:  {label:'WMS legend options (json)', size:'large'},
+    },    
     crs: {
 		type: [{
 			type: String,

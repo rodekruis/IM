@@ -14,11 +14,11 @@ var users = require('../../app/controllers/users'),
 module.exports = function(app) {
 	// Maps Routes
 	app.route('/maps')
-		.get(users.requiresLogin, maps.list)
+		.get(maps.list)
 		.post(users.requiresLogin, maps.create);
 	
 	app.route('/maps/:mapId')
-		.get(users.requiresLogin, maps.read)
+		.get(maps.read)
 		.put(users.requiresLogin, maps.hasAuthorization, maps.update)
 	    .delete(users.requiresLogin, maps.hasAuthorization, maps.delete);
 

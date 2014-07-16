@@ -19,7 +19,7 @@ var express = require('express'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
 	path = require('path');
-
+	
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
@@ -106,6 +106,24 @@ module.exports = function(db) {
 	app.use(helmet.ienoopen());
 	app.disable('x-powered-by');
 	
+	// Redirect all http requests to https
+	// If environment is development, remove the port
+	app.use(function(req, res, next) {
+		if (config.usessl) {
+			if (!req.secure) {
+			    if(process.env.NODE_ENV === 'development') {
+			      return res.redirect('https://localhost' + req.url);
+			    } else {
+			      return res.redirect('https://' + req.headers.host + req.url);
+			    }
+			} else {
+			    return next();
+			}
+		} else {
+			return next();
+		}
+	});
+		
 	// Setting the app router and static folder
 	app.use(express.static(path.resolve('./public')));
 

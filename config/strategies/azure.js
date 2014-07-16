@@ -7,6 +7,7 @@ var passport = require('passport'),
 	url = require('url'),
 	AzureStrategy = require('passport-azure-oauth').Strategy,
 	config = require('../config'),
+	secrets = require('../secrets'),
 	users = require('../../app/controllers/users');
 
 module.exports = function() {
@@ -15,8 +16,8 @@ module.exports = function() {
 			clientId: config.azure.clientID,
 			clientSecret: config.azure.clientSecret,
 			tenantId: config.azure.tenantId,
-			resource: config.azure.resource, // token url
-			redirectURL: config.azure.redirectURL, // callback
+			resource: config.azure.resource, // token url	
+			redirectURL: config.usessl ? config.azure.redirectURLSSL : config.azure.redirectURL, // callback
 			passReqToCallback: true
 		},
 		function(req, accessToken, refreshToken, profile, done) {
@@ -25,13 +26,12 @@ module.exports = function() {
 			var domainRegex = /@(.*$)/i;
 			
 			try {
+				// get domain from user email address in azure provided data
 				var matches = providerData.upn.match(domainRegex);
-		    
 				var domain = matches[1].toLowerCase();
 				
-				if (domain === 'rodekruis.nl' || domain ==='osbranches.onmicrosoft.com') {
-					//code	
-				
+				// test if email is within valid domain in secrets.json
+				if (secrets.domains.indexOf(domain) > -1) {		
 
 					// Set the provider data and include tokens
 					providerData.accessToken = accessToken;

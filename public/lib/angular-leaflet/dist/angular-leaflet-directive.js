@@ -1154,7 +1154,7 @@
           },
           crs: L.CRS.EPSG3857,
           tileLayer: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          tileLayerOptions: { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' },
+          tileLayerOptions: { attribution: '' },
           path: {
             weight: 10,
             opacity: 1,

@@ -97,7 +97,14 @@ exports.delete = function(req, res) {
  * List of AMaps
  */
 exports.list = function(req, res) {
-	AMap.find().sort('-created')
+	
+	// If user is not logged in, add criteria for selecting public maps only
+	var criteria = '';
+	if (typeof(req.user) === 'undefined') {
+		criteria = { 'isPublic': true} ;
+	}
+	
+	AMap.find(criteria).sort('-created')
 		.populate('user', 'displayName')
 		.populate('baseMap')
 		.populate('mapBounds')
@@ -112,24 +119,32 @@ exports.list = function(req, res) {
 			res.jsonp(maps);
 		}
 	});
+	
 };
 
 /**
  * AMap middleware
  */
 exports.mapByID = function(req, res, next, id) {
-	AMap.findById(id)
+	
+	// If user is not logged in, add criteria for selecting public maps only
+	var criteria = {'_id': id};
+	if (typeof(req.user) === 'undefined') {
+		criteria = { '_id': id, 'isPublic': true} ;
+	}
+	
+	AMap.findOne(criteria)
 		.populate('user', 'displayName')
 		.populate('baseMap')
 		.populate('mapBounds')
 		.populate('mapCenter')
 		.populate('wmsLayer')
 		.exec(function(err, map) {
-		if (err) return next(err);
-		if (!map) return next(new Error('Failed to load map ' + id));
-		req.map = map;
-		next();
-	});
+			if (err) return next(err);
+			if (!map) return res.send(400, { message: 'Failed to load map: ' + id });//return next(new Error('Failed to load map ' + id));
+			req.map = map;
+			next();
+		});
 };
 
 /**

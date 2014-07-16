@@ -9,7 +9,7 @@ angular.module('core').service('Menus', [
 		// Define the menus object
 		this.menus = {};
 
-		// A private function for rendering decision 
+		// A private function for rendering decision on the main menu
 		var shouldRender = function(user) {
 			if(user) {
 				for (var userRoleIndex in user.roles) {
@@ -25,7 +25,7 @@ angular.module('core').service('Menus', [
 
 			return false;
 		};
-
+		
 		// Validate menu existance
 		this.validateMenuExistance = function(menuId) {
 			if (menuId && menuId.length) {
@@ -83,7 +83,7 @@ angular.module('core').service('Menus', [
 				title: menuItemTitle,
 				link: menuItemURL,
 				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-				isPublic: isPublic || this.menus[menuId].isPublic,
+				isPublic: isPublic,
 				roles: roles || this.defaultRoles,
 				shouldRender: shouldRender
 			});
@@ -109,6 +109,6 @@ angular.module('core').service('Menus', [
 		};
 
 		//Adding the topbar menu
-		this.addMenu('topbar');
+		this.addMenu('topbar', true);
 	}
 ]);

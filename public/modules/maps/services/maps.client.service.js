@@ -1,13 +1,21 @@
 'use strict';
 
 //Maps service used for communicating with the Maps REST endpoints
-angular.module('maps').factory('Maps', ['$resource', function($resource) {
+angular.module('maps')
+
+.factory('Maps', ['$resource', function($resource) {
     return $resource('maps/:mapId', {
         mapsId: '@_id'
     }, {
         update: {
             method: 'PUT'
         }
+    });
+}])
+
+.factory('CartoDB', ['$resource', function($resource) {
+    return $resource('cartodb/:table', {
+        table: '@_id'
     });
 }])
 

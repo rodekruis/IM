@@ -94,6 +94,12 @@ var MapSchema = new Schema({
 		trim: true,
 		required: true
 	},
+	isPublic: {
+	    type: Boolean,
+	    required:true,
+	    default: false,
+	    form:  {label:'Publiek voor iedereen', size:'large'},
+	},
 	baseMap: {
 		type: Schema.Types.ObjectId,
 		ref: 'TileServer',
@@ -104,11 +110,6 @@ var MapSchema = new Schema({
 		default: 'glyphicon glyphicon-map-marker',
 		trim: true,
 		required: true
-	},
-	mapBounds: {
-		type: Schema.Types.ObjectId,
-		ref: 'MapBounds',
-		form:  {label:'Kaart centreren op'}
 	},
 	mapCenter: {
 		type: Schema.Types.ObjectId,

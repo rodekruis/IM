@@ -4,6 +4,11 @@ var secrets = require('../secrets');
 
 module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/im-dev',
+	usehttp: true, // should a non encrypted server be launched?
+	usessl: true, // should an encrypted server be launced?
+	sslport: process.env.SSLPORT || 443,
+	key_file: './config/cert/rodekruis-key.pem',
+	cert_file: './config/cert/rodekruis-cert.pem',
 	app: {
 		title: 'Rode Kruis Digital Operations Centre'
 	},
@@ -59,7 +64,11 @@ module.exports = {
 				'public/lib/forms-angular/forms-angular.min.js',
 				'public/lib/angular-carousel/dist/angular-carousel.min.js',
 				'https://maps.googleapis.com/maps/api/js?v=3&sensor=true',
-				'public/lib/leaflet-search/dist/leaflet-search.min.js'
+				'public/lib/leaflet-search/dist/leaflet-search.min.js',
+				'public/lib/Leaflet.NonTiledLayer/NonTiledLayer.js',
+				'public/lib/Leaflet.NonTiledLayer/NonTiledLayer.WMS.js',
+				'public/lib/leaflet-betterwms/L.TileLayer.BetterWMS.js',
+				'public/lib/Leaflet.WMS.GetLegendGraphic/leaflet-wms-getlegendgraphic.js',
 			]
 		},
 		css: 'public/dist/application.min.css',
@@ -90,6 +99,7 @@ module.exports = {
 		clientSecret: secrets.azure.clientSecret,
 		tenantId: secrets.azure.tenantId,
 		resource: 'https://graph.windows.net',
-		redirectURL: 'http://nexios-shared1.cloudapp.net/auth/azure/callback'
+		redirectURL: 'http://nexios-shared1.cloudapp.net/auth/azure/callback',
+		redirectURLSSL: 'https://nexios-shared1.cloudapp.net/auth/azure/callback'
 	}
 };
