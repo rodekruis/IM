@@ -7,3 +7,4 @@ app/tests/coverage/
 .idea/
 config/secrets.json
 config/cert/*.pem
+config/cert/.rnd
