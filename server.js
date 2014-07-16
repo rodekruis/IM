@@ -41,12 +41,17 @@ if (config.usehttp) {
     console.log('Application started on port ' + config.port);
 }
 
+// set certicicates and start SSL server
 if (config.usessl) {
-    // set certicicates and start SSL server
-    var sslconfig = { 
-        key : fs.readFileSync(path.resolve(__dirname, config.key_file), 'UTF-8'),
-        cert : fs.readFileSync(path.resolve(__dirname, config.cert_file), 'UTF-8'),
-    };
+    
+    var sslconfig = {};
+    if(config.hasOwnProperty('pfx_file')){
+        sslconfig.pfx = fs.readFileSync(path.resolve(__dirname, config.pfx_file), 'UTF-8');
+    }
+    else if (config.hasOwnProperty('key_file') && config.hasOwnProperty('cert_file')){
+        sslconfig.key = fs.readFileSync(path.resolve(__dirname, config.key_file), 'UTF-8');
+        sslconfig.cert = fs.readFileSync(path.resolve(__dirname, config.cert_file), 'UTF-8');
+    }
     
     if(secrets.certificate.passphrase) {
       sslconfig.passphrase = secrets.certificate.passphrase;
