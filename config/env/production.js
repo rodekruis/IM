@@ -6,8 +6,8 @@ module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/im-dev',
 	usehttp: true, // should a non encrypted server be launched?
 	usessl: true, // should an encrypted server be launced?
-	port: process.env.PORT || 3000,
-	sslport: process.env.SSLPORT || 444,
+	port: process.env.PORT || 80,
+	sslport: process.env.SSLPORT || 443,
 	key_file: './config/cert/rodekruis-key.pem',
 	cert_file: './config/cert/rodekruis-cert.pem',
 	app: {
@@ -110,7 +110,7 @@ module.exports = {
 		clientSecret: secrets.azure.clientSecret,
 		tenantId: secrets.azure.tenantId,
 		resource: 'https://graph.windows.net',
-		redirectURL: 'http://nexios-shared1.cloudapp.net/auth/azure/callback',
-		redirectURLSSL: 'https://nexios-shared1.cloudapp.net/auth/azure/callback'
+		redirectURL: 'http://digidoc.rodekruis.nl/auth/azure/callback',
+		redirectURLSSL: 'https://digidoc.rodekruis.nl/auth/azure/callback'
 	}
 };
