@@ -139,12 +139,49 @@ exports.mapByID = function(req, res, next, id) {
 		.populate('mapBounds')
 		.populate('mapCenter')
 		.populate('wmsLayer')
-		.exec(function(err, map) {
+		.populate('wfsLayer')
+		.exec(function(err, doc){
+			
+			var options = {
+				path: 'wfsLayer.markerStyle',
+				model: 'MarkerStyle'
+		        };
+    
+			if (err) return next(err);
+			if (!doc) return res.send(400, { message: 'Failed to load map: ' + id });
+			
+			
+			AMap.populate(doc, options, 
+			      function(err, mapWithMarkerStyle){
+					if (err) return res.json(500); //eturn next(err);
+					if (!mapWithMarkerStyle) return res.send(400, { message: 'Failed to load wfsLayer: ' + doc._id });//return next(new Error('Failed to load map ' + id));
+					
+					var options = {
+						path: 'wfsLayer.featureStyle',
+						model: 'FeatureStyle'
+					};
+		    
+					if (err) return next(err);
+					if (!mapWithMarkerStyle) return res.send(400, { message: 'Failed to load map: ' + id });
+					
+					
+					AMap.populate(mapWithMarkerStyle, options, 
+					      function(err, mapWithFeatureStyle){
+							if (err) return res.json(500); //return next(err);
+							if (!mapWithFeatureStyle) return res.send(400, { message: 'Failed to load wfsLayer: ' + doc._id });//return next(new Error('Failed to load map ' + id));
+							req.map = mapWithFeatureStyle;
+							next();
+					      }
+					); 
+			      }
+			);     
+		});
+		/*.exec(function(err, map) {
 			if (err) return next(err);
 			if (!map) return res.send(400, { message: 'Failed to load map: ' + id });//return next(new Error('Failed to load map ' + id));
 			req.map = map;
 			next();
-		});
+		});*/
 };
 
 /**

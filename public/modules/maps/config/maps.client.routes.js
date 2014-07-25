@@ -13,6 +13,10 @@ angular.module('maps').config(['$stateProvider',
 			url: '/maps/create',
 			templateUrl: 'modules/maps/views/create-map.client.view.html'
 		}).
+		state('proxy', {
+			url: '/maps/proxy/:url',
+			templateUrl: 'modules/maps/views/create-map.client.view.html'
+		}).
 		state('viewMap', {
 			url: '/maps/:mapId',
 			templateUrl: 'modules/maps/views/view-map.client.view.html'

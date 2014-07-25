@@ -6,7 +6,7 @@ module.exports = {
 		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
 		keywords: 'MongoDB, Express, AngularJS, Node.js'
 	},
-	port: process.env.PORT || 3000,
+	port: process.env.PORT || 80,
 	sslport: process.env.SSLPORT || 443,
 	key_file: './config/cert/localhost-key.pem',
 	cert_file: './config/cert/localhost-cert.pem',
@@ -29,6 +29,8 @@ module.exports = {
 				'public/lib/forms-angular/css/forms-angular-bs3.css',
 				'public/lib/angular-carousel/dist/angular-carousel.css',
 				'public/lib/leaflet-search/dist/leaflet-search.src.css',
+				'public/lib/angular-busy/dist/angular-busy.css',
+				'public/lib/leaflet-gps/dist/leaflet-gps.src.css'
 			],
 			js: [
 
@@ -72,6 +74,13 @@ module.exports = {
 				'public/lib/Leaflet.NonTiledLayer/NonTiledLayer.WMS.js',
 				'public/lib/leaflet-betterwms/L.TileLayer.BetterWMS.js',
 				'public/lib/Leaflet.WMS.GetLegendGraphic/leaflet-wms-getlegendgraphic.js',
+				'public/lib/azgs-leaflet/js/lib/less-1.2.2.min.js',
+				'public/lib/azgs-leaflet/js/lib/jade.js',
+				'public/lib/leaflet.ajax/dist/leaflet.ajax.js',
+				'public/lib/azgs-leaflet/js/azgs-leaflet/GeoJSON.WFS.js',
+				'public/lib/azgs-leaflet/js/azgs-leaflet/GeoJSON.WFS.ClickResponder.js',
+				'public/lib/angular-busy/dist/angular-busy.js',
+				'public/lib/leaflet-gps/dist/leaflet-gps.src.js'
 			]
 		},
 		css: [

@@ -39,6 +39,13 @@ var MapCenterSchema = new Schema({
 	    required:true,
 	    form:  {label:'Longitude'},
     },
+    zoom: {
+            type: String,
+            trim: true,
+            default: '9',
+	    required:true,
+	    form:  {label:'Zoom level'},
+    },
 });
 
 var MapCenter;

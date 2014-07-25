@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	wmsLayer = require('../../app/models/wmsLayer'),
+	wfsLayer = require('../../app/models/wfsLayer'),
 	Schema = mongoose.Schema;
 
 /**
@@ -45,19 +46,19 @@ var VisualisationSchema = new Schema({
             type: String,
             trim: true,
             default: '',
-	    required:true,
+	    required:false,
 	    form:  {label:'Naam tabel', size:'large'},
     },
     tableColumns: {
             type: String,
             trim: true,
-	    required:true,
+	    required:false,
 	    form:  {label:'Kolommen uit tabel', size:'large'},
     },
     groups: {
 	    type: String,
             trim: true,
-	    required:true,
+	    required:false,
 	    form:  {label:'Groepen', size:'large'},
     }
 });
@@ -127,6 +128,10 @@ var MapSchema = new Schema({
 	wmsLayer: [{
 		type: Schema.Types.ObjectId,
 		ref: 'WmsLayer'
+	}],
+	wfsLayer: [{
+		type: Schema.Types.ObjectId,
+		ref: 'WfsLayer'
 	}],
 
 });

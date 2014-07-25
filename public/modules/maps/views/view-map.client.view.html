@@ -44,6 +44,7 @@
        <div>
 	      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
        </div>
+       	<div cg-busy="{promise:loading, message:'Kaartlagen laden'}"></div>
         <div>
 	      <p class="lead" data-ng-init="loadLayers();">
 		    <leaflet heightresize class="mapView"></leaflet>

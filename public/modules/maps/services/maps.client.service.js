@@ -13,6 +13,12 @@ angular.module('maps')
     });
 }])
 
+.factory('Proxy', ['$resource', function($resource) {
+    return $resource('proxy/:url', {
+        url: '@_id'
+    });
+}])
+
 .factory('CartoDB', ['$resource', function($resource) {
     return $resource('cartodb/:table', {
         table: '@_id'

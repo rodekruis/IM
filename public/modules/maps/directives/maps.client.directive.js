@@ -21,8 +21,12 @@ angular.module('maps')
             var window = angular.element($window);
             
             scope.onResize = function() {
-               $(elem).height( window.height() - $('.navbar').height() - $('.mapHeader').height() );
-               $rootScope.LMap.invalidateSize();
+                $(elem).height( window.height() - $('.navbar').height() - $('.mapHeader').height() );
+                if(typeof $rootScope !== 'undefined'){
+                    if($rootScope.hasOwnProperty('LMap')){
+                         $rootScope.LMap.invalidateSize();
+                    }
+                }
            };
    
             scope.onResize();

@@ -2,13 +2,14 @@
 
 /*global google */
 
-angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps', '$window', 'leafletData', '$compile', 'layerService', '$parse', 'CartoDB', //'L', 'cartodb',
-	function($scope, $stateParams, $location, Authentication, Maps, $window, leafletData, $compile, layerService, $parse, CartoDB) { //, 
+angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps', '$window', 'leafletData', '$compile', 'layerService', '$parse', 'CartoDB', 'Proxy', //'L', 'cartodb',
+	function($scope, $stateParams, $location, Authentication, Maps, $window, leafletData, $compile, layerService, $parse, CartoDB, Proxy) { //, 
 		$scope.authentication = Authentication;
 		$scope.L = $window.L;
 		$scope.cartodb = $window.cartodb;
 		$scope.LMap = null;
 		$scope.subLayers = [];
+		$scope.bounds = null;
 				   
 		$scope.create = function() {
 			var map = new Maps({
@@ -238,6 +239,82 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				
 			};
 			
+			var addWfsLayer = function(cartomap, wfsLayer){
+				
+				function style(feature) {
+					return {
+						weight: wfsLayer.featureStyle.weight,
+						opacity: wfsLayer.featureStyle.opacity,
+						color: wfsLayer.featureStyle.color,
+						dashArray: wfsLayer.featureStyle.dashArray,
+						fillOpacity: wfsLayer.featureStyle.fillOpacity,
+						fillColor: wfsLayer.featureStyle.fillColor
+					};
+				}
+				
+				var geojsonMarkerOptions = {
+					radius: wfsLayer.markerStyle.radius,
+					fillColor: wfsLayer.markerStyle.fillColor,
+					color: wfsLayer.markerStyle.color,
+					weight: wfsLayer.markerStyle.weight,
+					opacity: wfsLayer.markerStyle.opacity,
+					fillOpacity: wfsLayer.markerStyle.fillOpacity
+				};
+				
+				function featureUrl(wfsLayer) {
+					// transform CRS to WFS accepted format by adding a : after EPSG
+					var crsString = '';
+					var crs = '';
+					// check if CRS was selected
+					if (wfsLayer.crs.length > 0) {
+						// only first in array can be selected
+						crs = wfsLayer.crs[0];
+						// check if the layer name contains EPSG and if there is already a :
+						if (crs.indexOf('EPSG') > -1 && crs.indexOf('EPSG:' === -1)) {
+							crs = [crs.slice(0, 4), ':', crs.slice(4)].join('');
+						}
+						// Build url parameter to query for coordinate system
+						crsString = '&srsName=' + crs;
+					}
+					
+					var bboxString = '';
+					if ($scope.bounds !== null) {
+						var bboxCrs = '';
+						if (crs !== '') {
+							bboxCrs = ',' + crs;
+						}
+						bboxString = '&BBOX=' + $scope.bounds.toBBoxString() + bboxCrs;
+					}
+					
+					
+
+					return encodeURIComponent(wfsLayer.url + '?request=GetFeature&outputformat=json&version=' + wfsLayer.version + '&typeName=' + wfsLayer.featureType + crsString + bboxString);
+				}
+				
+				function onEachFeature(feature, layer) {
+					// does this feature have a property named popupContent?
+					if (feature.properties && feature.properties[wfsLayer.hoverProperty]) {
+					    layer.bindPopup(feature.properties[wfsLayer.hoverProperty]);
+					}
+				}
+				
+				function pointToLayer(feature, latlng) {
+					return $scope.L.circleMarker(latlng, geojsonMarkerOptions);
+				}
+				
+				$scope.loading = Proxy.get({
+						url: featureUrl(wfsLayer)
+					}).$promise.then(function(response) {
+						if (response.type && response.type === 'FeatureCollection') {
+							$scope.L.geoJson(response, {
+								pointToLayer: pointToLayer,
+								style: style,
+								onEachFeature: onEachFeature,
+							}).addTo(cartomap);
+						}
+					});
+			};
+			
 			/*
 			 * Function to load png in legend when added to map
 			 */
@@ -253,7 +330,17 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			// Get leaflet map object
 			leafletData.getMap().then(function(cartomap) {
 				
+				// get map
 				$scope.LMap = cartomap;
+				
+				// set bounds variable whenever the map position or zoom is changed
+				cartomap.on('moveend', function() {
+					$scope.bounds = cartomap.getBounds();
+				});
+				
+				// Add the GPS location control
+				var gpsStyle = {radius: 3, weight:8, color: '#4C87C7', fill: true, opacity:1.0};
+				cartomap.addControl( new $scope.L.Control.Gps({style: gpsStyle }) );
 				
 				// Get map object
 				Maps.get({
@@ -318,6 +405,13 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 						layers.push({id: wmsLayer._id, name: wmsLayer.name});	
 					}
 					
+					for (var wfsId in map.wfsLayer) {
+						var wfsLayer = map.wfsLayer[wfsId];
+						addWfsLayer(cartomap, wfsLayer);
+						
+						layers.push({id: wfsLayer._id, name: wfsLayer.name});	
+					}
+										
 					layerService.setLayers(layers);
 					
 					layerService.setBaseLayers([

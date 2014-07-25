@@ -1,0 +1,17 @@
+<section class="section-expand" data-ng-controller="SourcesController" data-ng-init="findOne()">
+	<div class="sourceHeader">
+		<h1>{{source.name}}</h1>
+	</div>
+	<div class="section-expand" data-ng-show="source.showMenu">
+		<iframe 
+			resizeheight
+			id="spreadsheet"
+			type="text/html"
+			ng-src="{{source.url | unsafesource}}" 
+			frameborder="0"></iframe>
+	</div>
+	<div class="section-expand" data-ng-show="source.showMenu === false">
+		<iframe resizeheight ng-src="{{source.url | unsafesource}}"></iframe>
+	</div>
+	
+</section>

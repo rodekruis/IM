@@ -6,7 +6,8 @@ module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/im-dev',
 	usehttp: true, // should a non encrypted server be launched?
 	usessl: false, // should an encrypted server be launced?
-	sslport: process.env.SSLPORT || 443,
+	port: process.env.PORT || 3000,
+	sslport: process.env.SSLPORT || 444,
 	key_file: './config/cert/rodekruis-key.pem',
 	cert_file: './config/cert/rodekruis-cert.pem',
 	app: {
@@ -27,7 +28,10 @@ module.exports = {
 				//'public/lib/select2-bootstrap-css/select2-bootstrap.css',
 				'public/lib/forms-angular/css/forms-angular-bs3.less',
 				'public/lib/angular-carousel/dist/angular-carousel.min.css',
-				'public/lib/leaflet-search/dist/leaflet-search.min.css'
+				'public/lib/leaflet-search/dist/leaflet-search.min.css',
+				'public/lib/angular-busy/dist/angular-busy.min.css',
+				'public/lib/leaflet-gps/dist/leaflet-gps.min.css'
+				
 			],
 			js: [
 				'public/lib/jquery/jquery.min.js',
@@ -71,8 +75,11 @@ module.exports = {
 				'public/lib/Leaflet.WMS.GetLegendGraphic/leaflet-wms-getlegendgraphic.js',
 				'public/lib/azgs-leaflet/js/lib/less-1.2.2.min.js',
 				'public/lib/azgs-leaflet/js/lib/jade.js',
+				'public/lib/leaflet.ajax/dist/leaflet.ajax.min.js',
 				'public/lib/azgs-leaflet/js/azgs-leaflet/GeoJSON.WFS.js',
 				'public/lib/azgs-leaflet/js/azgs-leaflet/GeoJSON.WFS.ClickResponder.js',
+				'public/lib/angular-busy/dist/angular-busy.min.js',
+				'public/lib/leaflet-gps/dist/leaflet-gps.min.js'
 			]
 		},
 		css: 'public/dist/application.min.css',

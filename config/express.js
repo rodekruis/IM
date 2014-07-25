@@ -18,7 +18,8 @@ var express = require('express'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+	cors = require('cors');
 	
 module.exports = function(db) {
 	// Initialize express app
@@ -37,6 +38,9 @@ module.exports = function(db) {
 	app.locals.jsFiles = config.getJavaScriptAssets();
 	app.locals.cssFiles = config.getCSSAssets();
 
+	// use cors
+	app.use(cors());
+		
 	// Passing the request url to environment locals
 	app.use(function(req, res, next) {
 		res.locals.url = req.protocol + ':// ' + req.headers.host + req.url;

@@ -15,6 +15,10 @@ var mongoose = require('mongoose'),
 	MapCenter = mongoose.model('MapCenter'),
 	TileServer = mongoose.model('TileServer'),
 	WmsLayer = mongoose.model('WmsLayer'),
+	WfsLayer = mongoose.model('WfsLayer'),
+	MarkerStyle = mongoose.model('MarkerStyle'),
+	FeatureStyle = mongoose.model('FeatureStyle'),
+	Source = mongoose.model('Source'),
 	_ = require('lodash');
 	
 var formsAngular = require('forms-angular');
@@ -30,5 +34,9 @@ module.exports = function(app) {
 	DataFormHandler.addResource('MapCenter', MapCenter, {title: 'Kaarten centrum'});
 	DataFormHandler.addResource('TileServer', TileServer, {title: 'Tile servers'});
 	DataFormHandler.addResource('WmsLayer', WmsLayer, {title: 'WMS kaartlagen'});
+	DataFormHandler.addResource('WfsLayer', WfsLayer, {title: 'WFS kaartlagen'});
+	DataFormHandler.addResource('MarkerStyle', MarkerStyle, {title: 'Marker stijl'});
+	DataFormHandler.addResource('FeatureStyle', FeatureStyle, {title: 'Feature Stijl'});
+	DataFormHandler.addResource('Source', Source, {title: 'Brondata'});
 
 };
