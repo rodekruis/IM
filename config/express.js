@@ -110,6 +110,9 @@ module.exports = function(db) {
 	app.use(helmet.ienoopen());
 	app.disable('x-powered-by');
 	
+	// Enable reverse proxy
+	app.enable('trust proxy');
+	
 	// Redirect all http requests to https
 	// If environment is development, remove the port
 	app.use(function(req, res, next) {
