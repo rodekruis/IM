@@ -116,6 +116,7 @@ module.exports = function(db) {
 	// Redirect all http requests to https
 	// If environment is development, remove the port
 	app.use(function(req, res, next) {
+		var protocol = req.protocol;
 		if (config.usessl) {
 			if (!req.secure) {
 			    if(process.env.NODE_ENV === 'development') {
