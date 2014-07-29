@@ -18,6 +18,7 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.min.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
+				'public/lib/bootstrap-glyphicons/css/bootstrap.icon-large.min.css',
 				'public/lib/leaflet-dist/leaflet.css',
 				'public/lib/cartodb/cartodb.css',
 				'public/lib/jquery-ui/themes/smoothness/jquery-ui.min.css',

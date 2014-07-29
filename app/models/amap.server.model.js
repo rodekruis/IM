@@ -41,7 +41,21 @@ var VisualisationSchema = new Schema({
     active: {
 	    type: Boolean,
 	    form:  {label:'Actief', size:'large'},
+	    default: false,
     },
+    visible: {
+	    type: Boolean,
+	    form:  {label:'Zichtbaar bij laden kaart', size:'large'},
+	    default: false,
+    },
+    zindex: {
+            type: String,
+            trim: true,
+            default: '10',
+	    required:true,
+	    form:  {label:'Z-Index (volgorde)'},
+    },
+    /*,
     tableName: {
             type: String,
             trim: true,
@@ -60,7 +74,7 @@ var VisualisationSchema = new Schema({
             trim: true,
 	    required:false,
 	    form:  {label:'Groepen', size:'large'},
-    }
+    }*/
 });
 
 var Visualisation;

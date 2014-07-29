@@ -23,23 +23,4 @@ angular.module('maps')
     return $resource('cartodb/:table', {
         table: '@_id'
     });
-}])
-
-.factory('layerService', ['$rootScope', function($rootScope) {
-
-    return { 
-        baseLayers: function() {
-            return $rootScope.baseLayers;
-        },    
-        setBaseLayers: function(layers) {
-            $rootScope.baseLayers = layers;
-        },
-        layers: function() {
-            return $rootScope.layers;
-        },
-        setLayers: function(layers){
-            $rootScope.layers = layers;
-        }
-    };
-
 }]);

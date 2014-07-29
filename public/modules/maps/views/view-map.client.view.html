@@ -4,7 +4,7 @@
 		     <div class="btn-group">
 			    <button type="button" class="btn btn-default">Kaart: {{map.title}}</button>
 		     </div>
-		     <div class="btn-group" >
+		     <div class="btn-group hidden-xs" >
 			     <a class="btn btn-default" href="/#!/maps/{{map._id}}/edit">
 				     <i class="glyphicon glyphicon-edit"></i>
 			     </a>
@@ -19,19 +19,29 @@
 			   
 			   <ul class="dropdown-menu" role="menu">
 			     <li>
-				  <accordion close-others="true">
+				  
+				   <!-- DISABLE BASE LAYER TOGGLE
+				   <accordion close-others="true">
 					 <accordion-group heading="Achtergrondkaart">
 					   <div class="btn-group  btn-wide">
-					     <label ng-repeat="layer in baseLayers" class="btn btn-layers btn-wide" ng-model="radioModel" btn-checkbox>{{layer.name}}</label>
+						 <nav id='menu-ui-base' class='menu-ui'>
+							<a href="#" ng-repeat="layer in baseLayers" class="active_{{layer.options.visible}}" ng-click="toggleLayer(layer, $event)">{{layer.layer_name}}</a>
+						 </nav>
 					 </div>
 					 </accordion-group>
-					 <accordion-group heading="Lagen">
+					  <accordion-group heading="Lagen">
+				         -->
+					 
 					   <div class="btn-group btn-wide">
-					     <label ng-repeat="layer in layers" class="btn btn-layers btn-wide" ng-model="checkModel[layer.id]" btn-checkbox>{{layer.name}}</label>
-					   </div>
+					     <nav id='menu-ui-layers' class='menu-ui'>
+						 <a href="#" ng-repeat="layer in overlayLayers" class="active_{{layer.options.visible}}" ng-click="toggleLayer(layer, $event)">{{layer.layer_name}}</a>
+					     </nav>
+		     			   </div>
+				         <!-- DISABLE BASE LAYER TOGGLE
 					 </accordion-group>
 					 
 				  </accordion>
+				   -->
 			      </li>
 			   </ul>
 		     </div>
@@ -47,7 +57,7 @@
        	<div cg-busy="{promise:loading, message:'Kaartlagen laden'}"></div>
         <div>
 	      <p class="lead" data-ng-init="loadLayers();">
-		    <leaflet heightresize class="mapView"></leaflet>
+		    <leaflet defaults="defaults" heightresize class="mapView"></leaflet>
 	      </p>
         </div>
 </section>
