@@ -20,7 +20,7 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/bootstrap-glyphicons/css/bootstrap.icon-large.min.css',
 				'public/lib/leaflet-dist/leaflet.css',
-				'public/lib/cartodb.js/cartodb.css',
+				'public/lib/cartodb.js/dist/cartodb.css',
 				'public/lib/jquery-ui/themes/smoothness/jquery-ui.min.css',
 				'public/lib/angular-centered/angular-centered.css',
 				'public/lib/angular-ui-dashboard/dist/angular-ui-dashboard.css',
