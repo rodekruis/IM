@@ -109,7 +109,6 @@ exports.list = function(req, res) {
 		.populate('baseMap')
 		.populate('mapBounds')
 		.populate('mapCenter')
-		.populate('wmsLayer')
 		.exec(function(err, maps) {
 		if (err) {
 			return res.send(400, {
@@ -138,8 +137,6 @@ exports.mapByID = function(req, res, next, id) {
 		.populate('baseMap')
 		.populate('mapBounds')
 		.populate('mapCenter')
-		.populate('wmsLayer')
-		.populate('wfsLayer')
 		.exec(function(err, doc){
 			
 			var options = {

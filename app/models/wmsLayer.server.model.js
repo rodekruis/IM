@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 /**
  * WMS Layer Schema
  */
-var WmsLayerSchema = new Schema({
+/*var WmsLayerSchema = new Schema({
     name: {
             type: String,
             trim: true,
@@ -109,4 +109,4 @@ try {
   var WmsLayer = mongoose.model('WmsLayer');
 } catch (e) {
   var WmsLayer = mongoose.model('WmsLayer', WmsLayerSchema);
-}
+}*/

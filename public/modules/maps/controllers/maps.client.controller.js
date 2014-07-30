@@ -2,8 +2,8 @@
 
 /*global google */
 
-angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps', '$window', 'leafletData', '$compile', '$parse', 'CartoDB', 'Proxy', //'L', 'cartodb',
-	function($scope, $stateParams, $location, Authentication, Maps, $window, leafletData, $compile, $parse, CartoDB, Proxy) { //, 
+angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps', '$window', 'leafletData', '$compile', '$parse', 'CartoDB', 'Proxy', '$modal', //'L', 'cartodb',
+	function($scope, $stateParams, $location, Authentication, Maps, $window, leafletData, $compile, $parse, CartoDB, Proxy, $modal) { //, 
 		$scope.authentication = Authentication;
 		$scope.L = $window.L;
 		$scope.cartodb = $window.cartodb;
@@ -12,6 +12,9 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		$scope.bounds = null;
 		$scope.overlayLayers = {};
 		$scope.baseLayers = {};
+		$scope.wmsLegends = [];
+		$scope.wfsLegends = [];
+		$scope.visualisationLegends = [];
 		
 		// Set empty tileLayer for angular-leaflet directive to prevent base map loading
 		$scope.defaults.tileLayer = '';
@@ -74,7 +77,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				$scope.addAlert('danger', error.data.message);
 			    });
 		};
-		
+			
 		/**
 		 * Alert box above map for errors
 		 */
@@ -148,6 +151,11 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				var gpsStyle = {radius: 3, weight:8, color: '#4C87C7', fill: true, opacity:1.0};
 				cartomap.addControl( new $scope.L.Control.Gps({style: gpsStyle }) );
 				
+				// Listen to layer changes
+				
+				//cartomap.on('layeradd', toggleLegend);
+				//cartomap.on('layerremove', toggleLegend);
+				
 				// Get map object
 				Maps.get({
 					mapId: $stateParams.mapId
@@ -186,6 +194,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					
 					cartomap.fitBounds(bounds, {reset: true});
 					*/
+					
 		      
 					var layers = [];			
 					for (var vId in map.visualisation) {
@@ -212,7 +221,8 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			});
 			
 			var addVisualisation = function(cartomap, visualisation){
-				$scope.cartodb.createLayer(cartomap, visualisation.apiUrl, {https:true})
+				
+				$scope.cartodb.createLayer(cartomap, visualisation.apiUrl, {https:true, legends:false})
 				.addTo(cartomap)
 				.on('done', function(layer) {
 					
@@ -249,7 +259,29 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					
 					// add whole viz.json layer to layer control
 					$scope.overlayLayers[visualisation.name] = layer;
-	      
+					
+					
+					
+					// Check there is a legend in the visualisation
+					if (layer.layers[0].legend.type !== 'none') {
+						var legend = {};
+						var cartoLegend = layer.layers[0].legend;
+						cartoLegend.data = cartoLegend.items;
+					
+						// parse legend
+						var rendered = new cdb.geo.ui.Legend(cartoLegend).render().el;				
+						
+						// get html
+						legend.html = rendered.outerHTML;
+						
+						// set name
+						legend.name = visualisation.name;
+						
+						// add to list
+						$scope.visualisationLegends.push(legend);
+					}
+					
+					
 					 layer.on('featureOver', function(e, pos, latlng, data) {
 					   $scope.cartodb.log.log(e, pos, latlng, data);
 					 });
@@ -293,7 +325,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 							transparent: wmsLayer.transparent,
 							version: wmsLayer.version,
 							pane: cartomap.getPanes().tilePane,
-							zIndex: wmsLayer.zIndex,
+							zIndex: wmsLayer.zindex,
 							opacity: wmsLayer.opacity
 						    }, wmsLayer.featureInfo);
 				}
@@ -303,7 +335,23 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					wms.addTo(cartomap);
 					
 					// Add layer to layer control
-					$scope.layerControl.addOverlay(wms, wmsLayer.name);
+					var overlayMaps = { };
+					
+					// set Zindex
+					wms.setZIndex(wmsLayer.zindex);
+					 
+					// Set layr name
+					wms.layer_name = wmsLayer.name;
+					
+					// Set visibility
+					wms.options.visible = wmsLayer.visible;
+					
+					if (!wmsLayer.visible) {
+						$scope.LMap.removeLayer(wms);
+					}
+					
+					// add whole viz.json layer to layer control
+					$scope.overlayLayers[wmsLayer.name] = wms;
 				
 					// Get layer legends
 					var legendOptions = wmsLayer.legendOptions;
@@ -311,13 +359,11 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 						legendOptions = JSON.parse(wmsLayer.legendOptions);
 					}
 					var legends = wms.getLegendGraphic(legendOptions);
-					
-					// add legends to map
+					var legend = {};
 					for (var l in legends) {
-						var legendControl = $scope.L.control({position: 'bottomright'});
-						addLegend(legendControl, l, legends[l]);
-										
-						legendControl.addTo(cartomap);
+						legend.url = legends[l];
+						legend.name = wmsLayer.name;
+						$scope.wmsLegends.push(legend);
 					}
 				}
 				
@@ -326,7 +372,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			/**
 			 * Add WFS Layer
 			 */
-			var addWfsLayer = function(cartomap, wfsLayer){
+			var addWfsLayer = function(cartomap, wfsLayer){		
 				
 				function style(feature) {
 					return {
@@ -397,22 +443,32 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 								pointToLayer: pointToLayer,
 								style: style,
 								onEachFeature: onEachFeature,
-							}).addTo(cartomap);
+							}).addTo(cartomap)
+							.on('done', function(layer){
+								// Add layer to layer control
+								var overlayMaps = { };
+								
+								// set Zindex
+								layer.setZIndex(wfsLayer.zindex);
+								 
+								// Set layer name
+								layer.layer_name = wfsLayer.name;
+								
+								// Set visibility
+								layer.options.visible = wfsLayer.visible;
+								
+								if (!wfsLayer.visible) {
+									$scope.LMap.removeLayer(layer);
+								}
+								
+								// add whole viz.json layer to layer control
+								$scope.overlayLayers[wfsLayer.name] = layer;
+							});
 						}
 					});
 			};
 			
-			/*
-			 * Function to load png in legend when added to map
-			 */
-			var addLegend = function(legendControl, legend, url){
-				legendControl.onAdd = function (cartomap) {
-						var div = $scope.L.DomUtil.create('div', 'legend ' + legend);
-						    div.innerHTML +=
-						    '<img src="' + url + '" alt="legend">';
-						return div;
-					};
-			};
+
 			
 			
 			$scope.toggleLayer = function(layer, e){

@@ -12,13 +12,6 @@ angular.module('monitors')
 				element.html = angular.element($parse(attr.content)(scope));
 				var test = $compile(element)(scope);
 				element.append(test);
-				
-				/*
-				scope.$watch(attr.content, function() {
-				  element.html($parse(attr.content)(scope));
-				  $compile(element.contents())(scope);
-				}, true);
-				*/
 			}
 		};
 	}]

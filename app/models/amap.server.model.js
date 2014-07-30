@@ -4,8 +4,6 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	wmsLayer = require('../../app/models/wmsLayer'),
-	wfsLayer = require('../../app/models/wfsLayer'),
 	Schema = mongoose.Schema;
 
 /**
@@ -86,6 +84,218 @@ try {
 }
 
 /**
+ * WMS Layer Schema
+ */
+var WmsLayerSchema = new Schema({
+    name: {
+            type: String,
+            trim: true,
+            default: '',
+	    required:true,
+	    form:  {label:'Naam', size:'large'},
+	    list:true
+    },
+    description: {
+            type: String,
+            trim: true,
+            default: '',
+	    required:true,
+	    form:  {label:'Beschrijving', size:'large'},
+    },
+    url: {
+            type: String,
+            trim: true,
+            default: '',
+	    required:true,
+	    form:  {label:'Tileserver url (WMS)', size:'large'},
+    },
+    active: {
+	    type: Boolean,
+	    form:  {label:'Actief', size:'large'},
+    },
+        visible: {
+	    type: Boolean,
+	    form:  {label:'Zichtbaar bij laden kaart', size:'large'},
+	    default: false,
+    },
+    zindex: {
+            type: String,
+            trim: true,
+            default: '10',
+	    required:true,
+	    form:  {label:'Z-Index (volgorde)'},
+    },
+    layers: {
+            type: String,
+            trim: true,
+            default: '',
+	    required:true,
+	    form:  {label:'Comma-separated list of WMS layers to show', size:'large'},
+    },
+    styles: {
+            type: String,
+            trim: true,
+            default: '',
+	    form:  {label:'Comma-separated list of WMS styles', size:'large'},
+    },
+    format: {
+            type: String,
+            trim: true,
+            default: 'image/png',
+	    form:  {label:'WMS image format', size:'large'},
+    },
+    version: {
+            type: String,
+            trim: true,
+            default: '1.1.1',
+	    form:  {label:'WMS service version number', size:'large'},
+    },
+    transparent: {
+            type: Boolean,
+            default: true,
+	    form:  {label:'WMS images transparant', size:'large'},
+    },
+    opacity: {
+            type: String,
+	    trim: true,
+            default: '1.0',
+	    form:  {label:'WMS layer opacity', size:'large'},
+    },
+    tiled : {
+	    type: Boolean,
+	    default: true,
+	    form: {label:'Is the layer tiled?'}
+    },
+    featureInfo : {
+	    type: Boolean,
+	    default: false,
+	    form: {label:'Feature info can be retreived'}
+    },
+    legendOptions: {
+            type: String,
+	    trim: true,
+            default: '',
+	    form:  {label:'WMS legend options (json)', size:'large'},
+    },    
+    crs: {
+		type: [{
+			type: String,
+			enum: ['EPSG3857', 'EPSG4326', 'EPSG3395', 'Simple']
+		}],
+		default: ['EPSG3857']
+	},
+});
+
+var WmsLayer;
+
+try {
+  var WmsLayer = mongoose.model('WmsLayer');
+} catch (e) {
+  var WmsLayer = mongoose.model('WmsLayer', WmsLayerSchema);
+}
+
+/**
+ * WFS Layer Schema
+ */
+var WfsLayerSchema = new Schema({
+    name: {
+            type: String,
+            trim: true,
+            default: '',
+	    required:true,
+	    form:  {label:'Naam', size:'large'},
+	    list:true
+    },
+    description: {
+            type: String,
+            trim: true,
+            default: '',
+	    required:true,
+	    form:  {label:'Beschrijving', size:'large'},
+    },
+    url: {
+            type: String,
+            trim: true,
+            default: '',
+	    required:true,
+	    form:  {label:'Tileserver url (WFS)', size:'large'},
+    },   
+    active: {
+	    type: Boolean,
+	    form:  {label:'Actief', size:'large'},
+    },
+        visible: {
+	    type: Boolean,
+	    form:  {label:'Zichtbaar bij laden kaart', size:'large'},
+	    default: false,
+    },
+    zindex: {
+            type: String,
+            trim: true,
+            default: '10',
+	    required:true,
+	    form:  {label:'Z-Index (volgorde)'},
+    },
+    featureType: {
+            type: String,
+            trim: true,
+            default: '',
+	    required:true,
+	    form:  {label:'Comma-separated list of WFS Feature type', size:'large'},
+    },
+    hoverProperty: {
+            type: String,
+            trim: true,
+            default: '',
+	    form:  {label:'GeoJson property that is shown when hovered', size:'large'},
+    },
+    version: {
+            type: String,
+            trim: true,
+            default: '2.0.0',
+	    form:  {label:'WFS service version number', size:'large'},
+    },
+    transparent: {
+            type: Boolean,
+            default: true,
+	    form:  {label:'WFS images transparant', size:'large'},
+    },
+    opacity: {
+            type: String,
+	    trim: true,
+            default: '1.0',
+	    form:  {label:'WFS layer opacity', size:'large'},
+    },
+    markerStyle: {
+	    type: Schema.Types.ObjectId,
+	    ref: 'MarkerStyle',
+	    form:  {label:'Marker style'},
+	    required: false
+    },
+    featureStyle: {
+	    type: Schema.Types.ObjectId,
+	    ref: 'FeatureStyle',
+	    form:  {label:'Feature style'},
+	    required: false
+    },
+    crs: {
+		type: [{
+			type: String,
+			enum: ['EPSG3857', 'EPSG4326', 'EPSG3395', 'Simple']
+		}],
+		default: ['EPSG3857']
+	},
+});
+
+var WfsLayer;
+
+try {
+  var WfsLayer = mongoose.model('WfsLayer');
+} catch (e) {
+  var WfsLayer = mongoose.model('WfsLayer', WfsLayerSchema);
+}
+
+/**
  * Map Schema
  *
  */
@@ -139,14 +349,11 @@ var MapSchema = new Schema({
 	visualisation: {
 		type: [VisualisationSchema]
 	},
-	wmsLayer: [{
-		type: Schema.Types.ObjectId,
-		ref: 'WmsLayer'
-	}],
-	wfsLayer: [{
-		type: Schema.Types.ObjectId,
-		ref: 'WfsLayer'
-	}],
+	wmsLayer: {
+		type: [WmsLayerSchema]
+	},
+	wfsLayer: { type: [WfsLayerSchema]
+	},
 
 });
 

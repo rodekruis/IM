@@ -406,4 +406,8 @@ fieldset[disabled] .btn-layers.active {
     }
 .menu-ui a.active_true:hover {
       background:#3074a4;
-}  
+}
+
+div.cartodb-legend {
+    position:inherit;
+}

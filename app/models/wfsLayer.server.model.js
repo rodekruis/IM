@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 /**
  * WFS Layer Schema
  */
-var WfsLayerSchema = new Schema({
+/*var WfsLayerSchema = new Schema({
     name: {
             type: String,
             trim: true,
@@ -94,3 +94,4 @@ try {
 } catch (e) {
   var WfsLayer = mongoose.model('WfsLayer', WfsLayerSchema);
 }
+*/
