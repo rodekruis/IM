@@ -10,6 +10,7 @@ module.exports = {
 	sslport: process.env.SSLPORT || 444,
 	key_file: './config/cert/rodekruis-key.pem',
 	cert_file: './config/cert/rodekruis-cert.pem',
+	ca_file: './config/cert/ca.crt',
 	app: {
 		title: 'Rode Kruis Digital Operations Center'
 	},
