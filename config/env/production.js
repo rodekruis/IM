@@ -8,9 +8,9 @@ module.exports = {
 	usessl: true, // should an encrypted server be launced?
 	port: process.env.PORT || 80,
 	sslport: process.env.SSLPORT || 443,
-	//key_file: './config/cert/rodekruis-key.pem',
-	//cert_file: './config/cert/rodekruis-cert.pem',
-	pfx_file: './config/cert/rodekruis.pfx',
+	key_file: './config/cert/rodekruis-key.pem',
+	cert_file: './config/cert/rodekruis-cert.pem',
+	//pfx_file: './config/cert/rodekruis.pfx',
 	app: {
 		title: 'Rode Kruis Digital Operations Center'
 	},
