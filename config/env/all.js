@@ -6,8 +6,8 @@ module.exports = {
 		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
 		keywords: 'MongoDB, Express, AngularJS, Node.js'
 	},
-	port: process.env.PORT || 80,
-	sslport: process.env.SSLPORT || 443,
+	port: process.env.PORT || 81,
+	sslport: process.env.SSLPORT || 444,
 	key_file: './config/cert/localhost-key.pem',
 	cert_file: './config/cert/localhost-cert.pem',
 	templateEngine: 'swig',

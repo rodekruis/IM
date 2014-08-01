@@ -4,7 +4,7 @@ var secrets = require('../secrets');
 
 module.exports = {
 	db: 'mongodb://localhost/im-dev',
-	usehttp: true, // should a non encrypted server be launced?
+	usehttp: false, // should a non encrypted server be launced?
 	usessl: true, // should an encrypted server be launced?
 	app: {
 		title: 'IM - Development Environment'
