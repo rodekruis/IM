@@ -263,7 +263,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					
 					
 					// Check there is a legend in the visualisation
-					if (layer.layers[0].legend.type !== 'none') {
+					if (layer.layers[0].hasOwnProperty('legend') && layer.layers[0].legend.type !== 'none') {
 						var legend = {};
 						var cartoLegend = layer.layers[0].legend;
 						cartoLegend.data = cartoLegend.items;
@@ -272,7 +272,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 						var rendered = new cdb.geo.ui.Legend(cartoLegend).render().el;				
 						
 						// get html
-						legend.html = rendered.outerHTML;
+						legend.html = rendered.HTML;
 						
 						// set name
 						legend.name = visualisation.name;
