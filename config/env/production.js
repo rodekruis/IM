@@ -17,6 +17,7 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
+				'public/lib/forms-angular/css/forms-angular-bs3.css',
 				'public/lib/bootstrap/dist/css/bootstrap.min.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/bootstrap-glyphicons/css/bootstrap.icon-large.min.css',
@@ -27,8 +28,6 @@ module.exports = {
 				'public/lib/angular-ui-dashboard/dist/angular-ui-dashboard.css',
 				'public/lib/ng-grid/ng-grid.min.css',
 				'public/lib/select2/select2.css',
-				//'public/lib/select2-bootstrap-css/select2-bootstrap.css',
-				'public/lib/forms-angular/css/forms-angular-bs3.less',
 				'public/lib/angular-carousel/dist/angular-carousel.min.css',
 				'public/lib/leaflet-search/dist/leaflet-search.min.css',
 				'public/lib/angular-busy/dist/angular-busy.min.css',
