@@ -109,6 +109,7 @@ exports.list = function(req, res) {
 		.populate('baseMap')
 		.populate('mapBounds')
 		.populate('mapCenter')
+		.populate('category')
 		.exec(function(err, maps) {
 		if (err) {
 			return res.send(400, {

@@ -63,9 +63,23 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		$scope.find = function() {
 			Maps.query(function(data) {
 				$scope.maps = data;
+				
+				// Also get categories
+				findCategories();
+				
 			    }, function(error) {
 				$scope.addAlert('danger', error.data.message);
 			    });
+		};
+		
+		$scope.categories = [];
+		var findCategories = function(){
+			angular.forEach($scope.maps, function(value, category){
+			    if(value.category !== null && $scope.categories.indexOf(value.category.name) === -1)
+			    {
+				$scope.categories.push(value.category.name);
+			    }
+			});
 		};
 
 		$scope.findOne = function() {
@@ -77,6 +91,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				$scope.addAlert('danger', error.data.message);
 			    });
 		};
+	
 			
 		/**
 		 * Alert box above map for errors
@@ -150,12 +165,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				// Add the GPS location control
 				var gpsStyle = {radius: 3, weight:8, color: '#4C87C7', fill: true, opacity:1.0};
 				cartomap.addControl( new $scope.L.Control.Gps({style: gpsStyle }) );
-				
-				// Listen to layer changes
-				
-				//cartomap.on('layeradd', toggleLegend);
-				//cartomap.on('layerremove', toggleLegend);
-				
+						
 				// Get map object
 				Maps.get({
 					mapId: $stateParams.mapId
@@ -272,7 +282,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 						var rendered = new cdb.geo.ui.Legend(cartoLegend).render().el;				
 						
 						// get html
-						legend.html = rendered.HTML;
+						legend.html = rendered.outerHTML;
 						
 						// set name
 						legend.name = visualisation.name;

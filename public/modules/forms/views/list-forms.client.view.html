@@ -3,7 +3,7 @@
         <h1>Formulieren</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="form in forms" data-ng-href="#!/forms/{{form.resourceName}}" class="list-group-item">
+        <a data-ng-repeat="form in forms | orderBy:'options.title'" data-ng-href="#!/forms/{{form.resourceName}}" class="list-group-item">
             <h4 class="list-group-item-heading">{{form.options.title}}</h4>
         </a>
     </div>

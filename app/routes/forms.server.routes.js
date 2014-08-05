@@ -13,6 +13,7 @@ var mongoose = require('mongoose'),
 	Visualisation = mongoose.model('Visualisation'),
 	MapBounds = mongoose.model('MapBounds'),
 	MapCenter = mongoose.model('MapCenter'),
+	MapCategory = mongoose.model('MapCategory'),
 	TileServer = mongoose.model('TileServer'),
 	WmsLayer = mongoose.model('WmsLayer'),
 	WfsLayer = mongoose.model('WfsLayer'),
@@ -32,6 +33,7 @@ module.exports = function(app) {
 	DataFormHandler.addResource('visualisation', Visualisation, {title: 'CartoDB Visualisaties'});
 	DataFormHandler.addResource('MapBounds', MapBounds, {title: 'Kaart grenzen'});
 	DataFormHandler.addResource('MapCenter', MapCenter, {title: 'Kaarten centrum'});
+	DataFormHandler.addResource('MapCategory', MapCategory, {title: 'Kaartcategorien'});
 	DataFormHandler.addResource('TileServer', TileServer, {title: 'Tile servers'});
 	DataFormHandler.addResource('WmsLayer', WmsLayer, {title: 'WMS kaartlagen'});
 	DataFormHandler.addResource('WfsLayer', WfsLayer, {title: 'WFS kaartlagen'});

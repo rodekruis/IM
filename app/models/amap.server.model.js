@@ -180,9 +180,9 @@ var WmsLayerSchema = new Schema({
     crs: {
 		type: [{
 			type: String,
-			enum: ['EPSG3857', 'EPSG4326', 'EPSG3395', 'Simple']
+			enum: ['EPSG3857', 'EPSG4326', 'EPSG3395', 'EPSG28992', 'Simple']
 		}],
-		default: ['EPSG3857']
+		default: ['EPSG4326']
 	},
 });
 
@@ -281,9 +281,9 @@ var WfsLayerSchema = new Schema({
     crs: {
 		type: [{
 			type: String,
-			enum: ['EPSG3857', 'EPSG4326', 'EPSG3395', 'Simple']
+			enum: ['EPSG3857', 'EPSG4326', 'EPSG3395', 'EPSG28992', 'Simple']
 		}],
-		default: ['EPSG3857']
+		default: ['EPSG4326']
 	},
 });
 
@@ -318,6 +318,14 @@ var MapSchema = new Schema({
 		default: '',
 		trim: true,
 		required: true
+	},
+	active: {
+		type: Boolean,
+		form:  {label:'Actief', size:'large'},
+	},
+	category: {
+		type: Schema.Types.ObjectId,
+		ref: 'MapCategory'
 	},
 	isPublic: {
 	    type: Boolean,

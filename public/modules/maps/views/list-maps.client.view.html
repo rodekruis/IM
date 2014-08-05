@@ -1,43 +1,29 @@
 <section data-ng-controller="MapsController" data-ng-init="find()">
-    <!--<div class="mapHeader">	      
-	      <div class="btn-toolbar" role="toolbar">
-		     <div class="btn-group" >
-			     <a class="btn btn-default" href="/#!/maps/create">
-				     <i class="glyphicon glyphicon-edit"></i>
-			     </a>
+
+	<div class="btn-toolbar" role="toolbar">
+		     <div class="btn-group">
+			    <button type="button" class="btn btn-default">
+				Filteren:
+				<select ng-model="showCategory">
+				    <option value=" " selected>Alle</option>
+				    <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
+				</select>				
+			    </button>
 		     </div>
-	       </div>
-    </div>-->
-    <div class="row">
-	<div class="col-xs-12 col-md-3"  ng-repeat="map in maps">
-	    <div class="list-group">
-		<a href="#!/maps/{{map._id}}" class="list-group-item active">
+	</div>
+    
+    <div class="row row-no-padding">
+	<div class="col-xs-12 col-md-3"  ng-repeat="map in maps | orderBy:name | filter: {category: showCategory, active: true}">
+	    <div class="list-group list-group-map">
+		<a href="#!/maps/{{map._id}}" class="list-group-item active list-group-item-map">
 		  
 		  <h4 class="list-group-item-heading"><i class="{{map.icon}}"></i> {{map.title}}</h4>
 		  <p class="list-group-item-text">{{map.description}}</p>
-		  <p class="list-group-item-text">{{map.created | date:'medium'}}</p>
+		  <p class="list-group-item-text">{{map.category.name}}</p>
 		</a>
 	    </div>
 	</div>
     </div>
-    
-    <!--
-    <div deckgrid class="deckgrid" source="maps">
-	<div class="photo">
-	    <a href="#!/maps/{{card._id}}">
-	
-		<div class="photo-wrapper">
-		    <img src="" data-ng-src="https://cdn1.iconfinder.com/data/icons/dot/256/man_person_mens_room.png" class="animation-fade" data-imageloaded data-loadedclass="animation-faded">
-		</div>
-	
-		<div class="photo-description">
-		    <h3>{{card.title}}</h3>
-		    <p>{{card.created | date:'medium'}} / {{card.user.displayName}}</p>
-		</div>
-	    </a>
-	</div>
-    </div>
-    -->
     <div class="alert alert-warning text-center" data-ng-hide="!maps.$resolved || maps.length">
     	Nog geen kaarten, waarom <a href="/#!/maps/create">maak</a> je er niet één?
     </div>

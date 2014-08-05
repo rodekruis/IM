@@ -411,3 +411,11 @@ fieldset[disabled] .btn-layers.active {
 div.cartodb-legend {
     position:inherit;
 }
+
+.list-group-item-map {
+    min-height: 100px;
+}
+
+.list-group-map {
+    margin-bottom: 5px;
+}
