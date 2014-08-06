@@ -6,7 +6,7 @@ angular.module('maps').run(['gettextCatalog', 'Authentication',
         
         var language = 'nl_NL';
         var user = Authentication.user;
-        if (user !== undefined && user.language !== undefined && user.language !== '') {
+        if (user && user.language && user.language !== '') {
             language = user.language.id;
         }
         gettextCatalog.currentLanguage = language;
