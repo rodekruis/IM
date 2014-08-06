@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-	function($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication', '$window',
+	function($scope, $http, $location, Users, Authentication, $window) {
 		$scope.user = Authentication.user;
 
 		// If user is not signed in then redirect back home
@@ -46,6 +46,9 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			user.$update(function(response) {
 				$scope.success = true;
 				Authentication.user = response;
+				
+				// reload entire website due to possible language changes
+				$window.location.reload();
 			}, function(response) {
 				$scope.error = response.data.message;
 			});
@@ -63,5 +66,12 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 				$scope.error = response.message;
 			});
 		};
+		
+		$scope.languages = [
+					{ id: 'nl_NL', name: 'Nederlands' },
+					{ id: 'en_EN', name: 'English' }
+				      ];
+		
+		//$scope.selectedLanguage = user.language;
 	}
 ]);

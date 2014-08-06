@@ -1,0 +1,205 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_EN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.7\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: public/modules/users/views/signin.client.view.html
+msgid "@redcross.nl email"
+msgstr "@redcross.nl email"
+
+#: public/modules/users/views/signin.client.view.html
+msgid "Access your account with your @rodekruis.nl account"
+msgstr "Access your account with your @rodekruis.nl account"
+
+#: public/modules/maps/views/list-maps.client.view.html
+msgid "All"
+msgstr "All"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Change Password"
+msgstr "Change Password"
+
+#: public/modules/users/views/settings/social-accounts.client.view.html
+msgid "Connect other social accounts:"
+msgstr "Connect other social accounts:"
+
+#: public/modules/users/views/signup.client.view.html
+msgid "Create an account"
+msgstr "Create an account"
+
+#: public/modules/maps/views/create-map.client.view.html
+msgid "Create map"
+msgstr "Create map"
+
+#: public/modules/forms/config/forms.client.config.js
+msgid "Data management"
+msgstr "Data management"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Edit Profile"
+msgstr "Edit Profile"
+
+#: public/modules/sources/views/edit-source.client.view.html
+msgid "Edit Source"
+msgstr "Edit Source"
+
+#: public/modules/maps/views/edit-map.client.view.html
+msgid "Edit map"
+msgstr "Edit map"
+
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Edit your profile"
+msgstr "Edit your profile"
+
+#: public/modules/users/views/signup.client.view.html
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Email"
+msgstr "Email"
+
+#: public/modules/maps/views/list-maps.client.view.html
+msgid "Filter"
+msgstr "Filter"
+
+#: public/modules/users/views/signup.client.view.html
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "First Name"
+msgstr "First Name"
+
+#: public/modules/maps/views/infos.client.template.html
+msgid "Info"
+msgstr "Info"
+
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Language"
+msgstr "Language"
+
+#: public/modules/users/views/signup.client.view.html
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Last Name"
+msgstr "Last Name"
+
+#: public/modules/maps/views/view-map.client.view.html
+msgid "Layers"
+msgstr "Layers"
+
+#: public/modules/maps/views/legends.client.template.html
+msgid "Legend"
+msgstr "Legend"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Manage Social Accounts"
+msgstr "Manage Social Accounts"
+
+#: public/modules/maps/views/create-map.client.view.html
+#: public/modules/maps/views/edit-map.client.view.html
+msgid "Map name"
+msgstr "Map name"
+
+#: public/modules/maps/views/view-map.client.view.html
+msgid "Map: {{map.title}}"
+msgstr "Map: {{map.title}}"
+
+#: public/modules/maps/config/maps.client.config.js
+msgid "Maps"
+msgstr "Maps"
+
+#: public/modules/sources/views/create-source.client.view.html
+#: public/modules/sources/views/edit-source.client.view.html
+msgid "Name"
+msgstr "Name"
+
+#: public/modules/sources/views/create-source.client.view.html
+msgid "New Source"
+msgstr "New Source"
+
+#: public/modules/sources/views/list-sources.client.view.html
+msgid "No Sources yet, why don't you"
+msgstr "No Sources yet, why don't you"
+
+#: public/modules/maps/views/list-maps.client.view.html
+msgid "No maps yet, why don't you"
+msgstr "No maps yet, why don't you"
+
+#: public/modules/users/views/signin.client.view.html
+msgid "Or with your account"
+msgstr "Or with your account"
+
+#: public/modules/users/views/signin.client.view.html
+#: public/modules/users/views/signup.client.view.html
+msgid "Password"
+msgstr "Password"
+
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Profile Saved Successfully"
+msgstr "Profile Saved Successfully"
+
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Save Profile"
+msgstr "Save Profile"
+
+#: public/modules/core/views/header.client.view.html
+#: public/modules/users/views/signin.client.view.html
+#: public/modules/users/views/signup.client.view.html
+msgid "Signin"
+msgstr "Signin"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Signout"
+msgstr "Signout"
+
+#: public/modules/users/views/signin.client.view.html
+#: public/modules/users/views/signup.client.view.html
+msgid "Signup"
+msgstr "Signup"
+
+#: public/modules/sources/config/sources.client.config.js
+#: public/modules/sources/views/list-sources.client.view.html
+msgid "Sources"
+msgstr "Sources"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Toggle navigation"
+msgstr "Toggle navigation"
+
+#: public/modules/users/views/signup.client.view.html
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Username"
+msgstr "Username"
+
+#: public/modules/monitors/config/monitors.client.config.js
+msgid "Web monitor"
+msgstr "Web monitor"
+
+#: public/modules/sources/views/list-sources.client.view.html
+msgid "create"
+msgstr "create"
+
+#: public/modules/maps/views/list-maps.client.view.html
+msgid "make"
+msgstr "make"
+
+#: public/modules/monitors/views/list-monitors.client.view.html
+msgid "next"
+msgstr "next"
+
+#: public/modules/maps/views/list-maps.client.view.html
+#: public/modules/sources/views/list-sources.client.view.html
+msgid "one"
+msgstr "one"
+
+#: public/modules/monitors/views/list-monitors.client.view.html
+msgid "previous"
+msgstr "previous"
+
+#: public/modules/monitors/views/list-monitors.client.view.html
+msgid "rotate"
+msgstr "rotate"

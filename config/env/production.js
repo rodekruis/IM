@@ -80,7 +80,9 @@ module.exports = {
 				'public/lib/azgs-leaflet/js/azgs-leaflet/GeoJSON.WFS.js',
 				'public/lib/azgs-leaflet/js/azgs-leaflet/GeoJSON.WFS.ClickResponder.js',
 				'public/lib/angular-busy/dist/angular-busy.min.js',
-				'public/lib/leaflet-gps/dist/leaflet-gps.min.js'
+				'public/lib/leaflet-gps/dist/leaflet-gps.min.js',
+				'public/lib/angular-gettext/dist/angular-gettext.min.js',
+				'public/dist/translations.js'
 			]
 		},
 		css: 'public/dist/application.min.css',

@@ -62,6 +62,10 @@ var UserSchema = new Schema({
 		validate: [validateLocalStrategyPassword, 'Password should be longer'],
 		form:  {hidden:true}
 	},
+	language: {
+		type: Schema.Types.Mixed,
+		default: ''
+	},
 	salt: {
 		type: String,
 		form:  {hidden:true}

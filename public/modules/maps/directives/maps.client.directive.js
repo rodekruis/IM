@@ -82,6 +82,48 @@ angular.module('maps')
     }
 ])
 
+.directive('ngInfoClick', ['$modal',
+    function($modal, $compile, $parse) {
+
+      var ModalInstanceCtrl = function($scope, $modalInstance, infos) {        
+            $scope.infos = infos;           
+            
+            $scope.ok = function () {
+              $modalInstance.close();
+            };
+      };
+
+      return {
+        restrict: 'A',
+        scope:true,
+        link: function(scope, element, attrs) {
+          element.bind('click', function() {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'modules/maps/views/infos.client.template.html',
+                controller: ModalInstanceCtrl,
+                size: scope.size,
+                resolve: {
+                    infos: function () {
+                      return scope.infos;
+                    }
+                  }
+            });
+
+            modalInstance.result.then(function() {
+              // nothing
+            }, function() {
+              //Modal dismissed
+            });
+            //*/
+            
+          });
+
+        }
+      };
+    }
+])
+
 .directive('heightresize', ['$window', function($window, $rootScope) {
     return {
         restrict: 'A',

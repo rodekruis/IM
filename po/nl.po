@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: im\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.7\n"
+
+#: public/modules/users/views/signin.client.view.html
+msgid "@redcross.nl email"
+msgstr "@redcross.nl emailadres"
+
+#: public/modules/users/views/signin.client.view.html
+msgid "Access your account with your @rodekruis.nl account"
+msgstr "Aanmelden met uw @rodekruis.nl account"
+
+#: public/modules/maps/views/list-maps.client.view.html
+msgid "All"
+msgstr "Alle"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Change Password"
+msgstr "Wachtwoord wijzigen"
+
+#: public/modules/users/views/settings/social-accounts.client.view.html
+msgid "Connect other social accounts:"
+msgstr "Account koppelen"
+
+#: public/modules/users/views/signup.client.view.html
+msgid "Create an account"
+msgstr "Een account aanmaken"
+
+#: public/modules/maps/views/create-map.client.view.html
+msgid "Create map"
+msgstr "Kaart maken"
+
+#: public/modules/forms/config/forms.client.config.js
+msgid "Data management"
+msgstr "Beheer"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Edit Profile"
+msgstr "Profiel aanpassen"
+
+#: public/modules/sources/views/edit-source.client.view.html
+msgid "Edit Source"
+msgstr "Tabel bewerken"
+
+#: public/modules/maps/views/edit-map.client.view.html
+msgid "Edit map"
+msgstr "Kaart bewerken"
+
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Edit your profile"
+msgstr "Profiel aanpassen"
+
+#: public/modules/users/views/signup.client.view.html
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Email"
+msgstr "Email"
+
+#: public/modules/maps/views/list-maps.client.view.html
+msgid "Filter"
+msgstr "Filteren"
+
+#: public/modules/users/views/signup.client.view.html
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "First Name"
+msgstr "Voornaam"
+
+#: public/modules/maps/views/infos.client.template.html
+msgid "Info"
+msgstr "Informatie"
+
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Language"
+msgstr "Taal"
+
+#: public/modules/users/views/signup.client.view.html
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Last Name"
+msgstr "Achternaam"
+
+#: public/modules/maps/views/view-map.client.view.html
+msgid "Layers"
+msgstr "Kaartlagen"
+
+#: public/modules/maps/views/legends.client.template.html
+msgid "Legend"
+msgstr "Legenda"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Manage Social Accounts"
+msgstr "Account koppelen"
+
+#: public/modules/maps/views/create-map.client.view.html
+#: public/modules/maps/views/edit-map.client.view.html
+msgid "Map name"
+msgstr "Kaartnaam"
+
+#: public/modules/maps/views/view-map.client.view.html
+msgid "Map: {{map.title}}"
+msgstr "Kaart: {{map.title}}"
+
+#: public/modules/maps/config/maps.client.config.js
+msgid "Maps"
+msgstr "Kaarten"
+
+#: public/modules/sources/views/create-source.client.view.html
+#: public/modules/sources/views/edit-source.client.view.html
+msgid "Name"
+msgstr "Naam"
+
+#: public/modules/sources/views/create-source.client.view.html
+msgid "New Source"
+msgstr "Nieuwe tabel"
+
+#: public/modules/sources/views/list-sources.client.view.html
+msgid "No Sources yet, why don't you"
+msgstr "Nog geen tabellen, waarom"
+
+#: public/modules/maps/views/list-maps.client.view.html
+msgid "No maps yet, why don't you"
+msgstr "Nog geen kaarten, waarom"
+
+#: public/modules/users/views/signin.client.view.html
+msgid "Or with your account"
+msgstr "Of met uw account"
+
+#: public/modules/users/views/signin.client.view.html
+#: public/modules/users/views/signup.client.view.html
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Profile Saved Successfully"
+msgstr "Profiel opgeslagen"
+
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Save Profile"
+msgstr "Profiel opslaan"
+
+#: public/modules/core/views/header.client.view.html
+#: public/modules/users/views/signin.client.view.html
+#: public/modules/users/views/signup.client.view.html
+msgid "Signin"
+msgstr "Aanmelden"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Signout"
+msgstr "Afmelden"
+
+#: public/modules/users/views/signin.client.view.html
+#: public/modules/users/views/signup.client.view.html
+msgid "Signup"
+msgstr "Aanmelden"
+
+#: public/modules/sources/config/sources.client.config.js
+#: public/modules/sources/views/list-sources.client.view.html
+msgid "Sources"
+msgstr "Tabellen"
+
+#: public/modules/core/views/header.client.view.html
+msgid "Toggle navigation"
+msgstr "Navigatie uitvouwen"
+
+#: public/modules/users/views/signup.client.view.html
+#: public/modules/users/views/settings/edit-profile.client.view.html
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: public/modules/monitors/config/monitors.client.config.js
+msgid "Web monitor"
+msgstr "Web monitor"
+
+#: public/modules/sources/views/list-sources.client.view.html
+msgid "create"
+msgstr "maak"
+
+#: public/modules/maps/views/list-maps.client.view.html
+msgid "make"
+msgstr "maak"
+
+#: public/modules/monitors/views/list-monitors.client.view.html
+msgid "next"
+msgstr "volgende"
+
+#: public/modules/maps/views/list-maps.client.view.html
+#: public/modules/sources/views/list-sources.client.view.html
+msgid "one"
+msgstr "je er geen"
+
+#: public/modules/monitors/views/list-monitors.client.view.html
+msgid "previous"
+msgstr "vorige"
+
+#: public/modules/monitors/views/list-monitors.client.view.html
+msgid "rotate"
+msgstr "roteren"
+
+#~ msgid "<em class=\"glyphicon glyphicon-chevron-left\"></em> previous"
+#~ msgstr "<em class=\"glyphicon glyphicon-chevron-left\"></em> vorige"
+
+#~ msgid "<em class=\"glyphicon glyphicon-chevron-right\"></em> next"
+#~ msgstr "<em class=\"glyphicon glyphicon-chevron-right\"></em> volgende"

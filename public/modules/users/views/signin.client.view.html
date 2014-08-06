@@ -1,25 +1,25 @@
 <section class="row" data-ng-controller="AuthenticationController">
-	<h3 class="col-md-12 text-center">Toegang krijgen met je @rodekruis.nl account</h3>
+	<h3 class="col-md-12 text-center" translate>Access your account with your @rodekruis.nl account</h3>
 	<div class="col-md-12 text-center">
 		<a href="/auth/azure" class="undecorated-link">
 			<img src="/modules/users/img/buttons/rodekruis.png">
 		</a>
 	</div>
-	<h3 class="col-md-12 text-center">Or with your account</h3>
+	<h3 class="col-md-12 text-center" translate>Or with your account</h3>
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
 		<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
 			<fieldset>
 				<div class="form-group">
-					<label for="username">@redcross.nl email</label>
+					<label for="username" translate>@redcross.nl email</label>
 					<input type="text" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">
 				</div>
 				<div class="form-group">
-					<label for="password">Password</label>
+					<label for="password" translate>Password</label>
 					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
 				</div>
 				<div class="text-center form-group">
-					<button type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;
-					<a href="/#!/signup">Sign up</a>
+					<button type="submit" class="btn btn-primary" translate>Signin</button>&nbsp; or&nbsp;
+					<a href="/#!/signup" translate>Signup</a>
 				</div>
 				<div data-ng-show="error" class="text-center text-danger">
 					<strong>{{error}}</strong>

@@ -3,9 +3,9 @@
 	<div class="btn-toolbar" role="toolbar">
 		     <div class="btn-group">
 			    <button type="button" class="btn btn-default">
-				Filteren:
+				<span translate>Filter</span>:
 				<select ng-model="showCategory">
-				    <option value=" " selected>Alle</option>
+				    <option value=" " selected translate>All</option>
 				    <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
 				</select>				
 			    </button>
@@ -25,6 +25,6 @@
 	</div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!maps.$resolved || maps.length">
-    	Nog geen kaarten, waarom <a href="/#!/maps/create">maak</a> je er niet één?
+    	<span translate>No maps yet, why don't you</span><a href="/#!/maps/create" translate>make</a> <span translate>one</span>?
     </div>
 </sec

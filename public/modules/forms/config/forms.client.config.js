@@ -3,10 +3,13 @@
 /**
  * Only allow admin to see this module
  */
-angular.module('maps').run(['Menus',
-	function(Menus) {
+angular.module('maps').run(['Menus', 'gettextCatalog',
+	function(Menus, gettextCatalog) {
+		// Translate menu item
+		var title = gettextCatalog.getString('Data management');
+		
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Data management', 'forms', 'forms', false, ['admin']);
+		Menus.addMenuItem('topbar', title, 'forms', 'forms', false, ['admin']);
 	}
 ]);
 

@@ -2,19 +2,11 @@
        <div class="mapHeader">	      
 	      <div class="btn-toolbar" role="toolbar">
 		     <div class="btn-group">
-			    <button type="button" class="btn btn-default">Kaart: {{map.title}}</button>
-		     </div>
-		     <div class="btn-group hidden-xs" >
-			     <a class="btn btn-default" href="/#!/maps/{{map._id}}/edit">
-				     <i class="glyphicon glyphicon-edit"></i>
-			     </a>
-			     <a type="button" class="btn btn-default" data-ng-click="remove();">
-				     <i class="glyphicon glyphicon-trash"></i>
-			     </a>
+			    <button type="button" class="btn btn-default" translate>Map: {{map.title}}</button>
 		     </div>
 		     <div class="btn-group" dropdown>
 			   <button type="button" class="btn btn-default dropdown-toggle" ng-disabled="disabled">
-			     Kaartlagen <span class="caret"></span>
+			     <span translate>Layers</span> <span class="caret"></span>
 			   </button>
 			   
 			   <ul class="dropdown-menu" role="menu">
@@ -47,6 +39,7 @@
 		     </div>
 		     
 		     <div class="btn btn-default" ng-legend-click size="lg"><span class="glyphicon glyphicon-list-alt"></span></div>
+		     <div class="btn btn-default" ng-info-click size="lg"><span class="glyphicon glyphicon-info-sign"></span></div>
 		     <div class="btn-group">
 			    <div id="findbox" class="btn btn-default"></div>
 		     </div>
@@ -56,7 +49,7 @@
        <div>
 	      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
        </div>
-       	<div cg-busy="{promise:loading, message:'Kaartlagen laden'}"></div>
+       	<div cg-busy="{promise:loading, message:'Loading'}"></div>
         <div>
 	      <p class="lead" data-ng-init="loadLayers();">
 		    <leaflet defaults="defaults" heightresize class="mapView"></leaflet>
