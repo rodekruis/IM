@@ -175,7 +175,7 @@ msgstr "Afmelden"
 #: public/modules/users/views/signin.client.view.html
 #: public/modules/users/views/signup.client.view.html
 msgid "Signup"
-msgstr "Aanmelden"
+msgstr "Inschrijven"
 
 #: public/modules/sources/config/sources.client.config.js
 #: public/modules/sources/views/list-sources.client.view.html
