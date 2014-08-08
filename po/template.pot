@@ -78,6 +78,10 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
+#: public/modules/maps/views/infos.client.template.html
+msgid "Layer"
+msgstr ""
+
 #: public/modules/maps/views/view-map.client.view.html
 msgid "Layers"
 msgstr ""
@@ -90,13 +94,13 @@ msgstr ""
 msgid "Manage Social Accounts"
 msgstr ""
 
+#: public/modules/maps/views/infos.client.template.html
+msgid "Map"
+msgstr ""
+
 #: public/modules/maps/views/create-map.client.view.html
 #: public/modules/maps/views/edit-map.client.view.html
 msgid "Map name"
-msgstr ""
-
-#: public/modules/maps/views/view-map.client.view.html
-msgid "Map: {{map.title}}"
 msgstr ""
 
 #: public/modules/maps/config/maps.client.config.js
@@ -135,6 +139,18 @@ msgstr ""
 
 #: public/modules/users/views/settings/edit-profile.client.view.html
 msgid "Save Profile"
+msgstr ""
+
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a awesome font icon"
+msgstr ""
+
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a bootstrap icon"
+msgstr ""
+
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a humanitarian font icon"
 msgstr ""
 
 #: public/modules/core/views/header.client.view.html

@@ -24,13 +24,17 @@ module.exports = {
 				'public/lib/cartodb.js/dist/cartodb.css',
 				'public/lib/jquery-ui/themes/smoothness/jquery-ui.css',
 				'public/lib/angular-centered/angular-centered.css',
-				'public/lib/angular-ui-dashboard/dist/angular-ui-dashboard.css',
 				'public/lib/ng-grid/ng-grid.css',
 				'public/lib/select2/select2.css',	
 				'public/lib/angular-carousel/dist/angular-carousel.css',
 				'public/lib/leaflet-search/dist/leaflet-search.src.css',
 				'public/lib/angular-busy/dist/angular-busy.css',
-				'public/lib/leaflet-gps/dist/leaflet-gps.src.css'
+				'public/lib/leaflet-gps/dist/leaflet-gps.src.css',
+				'public/lib/font-awesome/css/font-awesome.css',
+				'public/lib/Humanitarian-Font/css/font-humanitarian.css',
+				'public/lib/reliefweb-disaster-icons/reliefweb-disaster-icons-webfont.css',
+				'public/lib/angular/angular-csp.css',
+				'public/lib/ui-iconpicker/dist/styles/ui-iconpicker.css'
 			],
 			js: [
 
@@ -56,9 +60,8 @@ module.exports = {
 				'public/lib/angular-deckgrid/angular-deckgrid.js',
 				'public/lib/smart-table/Smart-Table.min.js',
 				'public/lib/angular-ui-sortable/sortable.min.js',
-				'public/lib/angular-ui-dashboard/dist/angular-ui-dashboard.js',
 				'public/lib/angular-ui-date/src/date.js',
-				'public/lib/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
+				//'public/lib/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
 				'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
 				'public/lib/jspdf/dist/jspdf.debug.js',
 				'public/lib/ng-grid/build/ng-grid.debug.js',
@@ -82,7 +85,8 @@ module.exports = {
 				'public/lib/angular-busy/dist/angular-busy.js',
 				'public/lib/leaflet-gps/dist/leaflet-gps.src.js',
 				'public/lib/angular-gettext/dist/angular-gettext.js',
-				'public/dist/translations.js'
+				'public/dist/translations.js',
+				'public/lib/ui-iconpicker/dist/scripts/ui-iconpicker.js'
 			]
 		},
 		css: [

@@ -1870,6 +1870,9 @@ formsAngular
                 value = generateDefault(common, options, fieldInfo);
               }
               break;
+            case 'icon':
+              value = '<div class="input-group"><span class="input-group-btn"><ui-iconpicker  groups="all" ' + common + '></ui-iconpicker></span><input ' + common + ' class="form-control" type="text" ng-model="iconClass" /></div>';
+              break;
             default:
               common += 'class="' + formControl.trim() + compactClass + sizeClassBS2 + '"' + (fieldInfo.add ? fieldInfo.add : '');
               common += 'ng-model="' + modelString + '"' + (idString ? ' id="' + idString + '" name="' + idString + '"' : '') + requiredStr + readonlyStr + ' ';

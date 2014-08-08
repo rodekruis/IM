@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: im\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -87,6 +87,10 @@ msgstr "Language"
 msgid "Last Name"
 msgstr "Last Name"
 
+#: public/modules/maps/views/infos.client.template.html
+msgid "Layer"
+msgstr "Layer"
+
 #: public/modules/maps/views/view-map.client.view.html
 msgid "Layers"
 msgstr "Layers"
@@ -99,14 +103,14 @@ msgstr "Legend"
 msgid "Manage Social Accounts"
 msgstr "Manage Social Accounts"
 
+#: public/modules/maps/views/infos.client.template.html
+msgid "Map"
+msgstr "Map"
+
 #: public/modules/maps/views/create-map.client.view.html
 #: public/modules/maps/views/edit-map.client.view.html
 msgid "Map name"
 msgstr "Map name"
-
-#: public/modules/maps/views/view-map.client.view.html
-msgid "Map: {{map.title}}"
-msgstr "Map: {{map.title}}"
 
 #: public/modules/maps/config/maps.client.config.js
 msgid "Maps"
@@ -145,6 +149,18 @@ msgstr "Profile Saved Successfully"
 #: public/modules/users/views/settings/edit-profile.client.view.html
 msgid "Save Profile"
 msgstr "Save Profile"
+
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a awesome font icon"
+msgstr "Select a awesome font icon"
+
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a bootstrap icon"
+msgstr "Select a bootstrap icon"
+
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a humanitarian font icon"
+msgstr "Select a humanitarian font icon"
 
 #: public/modules/core/views/header.client.view.html
 #: public/modules/users/views/signin.client.view.html
@@ -203,3 +219,6 @@ msgstr "previous"
 #: public/modules/monitors/views/list-monitors.client.view.html
 msgid "rotate"
 msgstr "rotate"
+
+#~ msgid "Map: {{map.title}}"
+#~ msgstr "Map: {{map.title}}"

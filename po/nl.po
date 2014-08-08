@@ -87,6 +87,10 @@ msgstr "Taal"
 msgid "Last Name"
 msgstr "Achternaam"
 
+#: public/modules/maps/views/infos.client.template.html
+msgid "Layer"
+msgstr "Kaartlaag"
+
 #: public/modules/maps/views/view-map.client.view.html
 msgid "Layers"
 msgstr "Kaartlagen"
@@ -99,14 +103,14 @@ msgstr "Legenda"
 msgid "Manage Social Accounts"
 msgstr "Account koppelen"
 
+#: public/modules/maps/views/infos.client.template.html
+msgid "Map"
+msgstr "Kaart"
+
 #: public/modules/maps/views/create-map.client.view.html
 #: public/modules/maps/views/edit-map.client.view.html
 msgid "Map name"
 msgstr "Kaartnaam"
-
-#: public/modules/maps/views/view-map.client.view.html
-msgid "Map: {{map.title}}"
-msgstr "Kaart: {{map.title}}"
 
 #: public/modules/maps/config/maps.client.config.js
 msgid "Maps"
@@ -145,6 +149,18 @@ msgstr "Profiel opgeslagen"
 #: public/modules/users/views/settings/edit-profile.client.view.html
 msgid "Save Profile"
 msgstr "Profiel opslaan"
+
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a awesome font icon"
+msgstr "Kies een icoon (font-awesome)"
+
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a bootstrap icon"
+msgstr "Kies een icoon (bootstrap)"
+
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a humanitarian font icon"
+msgstr "Kies een icoon (UNHCR)"
 
 #: public/modules/core/views/header.client.view.html
 #: public/modules/users/views/signin.client.view.html
@@ -203,6 +219,9 @@ msgstr "vorige"
 #: public/modules/monitors/views/list-monitors.client.view.html
 msgid "rotate"
 msgstr "roteren"
+
+#~ msgid "Map: {{map.title}}"
+#~ msgstr "Kaart: {{map.title}}"
 
 #~ msgid "<em class=\"glyphicon glyphicon-chevron-left\"></em> previous"
 #~ msgstr "<em class=\"glyphicon glyphicon-chevron-left\"></em> vorige"

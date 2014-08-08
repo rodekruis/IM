@@ -25,14 +25,16 @@ module.exports = {
 				'public/lib/cartodb.js/dist/cartodb.css',
 				'public/lib/jquery-ui/themes/smoothness/jquery-ui.min.css',
 				'public/lib/angular-centered/angular-centered.css',
-				'public/lib/angular-ui-dashboard/dist/angular-ui-dashboard.css',
 				'public/lib/ng-grid/ng-grid.min.css',
 				'public/lib/select2/select2.css',
 				'public/lib/angular-carousel/dist/angular-carousel.min.css',
 				'public/lib/leaflet-search/dist/leaflet-search.min.css',
 				'public/lib/angular-busy/dist/angular-busy.min.css',
-				'public/lib/leaflet-gps/dist/leaflet-gps.min.css'
-				
+				'public/lib/leaflet-gps/dist/leaflet-gps.min.css',
+				'public/lib/font-awesome/css/font-awesome.css',
+				//'public/lib/Humanitarian-Font/css/font-awesome.min.css',
+				'public/lib/angular/angular-csp.css',
+				'public/lib/ui-iconpicker/dist/styles/ui-iconpicker.css'				
 			],
 			js: [
 				'public/lib/jquery/jquery.min.js',
@@ -56,9 +58,8 @@ module.exports = {
 				'public/lib/angular-centered/angular-centered.js',
 				'public/lib/angular-deckgrid/angular-deckgrid.js',
 				'public/lib/angular-ui-sortable/sortable.min.js',
-				'public/lib/angular-ui-dashboard/dist/angular-ui-dashboard.js',
 				'public/lib/angular-ui-date/src/date.js',
-				'public/lib/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js',
+				'//public/lib/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js',
 				'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
 				'public/lib/jspdf/dist/jspdf.min.js',
 				'public/lib/ng-grid/build/ng-grid.min.js',
@@ -82,7 +83,8 @@ module.exports = {
 				'public/lib/angular-busy/dist/angular-busy.min.js',
 				'public/lib/leaflet-gps/dist/leaflet-gps.min.js',
 				'public/lib/angular-gettext/dist/angular-gettext.min.js',
-				'public/dist/translations.js'
+				'public/dist/translations.js',
+				'public/lib/ui-iconpicker/dist/scripts/ui-iconpicker.js'
 			]
 		},
 		css: 'public/dist/application.min.css',

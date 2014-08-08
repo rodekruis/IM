@@ -15,6 +15,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		$scope.wmsLegends = [];
 		$scope.wfsLegends = [];
 		$scope.visualisationLegends = [];
+		$scope.infos = {};
 		
 		// Set empty tileLayer for angular-leaflet directive to prevent base map loading
 		$scope.defaults.tileLayer = '';
@@ -205,21 +206,35 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					cartomap.fitBounds(bounds, {reset: true});
 					*/
 					
-		      
+					// Add map description to infos scope
+					$scope.infos.title = map.title;
+					$scope.infos.info = map.description;
+					$scope.infos.layers = [];
+							      
 					var layers = [];			
 					for (var vId in map.visualisation) {
 						var visualisation = map.visualisation[vId];
 						addVisualisation(cartomap, visualisation);
+						
+						// add layer description to infos scope
+						$scope.infos.layers.push({title: visualisation.name, info: visualisation.description});
+						
 					}
 					
 					for (var wmsId in map.wmsLayer) {
 						var wmsLayer = map.wmsLayer[wmsId];
 						addWmsLayer(cartomap, wmsLayer);
+						
+						// add layer description to infos scope
+						$scope.infos.layers.push({title: wmsLayer.name, info: wmsLayer.description});
 					}
 					
 					for (var wfsId in map.wfsLayer) {
 						var wfsLayer = map.wfsLayer[wfsId];
-						addWfsLayer(cartomap, wfsLayer);	
+						addWfsLayer(cartomap, wfsLayer);
+						
+						// add layer description to infos scope
+						$scope.infos.layers.push({title: wfsLayer.name, info: wfsLayer.description});
 					}
 				});
 				
@@ -230,6 +245,9 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				$scope.loadSearchControl(cartomap);
 			});
 			
+			/**
+			 * Add cartodb visualisation through url pointing to viz.json
+			 */
 			var addVisualisation = function(cartomap, visualisation){
 				
 				$scope.cartodb.createLayer(cartomap, visualisation.apiUrl, {https:true, legends:false})
@@ -445,6 +463,9 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					return $scope.L.circleMarker(latlng, geojsonMarkerOptions);
 				}
 				
+				/**
+				 * Get wfsLayer from URL through proxy and show loading icon
+				 */
 				$scope.loading = Proxy.get({
 						url: featureUrl(wfsLayer)
 					}).$promise.then(function(response) {
@@ -480,7 +501,9 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			
 
 			
-			
+			/**
+			 * Toggle layers from map upon user action. Remove or add label and change setting of button
+			 */
 			$scope.toggleLayer = function(layer, e){
 				e.preventDefault();
 				e.stopPropagation();

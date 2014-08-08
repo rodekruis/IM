@@ -3,9 +3,14 @@
     <h3 class="modal-title" translate>Info</h3>
 </div>
 <div class="modal-body">
-        <div ng-repeat="info in infos">
-            <label>{{info.name}}</label>
-            <div>{{info.description}}</div>
+        <div>
+            <label><span translate>Map</span>: {{infos.title}}</label>
+            <div>{{infos.info}}</div>
+            <br />
+        </div>
+        <div ng-repeat="info in infos.layers">
+            <label><span translate>Layer</span>: {{info.title}}</label>
+            <div>{{info.info}}</div>
             <br />
         </div>
 </div>

@@ -1,0 +1,14 @@
+{
+  "name": "reliefweb-disaster-icons",
+  "homepage": "https://github.com/reliefweb/reliefweb-disaster-icons",
+  "_release": "e30b319930",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e30b319930f1d151da8e68a13c4ae6afa0e7cb8c"
+  },
+  "_source": "https://github.com/reliefweb/reliefweb-disaster-icons.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/reliefweb/reliefweb-disaster-icons.git",
+  "_direct": true
+}

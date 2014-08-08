@@ -24,6 +24,10 @@ angular.module('maps').config(['$stateProvider',
 		state('editMap', {
 			url: '/maps/:mapId/edit',
 			templateUrl: 'modules/maps/views/edit-map.client.view.html'
+		}).
+		state('icons', {
+			url: '/icons',
+			templateUrl: 'modules/maps/views/icons.client.view.html'
 		})
 		;
 	}

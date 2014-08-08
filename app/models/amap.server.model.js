@@ -19,12 +19,12 @@ var VisualisationSchema = new Schema({
 	    list:true
     },
     description: {
-            type: String,
-            trim: true,
-            default: '',
-	    required:true,
-	    form:  {label:'Beschrijving', size:'large'},
-    },
+		type: String,
+		default: '',
+		trim: true,
+		form:  {label:'Naam kaart', type:'textarea', size:'large', rows:5},
+		required: true
+	},
     apiUrl: {
             type: String,
             trim: true,
@@ -96,12 +96,12 @@ var WmsLayerSchema = new Schema({
 	    list:true
     },
     description: {
-            type: String,
-            trim: true,
-            default: '',
-	    required:true,
-	    form:  {label:'Beschrijving', size:'large'},
-    },
+		type: String,
+		default: '',
+		trim: true,
+		form:  {label:'Naam kaart', type:'textarea', size:'large', rows:5},
+		required: true
+	},
     url: {
             type: String,
             trim: true,
@@ -207,12 +207,12 @@ var WfsLayerSchema = new Schema({
 	    list:true
     },
     description: {
-            type: String,
-            trim: true,
-            default: '',
-	    required:true,
-	    form:  {label:'Beschrijving', size:'large'},
-    },
+		type: String,
+		default: '',
+		trim: true,
+		form:  {label:'Naam kaart', type:'textarea', size:'large', rows:5},
+		required: true
+	},
     url: {
             type: String,
             trim: true,
@@ -317,6 +317,7 @@ var MapSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true,
+		form:  {label:'Naam kaart', type:'textarea', size:'large', rows:5},
 		required: true
 	},
 	active: {
@@ -342,7 +343,8 @@ var MapSchema = new Schema({
 		type: String,
 		default: 'glyphicon glyphicon-map-marker',
 		trim: true,
-		required: true
+		required: true,
+		form: {type: 'icon', help: 'kies bootstrap, font awesome of humanitarian font css class. https://localhost/#!/icons'}
 	},
 	mapCenter: {
 		type: Schema.Types.ObjectId,

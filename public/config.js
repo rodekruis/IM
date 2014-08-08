@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'Digital Operations Centre';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'leaflet-directive', 'angular-centered', 'akoenig.deckgrid', 'ui.dashboard', 'ui.sortable', 'ngRoute', 'angular-lodash', 'ngGrid', 'formsAngular', 'angular-carousel', 'cgBusy', 'gettext'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'leaflet-directive', 'angular-centered', 'akoenig.deckgrid', 'ui.sortable', 'ngRoute', 'angular-lodash', 'ngGrid', 'formsAngular', 'angular-carousel', 'cgBusy', 'gettext', 'ui-iconpicker'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName) {
