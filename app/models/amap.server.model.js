@@ -15,14 +15,14 @@ var VisualisationSchema = new Schema({
             trim: true,
             default: '',
 	    required:true,
-	    form:  {label:'Naam', size:'large'},
+	    form:  {label:'Name', size:'large'},
 	    list:true
     },
     description: {
 		type: String,
 		default: '',
 		trim: true,
-		form:  {label:'Naam kaart', type:'textarea', size:'large', rows:5},
+		form:  {label:'Description', type:'textarea', size:'large', rows:5},
 		required: true
 	},
     apiUrl: {
@@ -34,16 +34,16 @@ var VisualisationSchema = new Schema({
     },
     created: {
 	    type: Date,
-	    form:  {label:'Datum aangemaakt', size:'large'},
+	    form:  {label:'Date created', size:'large'},
     },
     active: {
 	    type: Boolean,
-	    form:  {label:'Actief', size:'large'},
+	    form:  {label:'Acive', size:'large'},
 	    default: false,
     },
     visible: {
 	    type: Boolean,
-	    form:  {label:'Zichtbaar bij laden kaart', size:'large'},
+	    form:  {label:'Show when loading map', size:'large'},
 	    default: false,
     },
     zindex: {
@@ -51,7 +51,7 @@ var VisualisationSchema = new Schema({
             trim: true,
             default: '10',
 	    required:true,
-	    form:  {label:'Z-Index (volgorde)'},
+	    form:  {label:'Z-Index (order)'},
     },
     /*,
     tableName: {
@@ -92,14 +92,14 @@ var WmsLayerSchema = new Schema({
             trim: true,
             default: '',
 	    required:true,
-	    form:  {label:'Naam', size:'large'},
+	    form:  {label:'Name', size:'large'},
 	    list:true
     },
     description: {
 		type: String,
 		default: '',
 		trim: true,
-		form:  {label:'Naam kaart', type:'textarea', size:'large', rows:5},
+		form:  {label:'Description', type:'textarea', size:'large', rows:5},
 		required: true
 	},
     url: {
@@ -111,11 +111,11 @@ var WmsLayerSchema = new Schema({
     },
     active: {
 	    type: Boolean,
-	    form:  {label:'Actief', size:'large'},
+	    form:  {label:'Active', size:'large'},
     },
         visible: {
 	    type: Boolean,
-	    form:  {label:'Zichtbaar bij laden kaart', size:'large'},
+	    form:  {label:'Show when loading map', size:'large'},
 	    default: false,
     },
     zindex: {
@@ -123,7 +123,7 @@ var WmsLayerSchema = new Schema({
             trim: true,
             default: '10',
 	    required:true,
-	    form:  {label:'Z-Index (volgorde)'},
+	    form:  {label:'Z-Index (order)'},
     },
     layers: {
             type: String,
@@ -203,14 +203,14 @@ var WfsLayerSchema = new Schema({
             trim: true,
             default: '',
 	    required:true,
-	    form:  {label:'Naam', size:'large'},
+	    form:  {label:'Name', size:'large'},
 	    list:true
     },
     description: {
 		type: String,
 		default: '',
 		trim: true,
-		form:  {label:'Naam kaart', type:'textarea', size:'large', rows:5},
+		form:  {label:'Description', type:'textarea', size:'large', rows:5},
 		required: true
 	},
     url: {
@@ -222,11 +222,11 @@ var WfsLayerSchema = new Schema({
     },   
     active: {
 	    type: Boolean,
-	    form:  {label:'Actief', size:'large'},
+	    form:  {label:'Active', size:'large'},
     },
         visible: {
 	    type: Boolean,
-	    form:  {label:'Zichtbaar bij laden kaart', size:'large'},
+	    form:  {label:'Show when loading map', size:'large'},
 	    default: false,
     },
     zindex: {
@@ -310,19 +310,19 @@ var MapSchema = new Schema({
 		default: '',
 		trim: true,
 		required: true,
-		form:  {label:'Naam kaart'},
+		form:  {label:'Name'},
 		list:true
 	},
 	description: {
 		type: String,
 		default: '',
 		trim: true,
-		form:  {label:'Naam kaart', type:'textarea', size:'large', rows:5},
+		form:  {label:'Description', type:'textarea', size:'large', rows:5},
 		required: true
 	},
 	active: {
 		type: Boolean,
-		form:  {label:'Actief', size:'large'},
+		form:  {label:'Active', size:'large'},
 	},
 	category: {
 		type: Schema.Types.ObjectId,
@@ -332,24 +332,24 @@ var MapSchema = new Schema({
 	    type: Boolean,
 	    required:true,
 	    default: false,
-	    form:  {label:'Publiek voor iedereen', size:'large'},
+	    form:  {label:'Public map for everyone', size:'large'},
 	},
 	baseMap: {
 		type: Schema.Types.ObjectId,
 		ref: 'TileServer',
-		form:  {label:'Achtergrondkaart'}
+		form:  {label:'Base map'}
 	},
 	icon: {
 		type: String,
 		default: 'glyphicon glyphicon-map-marker',
 		trim: true,
 		required: true,
-		form: {type: 'icon', help: 'kies bootstrap, font awesome of humanitarian font css class. https://localhost/#!/icons'}
+		form: {type: 'icon', help: 'Choose bootstrap, font awesome or humanitarian font css class. https://localhost/#!/icons'}
 	},
 	mapCenter: {
 		type: Schema.Types.ObjectId,
 		ref: 'MapCenter',
-		form:  {label:'Kaart centreren op'},
+		form:  {label:'Map center'},
 		required: true
 	},
 	user: {

@@ -26,7 +26,6 @@ module.exports = {
 				'public/lib/angular-centered/angular-centered.css',
 				'public/lib/ng-grid/ng-grid.css',
 				'public/lib/select2/select2.css',	
-				'public/lib/angular-carousel/dist/angular-carousel.css',
 				'public/lib/leaflet-search/dist/leaflet-search.src.css',
 				'public/lib/angular-busy/dist/angular-busy.css',
 				'public/lib/leaflet-gps/dist/leaflet-gps.src.css',
@@ -34,7 +33,8 @@ module.exports = {
 				'public/lib/Humanitarian-Font/css/font-humanitarian.css',
 				'public/lib/reliefweb-disaster-icons/reliefweb-disaster-icons-webfont.css',
 				'public/lib/angular/angular-csp.css',
-				'public/lib/ui-iconpicker/dist/styles/ui-iconpicker.css'
+				'public/lib/ui-iconpicker/dist/styles/ui-iconpicker.css',
+				'public/lib/angular-carousel/dist/angular-carousel.css'
 			],
 			js: [
 
@@ -61,7 +61,6 @@ module.exports = {
 				'public/lib/smart-table/Smart-Table.min.js',
 				'public/lib/angular-ui-sortable/sortable.min.js',
 				'public/lib/angular-ui-date/src/date.js',
-				//'public/lib/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
 				'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
 				'public/lib/jspdf/dist/jspdf.debug.js',
 				'public/lib/ng-grid/build/ng-grid.debug.js',
@@ -70,7 +69,6 @@ module.exports = {
 				'public/lib/ckeditor/ckeditor.js',
 				'public/lib/ng-ckeditor/ng-ckeditor.js',
 				'public/lib/forms-angular/forms-angular.js',
-				'public/lib/angular-carousel/dist/angular-carousel.js',
 				'https://maps.googleapis.com/maps/api/js?v=3&sensor=true',
 				'public/lib/leaflet-search/dist/leaflet-search.src.js',
 				'public/lib/Leaflet.NonTiledLayer/NonTiledLayer.js',
@@ -86,7 +84,8 @@ module.exports = {
 				'public/lib/leaflet-gps/dist/leaflet-gps.src.js',
 				'public/lib/angular-gettext/dist/angular-gettext.js',
 				'public/dist/translations.js',
-				'public/lib/ui-iconpicker/dist/scripts/ui-iconpicker.js'
+				'public/lib/ui-iconpicker/dist/scripts/ui-iconpicker.js',
+				'public/lib/angular-carousel/dist/angular-carousel.js'
 			]
 		},
 		css: [
