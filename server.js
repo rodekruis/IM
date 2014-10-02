@@ -54,8 +54,13 @@ if (config.usessl) {
         sslconfig.cert = fs.readFileSync(path.resolve(__dirname, config.cert_file), 'UTF-8');
     }
     
-    if(config.hasOwnProperty('ca_file')){
-              sslconfig.ca = fs.readFileSync(path.resolve(__dirname, config.ca_file), 'UTF-8');
+    if(config.hasOwnProperty('ca_file') && config.hasOwnProperty('ca2_file')){
+              sslconfig.ca = [
+			      fs.readFileSync(path.resolve(__dirname, config.ca_file), 'UTF-8'),
+			      fs.readFileSync(path.resolve(__dirname, config.ca2_file), 'UTF-8')
+			     ]
+    } else if(config.hasOwnProperty('ca_file')){
+                sslconfig.ca = fs.readFileSync(path.resolve(__dirname, config.ca_file), 'UTF-8');
     }
     
     if(secrets.certificate.passphrase) {
