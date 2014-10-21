@@ -45,7 +45,7 @@ module.exports = function() {
 						email: providerData.upn,
 						username: profile.username,
 						provider: 'azure',
-						providerIdentifierField: 'id',
+						providerIdentifierField: 'oid',
 						providerData: providerData
 					};
 		
