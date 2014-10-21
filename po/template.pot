@@ -3,20 +3,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: public/modules/users/views/signin.client.view.html
-msgid "@redcross.nl email"
-msgstr ""
-
-#: public/modules/users/views/signin.client.view.html
-msgid "Access your account with your @rodekruis.nl account"
-msgstr ""
-
 #: public/modules/maps/views/list-maps.client.view.html
 msgid "All"
 msgstr ""
 
 #: public/modules/core/views/header.client.view.html
 msgid "Change Password"
+msgstr ""
+
+#: public/modules/users/views/signin.client.view.html
+msgid "Click here to access digidoc with your red cross account"
 msgstr ""
 
 #: public/modules/users/views/settings/social-accounts.client.view.html
@@ -124,11 +120,6 @@ msgstr ""
 msgid "No maps yet, why don't you"
 msgstr ""
 
-#: public/modules/users/views/signin.client.view.html
-msgid "Or with your account"
-msgstr ""
-
-#: public/modules/users/views/signin.client.view.html
 #: public/modules/users/views/signup.client.view.html
 msgid "Password"
 msgstr ""
@@ -153,8 +144,11 @@ msgstr ""
 msgid "Select a humanitarian font icon"
 msgstr ""
 
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a relief-web font icon"
+msgstr ""
+
 #: public/modules/core/views/header.client.view.html
-#: public/modules/users/views/signin.client.view.html
 #: public/modules/users/views/signup.client.view.html
 msgid "Signin"
 msgstr ""
@@ -163,7 +157,6 @@ msgstr ""
 msgid "Signout"
 msgstr ""
 
-#: public/modules/users/views/signin.client.view.html
 #: public/modules/users/views/signup.client.view.html
 msgid "Signup"
 msgstr ""

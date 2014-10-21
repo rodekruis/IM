@@ -12,14 +12,6 @@ msgstr ""
 "X-Generator: Poedit 1.6.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: public/modules/users/views/signin.client.view.html
-msgid "@redcross.nl email"
-msgstr "@redcross.nl email"
-
-#: public/modules/users/views/signin.client.view.html
-msgid "Access your account with your @rodekruis.nl account"
-msgstr "Access your account with your @rodekruis.nl account"
-
 #: public/modules/maps/views/list-maps.client.view.html
 msgid "All"
 msgstr "All"
@@ -27,6 +19,10 @@ msgstr "All"
 #: public/modules/core/views/header.client.view.html
 msgid "Change Password"
 msgstr "Change Password"
+
+#: public/modules/users/views/signin.client.view.html
+msgid "Click here to access digidoc with your red cross account"
+msgstr "Click here to access digidoc with your red cross account"
 
 #: public/modules/users/views/settings/social-accounts.client.view.html
 msgid "Connect other social accounts:"
@@ -133,11 +129,6 @@ msgstr "No Sources yet, why don't you"
 msgid "No maps yet, why don't you"
 msgstr "No maps yet, why don't you"
 
-#: public/modules/users/views/signin.client.view.html
-msgid "Or with your account"
-msgstr "Or with your account"
-
-#: public/modules/users/views/signin.client.view.html
 #: public/modules/users/views/signup.client.view.html
 msgid "Password"
 msgstr "Password"
@@ -162,8 +153,11 @@ msgstr "Select a bootstrap icon"
 msgid "Select a humanitarian font icon"
 msgstr "Select a humanitarian font icon"
 
+#: public/modules/maps/views/icons.client.view.html
+msgid "Select a relief-web font icon"
+msgstr "Select a relief-web font icon"
+
 #: public/modules/core/views/header.client.view.html
-#: public/modules/users/views/signin.client.view.html
 #: public/modules/users/views/signup.client.view.html
 msgid "Signin"
 msgstr "Signin"
@@ -172,7 +166,6 @@ msgstr "Signin"
 msgid "Signout"
 msgstr "Signout"
 
-#: public/modules/users/views/signin.client.view.html
 #: public/modules/users/views/signup.client.view.html
 msgid "Signup"
 msgstr "Signup"
@@ -219,6 +212,15 @@ msgstr "previous"
 #: public/modules/monitors/views/list-monitors.client.view.html
 msgid "rotate"
 msgstr "rotate"
+
+#~ msgid "@redcross.nl email"
+#~ msgstr "@redcross.nl email"
+
+#~ msgid "Access your account with your @rodekruis.nl account"
+#~ msgstr "Access your account with your @rodekruis.nl account"
+
+#~ msgid "Or with your account"
+#~ msgstr "Or with your account"
 
 #~ msgid "Map: {{map.title}}"
 #~ msgstr "Map: {{map.title}}"
