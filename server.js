@@ -6,6 +6,7 @@ var init = require('./config/init')(),
 	config = require('./config/config'),
 	mongoose = require('mongoose'),
 	https = require('https'),
+        http  = require('http'),
 	fs = require('fs'),
         secrets = require('./config/secrets'),
         path = require('path');
@@ -36,10 +37,14 @@ require('./config/passport')();
 
 // Start the app on http by listening on <port>
 if (config.usehttp) {
-    app.listen(config.port);
+    var server  = http.createServer(app);
     
-    // Logging initialization
-    console.log('Application started on port ' + config.port);
+    server.on('listening',function(){
+        console.log('ok, http server is running on port ' + config.port);
+    });
+    
+    server.listen(config.port);    
+    
 }
 
 // set certicicates and start SSL server
@@ -58,7 +63,7 @@ if (config.usessl) {
               sslconfig.ca = [
 			      fs.readFileSync(path.resolve(__dirname, config.ca_file), 'UTF-8'),
 			      fs.readFileSync(path.resolve(__dirname, config.ca2_file), 'UTF-8')
-			     ]
+			     ];
     } else if(config.hasOwnProperty('ca_file')){
                 sslconfig.ca = fs.readFileSync(path.resolve(__dirname, config.ca_file), 'UTF-8');
     }
@@ -67,10 +72,13 @@ if (config.usessl) {
       sslconfig.passphrase = secrets.certificate.passphrase;
     }
     
-    https.createServer(sslconfig, app).listen(config.sslport);
+    var sslServer = https.createServer(sslconfig, app);
     
-    // Logging initialization
-    console.log('Application started on port ' + config.sslport);
+    sslServer.on('listening',function(){
+        console.log('ok, https server is running on port ' + config.sslport);
+    });
+    
+    sslServer.listen(config.sslport);
 }
 
 // Expose app
