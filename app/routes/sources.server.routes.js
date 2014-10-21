@@ -6,11 +6,11 @@ module.exports = function(app) {
 
 	// Sources Routes
 	app.route('/sources')
-		.get(sources.list)
-		.post(users.requiresLogin, sources.create);
+		.get(sources.list, sources.hasAuthorization)
+		.post(users.requiresLogin, sources.hasAuthorization, sources.create);
 	
 	app.route('/sources/:sourceId')
-		.get(sources.read)
+		.get(sources.read, sources.hasAuthorization)
 		.put(users.requiresLogin, sources.hasAuthorization, sources.update)
 	    .delete(users.requiresLogin, sources.hasAuthorization, sources.delete);
 
