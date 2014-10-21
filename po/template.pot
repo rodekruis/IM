@@ -61,6 +61,14 @@ msgstr ""
 msgid "First Name"
 msgstr ""
 
+#: public/modules/users/views/signin.client.view.html
+msgid "For @redcross.nl addresses, enter your @redcross.nl email address. You will be redirected to another page. On this page, use your redcross\\username and password to sign in"
+msgstr ""
+
+#: public/modules/users/views/signin.client.view.html
+msgid "For @rodekruis.nl addresses, simply enter your emailaddress and password to sign in"
+msgstr ""
+
 #: public/modules/maps/views/infos.client.template.html
 msgid "Info"
 msgstr ""
@@ -84,6 +92,10 @@ msgstr ""
 
 #: public/modules/maps/views/legends.client.template.html
 msgid "Legend"
+msgstr ""
+
+#: public/modules/users/views/signin.client.view.html
+msgid "Login explanation"
 msgstr ""
 
 #: public/modules/core/views/header.client.view.html
@@ -177,6 +189,10 @@ msgstr ""
 
 #: public/modules/monitors/config/monitors.client.config.js
 msgid "Web monitor"
+msgstr ""
+
+#: public/modules/users/views/signin.client.view.html
+msgid "You are being directed to a microsoft login page. Please use it as follows:"
 msgstr ""
 
 #: public/modules/sources/views/list-sources.client.view.html

@@ -1,8 +1,21 @@
 <section class="row" data-ng-controller="AuthenticationController">
-	<br /><br />
-	<a href="/auth/azure" class="undecorated-link"><h3 class="col-md-12 text-center" translate>Click here to access digidoc with your red cross account</h3></a>
+	
+	<div class="col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4">
+		<br /><br />
+		<a href="/auth/azure" class="btn btn-primary btn-lg"><h3 class="col-md-12 text-left" translate>Click here to access digidoc with your red cross account</h3></a>
+		<br/>
+		<br/>
+		<p class="bg-success">
+				<h2 translate>Login explanation</h2>
+				<span translate>You are being directed to a microsoft login page. Please use it as follows:</span>
+				<ul>
+					<li translate>For @rodekruis.nl addresses, simply enter your emailaddress and password to sign in</li>
+					<li translate>For @redcross.nl addresses, enter your @redcross.nl email address. You will be redirected to another page. On this page, use your redcross\username and password to sign in</li>
+				</ul>
+
+		</p>
+	</div>
 	<!--
-	<h3 class="col-md-12 text-center" translate>Or with your account</h3>
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
 		<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
 			<fieldset>

@@ -70,6 +70,24 @@ msgstr "Filter"
 msgid "First Name"
 msgstr "First Name"
 
+#: public/modules/users/views/signin.client.view.html
+msgid ""
+"For @redcross.nl addresses, enter your @redcross.nl email address. You will "
+"be redirected to another page. On this page, use your redcross\\username and "
+"password to sign in"
+msgstr ""
+"For @redcross.nl addresses, enter your @redcross.nl email address. You will "
+"be redirected to another page. On this page, use your redcross\\username and "
+"password to sign in"
+
+#: public/modules/users/views/signin.client.view.html
+msgid ""
+"For @rodekruis.nl addresses, simply enter your emailaddress and password to "
+"sign in"
+msgstr ""
+"For @rodekruis.nl addresses, simply enter your emailaddress and password to "
+"sign in"
+
 #: public/modules/maps/views/infos.client.template.html
 msgid "Info"
 msgstr "Info"
@@ -94,6 +112,10 @@ msgstr "Layers"
 #: public/modules/maps/views/legends.client.template.html
 msgid "Legend"
 msgstr "Legend"
+
+#: public/modules/users/views/signin.client.view.html
+msgid "Login explanation"
+msgstr "Login explanation"
 
 #: public/modules/core/views/header.client.view.html
 msgid "Manage Social Accounts"
@@ -187,6 +209,12 @@ msgstr "Username"
 #: public/modules/monitors/config/monitors.client.config.js
 msgid "Web monitor"
 msgstr "Web monitor"
+
+#: public/modules/users/views/signin.client.view.html
+msgid ""
+"You are being directed to a microsoft login page. Please use it as follows:"
+msgstr ""
+"You are being directed to a microsoft login page. Please use it as follows:"
 
 #: public/modules/sources/views/list-sources.client.view.html
 msgid "create"
