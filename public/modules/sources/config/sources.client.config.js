@@ -7,6 +7,6 @@ angular.module('sources').run(['Menus','gettextCatalog',
 		var title = gettextCatalog.getString('Sources');
 		
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', title, 'sources');
+		Menus.addMenuItem('topbar', title, 'sources', 'sources', false, ['admin']);
 	}
 ]);

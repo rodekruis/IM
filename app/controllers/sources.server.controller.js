@@ -120,11 +120,14 @@ exports.sourceByID = function(req, res, next, id) {
 };
 
 /**
- * Source authorization middleware
+ * Only allow users with role admin to this module
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.source.user.id !== req.user.id) {
-		return res.send(403, 'User is not authorized');
-	}
-	next();
+	if (_.intersection(req.user.roles, ['admin']).length) {
+				return next();
+			} else {
+				return res.send(403, {
+					message: 'User is not authorized'
+				});
+			}
 };
