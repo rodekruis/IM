@@ -1,17 +1,14 @@
 <section data-ng-controller="MapsController" data-ng-init="find()">
 
-	<div class="btn-toolbar" role="toolbar">
-		     <div class="btn-group">
-			    <button type="button" class="btn btn-default">
-				<span translate>Filter</span>:
-				<select ng-model="showCategory">
-				    <option value=" " selected translate>All</option>
-				    <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
-				</select>				
-			    </button>
-		     </div>
+<div class="row">
+	<div class="col-md-12">
+		<span translate>Filter</span>:
+		<select ng-model="showCategory">
+		    <option value=" " selected translate>All</option>
+		    <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
+		</select>				
 	</div>
-    
+</div>
     <div class="row row-no-padding">
 	<div class="col-xs-12 col-md-3"  ng-repeat="map in maps | orderBy:name | filter: {category: showCategory, active: true}">
 	    <div class="list-group list-group-map">
