@@ -21,6 +21,10 @@ angular.module('maps').config(['$stateProvider',
 			url: '/maps/:mapId',
 			templateUrl: 'modules/maps/views/view-map.client.view.html'
 		}).
+		state('viewMapCenter', {
+			url: '/maps/:mapId/:centerLat/:centerLng/:centerZoom',
+			templateUrl: 'modules/maps/views/view-map.client.view.html'
+		}).
 		state('editMap', {
 			url: '/maps/:mapId/edit',
 			templateUrl: 'modules/maps/views/edit-map.client.view.html'

@@ -160,6 +160,10 @@ msgstr ""
 msgid "Select a relief-web font icon"
 msgstr ""
 
+#: public/modules/maps/views/share.client.template.html
+msgid "Share"
+msgstr ""
+
 #: public/modules/core/views/header.client.view.html
 #: public/modules/users/views/signup.client.view.html
 msgid "Signin"
@@ -180,6 +184,10 @@ msgstr ""
 
 #: public/modules/core/views/header.client.view.html
 msgid "Toggle navigation"
+msgstr ""
+
+#: public/modules/maps/views/share.client.template.html
+msgid "Use this link to share the map in its current view"
 msgstr ""
 
 #: public/modules/users/views/signup.client.view.html

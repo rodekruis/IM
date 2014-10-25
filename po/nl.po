@@ -179,6 +179,10 @@ msgstr "Kies een icoon (UNHCR)"
 msgid "Select a relief-web font icon"
 msgstr "Kies een icoon (relief-web)"
 
+#: public/modules/maps/views/share.client.template.html
+msgid "Share"
+msgstr "Delen"
+
 #: public/modules/core/views/header.client.view.html
 #: public/modules/users/views/signup.client.view.html
 msgid "Signin"
@@ -200,6 +204,10 @@ msgstr "Tabellen"
 #: public/modules/core/views/header.client.view.html
 msgid "Toggle navigation"
 msgstr "Navigatie uitvouwen"
+
+#: public/modules/maps/views/share.client.template.html
+msgid "Use this link to share the map in its current view"
+msgstr "Kopieer deze link om de kaart te delen in de huidige weergave"
 
 #: public/modules/users/views/signup.client.view.html
 #: public/modules/users/views/settings/edit-profile.client.view.html

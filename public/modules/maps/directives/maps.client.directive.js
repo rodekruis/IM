@@ -124,6 +124,56 @@ angular.module('maps')
     }
 ])
 
+.directive('ngShareClick', ['$modal',
+    function($modal, $compile, $parse) {
+
+      var ModalInstanceCtrl = function($scope, $modalInstance, mapCenter, baseUrl, mapParameters) {        
+            $scope.mapCenter = mapCenter;
+            $scope.baseUrl = baseUrl;
+            $scope.mapParameters = mapParameters;
+            
+            $scope.ok = function () {
+              $modalInstance.close();
+            };
+      };
+
+      return {
+        restrict: 'A',
+        scope:true,
+        link: function(scope, element, attrs) {
+          element.bind('click', function() {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'modules/maps/views/share.client.template.html',
+                controller: ModalInstanceCtrl,
+                size: scope.size,
+                resolve: {
+                    mapCenter: function () {
+                      return scope.mapCenter;
+                    },
+                    baseUrl: function () {
+                      return scope.baseUrl;
+                    },
+                    mapParameters: function () {
+                      return scope.mapParameters;
+                    }
+                  }
+            });
+
+            modalInstance.result.then(function() {
+              // nothing
+            }, function() {
+              //Modal dismissed
+            });
+            //*/
+            
+          });
+
+        }
+      };
+    }
+])
+
 .directive('heightresize', ['$window', function($window, $rootScope) {
     return {
         restrict: 'A',

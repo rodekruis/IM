@@ -16,6 +16,10 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		$scope.wfsLegends = [];
 		$scope.visualisationLegends = [];
 		$scope.infos = {};
+		$scope.mapCenter = {};
+		$scope.baseUrl = $location.absUrl().substring(0,$location.absUrl().length - $location.path().length);
+		$scope.mapParameters = $location.path().split('/').slice(0,3).join('/');
+
 		
 		// Set empty tileLayer for angular-leaflet directive to prevent base map loading
 		$scope.defaults.tileLayer = '';
@@ -161,6 +165,13 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				// set bounds variable whenever the map position or zoom is changed
 				cartomap.on('moveend', function() {
 					$scope.bounds = cartomap.getBounds();
+					
+					var center = cartomap.getCenter();
+					var zoom = cartomap.getZoom();
+					
+					$scope.mapCenter.lat = center.lat;
+					$scope.mapCenter.lng = center.lng;
+					$scope.mapCenter.zoom = zoom;					
 				});
 				
 				// Add the GPS location control
@@ -187,8 +198,15 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					}
 									
 					// Set map center
-					var mapCenter = map.mapCenter;
-					cartomap.setView(new $scope.L.latLng(mapCenter.lat, mapCenter.lng), mapCenter.zoom);
+					// if center is set by url variable
+					if ($stateParams.centerLat && $stateParams.centerLng && $stateParams.centerZoom) {
+						cartomap.setView(new $scope.L.latLng($stateParams.centerLat, $stateParams.centerLng), $stateParams.centerZoom);
+					}
+					// if center is not set
+					else {
+						$scope.mapCenter = map.mapCenter;
+						cartomap.setView(new $scope.L.latLng($scope.mapCenter.lat, $scope.mapCenter.lng), $scope.mapCenter.zoom);
+					}
 					
 					/*
 					 * Couldn't get the map bounds to work.
