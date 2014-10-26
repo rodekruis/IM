@@ -22,7 +22,7 @@ angular.module('maps').config(['$stateProvider',
 			templateUrl: 'modules/maps/views/view-map.client.view.html'
 		}).
 		state('viewMapCenter', {
-			url: '/maps/:mapId/:centerLat/:centerLng/:centerZoom',
+			url: '/maps/:mapId/:centerLat/:centerLng/:centerZoom/:activeLayers',
 			templateUrl: 'modules/maps/views/view-map.client.view.html'
 		}).
 		state('editMap', {

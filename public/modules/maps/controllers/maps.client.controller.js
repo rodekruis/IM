@@ -11,6 +11,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		$scope.subLayers = [];
 		$scope.bounds = null;
 		$scope.overlayLayers = {};
+		$scope.activeLayers = [];
 		$scope.baseLayers = {};
 		$scope.wmsLegends = [];
 		$scope.wfsLegends = [];
@@ -95,6 +96,21 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			    function(error) {
 				$scope.addAlert('danger', error.data.message);
 			    });
+		};
+		
+		// Active layers function
+		$scope.addActiveLayer = function(id){
+			if ($scope.activeLayers.indexOf(id) === -1) {
+				$scope.activeLayers.push(id);
+			}
+		};
+		
+		$scope.deleteActiveLayer = function(id){
+			var index = $scope.activeLayers.indexOf(id);
+			
+			if (index > -1) {
+				$scope.activeLayers.splice(index, 1);
+			}
 		};
 	
 			
@@ -228,10 +244,30 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					$scope.infos.title = map.title;
 					$scope.infos.info = map.description;
 					$scope.infos.layers = [];
-							      
-					var layers = [];			
+					
+					// See if visible layers should be overriden by url variables
+					// At least one layerid should be in the url, otherwise default layer settings will apply
+					var urlLayersSet = false;
+					var activeLayers = [];
+					if ($stateParams.activeLayers) {
+						activeLayers = $stateParams.activeLayers.split(',');
+						urlLayersSet = true;	
+					}
+					
 					for (var vId in map.visualisation) {
 						var visualisation = map.visualisation[vId];
+						
+						// if url layers are set
+						if (urlLayersSet) {
+				
+							// Check if layer visibility should be overriden
+							if (activeLayers.indexOf(visualisation._id) > -1) {
+								visualisation.visible = true;
+							} else {
+								visualisation.visible = false;
+							}
+						}
+						
 						addVisualisation(cartomap, visualisation);
 						
 						// add layer description to infos scope
@@ -241,6 +277,17 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					
 					for (var wmsId in map.wmsLayer) {
 						var wmsLayer = map.wmsLayer[wmsId];
+						
+						// if url layers are set
+						if (urlLayersSet) {
+							// Check if layer visibility should be overriden
+							if (activeLayers.indexOf(map.wmsLayer[wmsId]._id) > -1) {
+								wmsLayer.visible = true;
+							} else {
+								wmsLayer.visible = false;
+							}
+						}
+						
 						addWmsLayer(cartomap, wmsLayer);
 						
 						// add layer description to infos scope
@@ -249,6 +296,16 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					
 					for (var wfsId in map.wfsLayer) {
 						var wfsLayer = map.wfsLayer[wfsId];
+						
+						// if url layers are set
+						if (urlLayersSet) {
+							// Check if layer visibility should be overriden
+							if (activeLayers.indexOf(map.wfsLayer[wfsId]._id) > -1) {
+								wfsLayer.visible = true;
+							} else {
+								wfsLayer.visible = false;
+							}
+						}
 						addWfsLayer(cartomap, wfsLayer);
 						
 						// add layer description to infos scope
@@ -275,39 +332,29 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					//var layers = layer.layers;
 					var overlayMaps = { };
 					
-					/**
-					 * Loop through sub layers of viz.json and add to map
-					 * CURRENTLY NOT WORKING
-					 */
-					/*
-					for (var i = 0; i < layers.length; i++){
-						var layerName = layers[i].layer_name;
-	      
-						// Add layer to control
-						$scope.overlayLayers[layerName] = layers[i];
-					}
-					*/
-					
 					layer.setInteraction(true);
 					
 					// set Zindex
 					layer.setZIndex(visualisation.zindex);
 					 
-					// Set layr name
+					// Set layer name
 					layer.layer_name = visualisation.name;
+					layer.parentId = visualisation._id;
 					
 					// Set visibility
 					layer.options.visible = visualisation.visible;
 					
+					// If layer should not be visible, remove it from the map
 					if (!visualisation.visible) {
 						$scope.LMap.removeLayer(layer);
+					}
+					else {
+						$scope.addActiveLayer(visualisation._id);
 					}
 					
 					// add whole viz.json layer to layer control
 					$scope.overlayLayers[visualisation.name] = layer;
-					
-					
-					
+								
 					// Check there is a legend in the visualisation
 					if (layer.layers[0].hasOwnProperty('legend') && layer.layers[0].legend.type !== 'none') {
 						var legend = {};
@@ -386,8 +433,11 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					// set Zindex
 					wms.setZIndex(wmsLayer.zindex);
 					 
-					// Set layr name
+					// Set layer name
 					wms.layer_name = wmsLayer.name;
+					
+					// Set parentid of wms object
+					wms.parentId = wmsLayer._id;
 					
 					// Set visibility
 					wms.options.visible = wmsLayer.visible;
@@ -395,10 +445,13 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 					if (!wmsLayer.visible) {
 						$scope.LMap.removeLayer(wms);
 					}
-					
+					else {
+						$scope.addActiveLayer(wmsLayer._id);
+					}
+							
 					// add whole viz.json layer to layer control
 					$scope.overlayLayers[wmsLayer.name] = wms;
-				
+					
 					// Get layer legends
 					var legendOptions = wmsLayer.legendOptions;
 					if (wmsLayer.legendOptions !== '') {
@@ -503,13 +556,20 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 								// Set layer name
 								layer.layer_name = wfsLayer.name;
 								
+								// Set parentid of wms object
+								layer.parentId = wfsLayer._id;
+					
+								
 								// Set visibility
 								layer.options.visible = wfsLayer.visible;
 								
 								if (!wfsLayer.visible) {
 									$scope.LMap.removeLayer(layer);
 								}
-								
+								else {
+									$scope.addActiveLayer(wfsLayer._id);
+								}
+											
 								// add whole viz.json layer to layer control
 								$scope.overlayLayers[wfsLayer.name] = layer;
 							});
@@ -525,15 +585,20 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			$scope.toggleLayer = function(layer, e){
 				e.preventDefault();
 				e.stopPropagation();
-			    
+						
 				// If layer exists on map, remove layer
 				if ($scope.LMap.hasLayer(layer)) {
 				    $scope.LMap.removeLayer(layer);
 				    layer.options.visible = false;
+				    
+				    $scope.deleteActiveLayer(layer.parentId);
+				    
 				// If layer does not exist on map, add layer
 				} else {
 				    $scope.LMap.addLayer(layer);
 				    layer.options.visible = true;
+				    
+				    $scope.addActiveLayer(layer.parentId);
 				}
 			};
 		};

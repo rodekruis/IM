@@ -127,10 +127,11 @@ angular.module('maps')
 .directive('ngShareClick', ['$modal',
     function($modal, $compile, $parse) {
 
-      var ModalInstanceCtrl = function($scope, $modalInstance, mapCenter, baseUrl, mapParameters) {        
+      var ModalInstanceCtrl = function($scope, $modalInstance, mapCenter, baseUrl, mapParameters, activeLayers) {        
             $scope.mapCenter = mapCenter;
             $scope.baseUrl = baseUrl;
             $scope.mapParameters = mapParameters;
+            $scope.activeLayers = activeLayers;
             
             $scope.ok = function () {
               $modalInstance.close();
@@ -156,6 +157,9 @@ angular.module('maps')
                     },
                     mapParameters: function () {
                       return scope.mapParameters;
+                    },
+                    activeLayers: function () {
+                        return scope.activeLayers.join(',');
                     }
                   }
             });
