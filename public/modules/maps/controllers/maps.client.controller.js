@@ -2,8 +2,8 @@
 
 /*global google */
 
-angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps', '$window', 'leafletData', '$compile', '$parse', 'CartoDB', 'Proxy', '$modal', //'L', 'cartodb',
-	function($scope, $stateParams, $location, Authentication, Maps, $window, leafletData, $compile, $parse, CartoDB, Proxy, $modal) { //, 
+angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Maps', '$window', 'leafletData', '$compile', '$parse', 'CartoDB', 'Proxy', '$modal', '_', //'L', 'cartodb',
+	function($scope, $stateParams, $location, Authentication, Maps, $window, leafletData, $compile, $parse, CartoDB, Proxy, $modal, _) { //, 
 		$scope.authentication = Authentication;
 		$scope.L = $window.L;
 		$scope.cartodb = $window.cartodb;
@@ -20,7 +20,7 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 		$scope.mapCenter = {};
 		$scope.baseUrl = $location.absUrl().substring(0,$location.absUrl().length - $location.path().length);
 		$scope.mapParameters = $location.path().split('/').slice(0,3).join('/');
-
+		$scope.columns = 4;
 		
 		// Set empty tileLayer for angular-leaflet directive to prevent base map loading
 		$scope.defaults.tileLayer = '';
@@ -74,13 +74,14 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				findCategories();
 				
 				// Split maps array in subarrays of 4, for creating the rows in the list view
-				$scope.splitMaps = $scope.partition($scope.maps, 4);
+				$scope.prepareMapsList();
 				
 			    }, function(error) {
 				$scope.addAlert('danger', error.data.message);
 			    });
 		};
 		
+		// get categories from maps list
 		$scope.categories = [];
 		var findCategories = function(){
 			angular.forEach($scope.maps, function(value, category){
@@ -90,6 +91,12 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			    }
 			});
 		};
+		
+		// watch change of category
+		$scope.$watch('showCategory', function() {
+			// prepare maps list
+			$scope.prepareMapsList();
+		});
 
 		$scope.findOne = function() {
 			Maps.get({mapId: $stateParams.mapId},
@@ -116,13 +123,40 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 			}
 		};
 		
-		// partition maps list into number of columns
-		$scope.partition = function(arr, size) {
-			var newArr = [];
-			for (var i=0; i<arr.length; i+=size) {
-			  newArr.push(arr.slice(i, i+size));
+		// prepare maps list
+		$scope.prepareMapsList = function() {
+			// check if maps list is already initialized
+			if (typeof $scope.maps === 'undefined') {
+				return;
 			}
-			return newArr;
+			
+			var newArr = $scope.maps;
+			
+			// filter the list by category selected
+			var filteredArr = newArr;
+			
+			// If category is set, and not set to 'all' by the user, then filter on category
+			if (typeof $scope.showCategory !== 'undefined' && $scope.showCategory !== ' ') {
+				filteredArr = _.filter(newArr, function(map) {
+					if (typeof map.category === 'undefined' || map.category === null) {
+						return false;
+					}
+					else {
+						return map.category.name === $scope.showCategory;
+					}
+				});
+			}
+			
+			// Sort maps list by title
+			var sorted = _.sortBy(filteredArr, function(map) {
+				return map.title.toLowerCase();
+			});
+			
+			// make two dimensional array based on number of columns in view
+			$scope.splitMaps = [];
+			for (var i=0; i< sorted.length; i+=$scope.columns) {
+			  $scope.splitMaps.push(sorted.slice(i, i+$scope.columns));
+			}
 	        };
 		      
 			
