@@ -73,6 +73,9 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				// Also get categories
 				findCategories();
 				
+				// Split maps array in subarrays of 4, for creating the rows in the list view
+				$scope.splitMaps = $scope.partition($scope.maps, 4);
+				
 			    }, function(error) {
 				$scope.addAlert('danger', error.data.message);
 			    });
@@ -112,7 +115,16 @@ angular.module('maps').controller('MapsController', ['$scope', '$stateParams', '
 				$scope.activeLayers.splice(index, 1);
 			}
 		};
-	
+		
+		// partition maps list into number of columns
+		$scope.partition = function(arr, size) {
+			var newArr = [];
+			for (var i=0; i<arr.length; i+=size) {
+			  newArr.push(arr.slice(i, i+size));
+			}
+			return newArr;
+	        };
+		      
 			
 		/**
 		 * Alert box above map for errors
