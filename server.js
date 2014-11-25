@@ -9,7 +9,9 @@ var init = require('./config/init')(),
         http  = require('http'),
 	fs = require('fs'),
         secrets = require('./config/secrets'),
-        path = require('path');
+        path = require('path'),
+        constants = require('constants'),
+        tls = require('tls');
         
 
 /**
@@ -77,6 +79,9 @@ if (config.usessl) {
     if(secrets.certificate.passphrase) {
       sslconfig.passphrase = secrets.certificate.passphrase;
     }
+    
+    sslconfig.secureProtocol = 'SSLv23_method';
+    sslconfig.secureOptions = constants.SSL_OP_NO_SSLv3;
     
     var sslServer = https.createServer(sslconfig, app);
     
