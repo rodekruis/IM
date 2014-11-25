@@ -12,6 +12,7 @@ module.exports = {
 	cert_file: './config/cert/rodekruis-cert.pem',
 	ca_file: './config/cert/thawte.ca',
 	ca2_file: './config/cert/thawte2.ca',
+	ca3_file: './config/cert/thawte3.ca',
 	app: {
 		title: 'Rode Kruis Digital Operations Center'
 	},
