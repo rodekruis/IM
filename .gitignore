@@ -11,3 +11,4 @@ config/cert/.rnd
 config/cert/*.cer
 config/cert/*.pfx
 config/cert/*.ca
+*.komodoproject
