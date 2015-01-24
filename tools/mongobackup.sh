@@ -20,4 +20,4 @@ mv dump $BACKUP_NAME
 tar -zcvf $BACKUPS_DIR/$BACKUP_NAME.tgz $BACKUP_NAME
 rm -rf $BACKUP_NAME
 
-/home/maarten/dropboxUploader.sh $BACKUPS_DIR/$BACKUP_NAME.tgz $BACKUP_NAME.tgz
+/home/maarten/dropboxUploader.sh upload $BACKUPS_DIR/$BACKUP_NAME.tgz $BACKUP_NAME.tgz
