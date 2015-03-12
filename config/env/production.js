@@ -12,7 +12,6 @@ module.exports = {
 	cert_file: './config/cert/rodekruis-cert.pem',
 	ca_file: './config/cert/thawte.ca',
 	ca2_file: './config/cert/thawte2.ca',
-	ca3_file: './config/cert/thawte3.ca',
 	app: {
 		title: 'Rode Kruis Digital Operations Center'
 	},
@@ -61,7 +60,7 @@ module.exports = {
 				'public/lib/angular-deckgrid/angular-deckgrid.js',
 				'public/lib/angular-ui-sortable/sortable.min.js',
 				'public/lib/angular-ui-date/src/date.js',
-				'//public/lib/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js',
+				//'public/lib/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js',
 				'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
 				'public/lib/jspdf/dist/jspdf.min.js',
 				'public/lib/ng-grid/build/ng-grid.min.js',
