@@ -87,9 +87,20 @@ Your application should run on the 3000 port so in your browser just go to [http
 That's it! your application should be running by now, to proceed with your development check the other sections in this documentation. 
 If you encounter any problem try the Troubleshooting section.
 
-## Getting Started With the IM Dashboard
+## Getting Started With the Digidoc
 Edit the config/secrets.json.template to set your project secrets and save it to config/secrets.json
 
+Make sure the certificates mentioned in the secrets.json are located in the config/cert/
+
+The apache service needs to be running, as it is serving as a proxy: sudo service apache2 start|stop|restart
+The apache config files are located in /etc/apache2/sites-available/
+
+The digidoc upstart script needs to be running, which will start the node server: sudo start|stop digidoc
+The upstart script is located in /etc/init/digidoc.conf
+
+## Debugging
+If for whatever reason you need to debug on the production server, use this command:
+sudo NODE_ENV="development" PATH=$PATH node-debug /var/www/digidoc/server.js
 
 ## Credits
 Inspired by the great work of [Madhusudhan Srinivasa](https://github.com/madhums/)
